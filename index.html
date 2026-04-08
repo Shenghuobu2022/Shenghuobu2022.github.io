@@ -16,12 +16,69 @@
         }
         h1 { letter-spacing: 12px; font-weight: 300; margin: 0; font-size: 2.5em; }
         .eng-title { color: #666; font-size: 10px; letter-spacing: 4px; margin-bottom: 50px; margin-top: 10px; }
-        input {
-            background: transparent; border: none; border-bottom: 1px solid #444;
-            color: white; padding: 12px; width: 280px; text-align: center;
-            font-size: 16px; outline: none; transition: 0.3s;
+
+        /* 输入区域容器 - 使用 flex 布局 */
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            border-bottom: 1px solid #444;
+            width: 340px;
+            margin: 0 auto;
+            transition: border-color 0.3s;
         }
-        input:focus { border-bottom-color: #fff; }
+        .input-group:focus-within {
+            border-bottom-color: #fff;
+        }
+
+        /* 下拉框样式 */
+        select {
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding: 12px 8px 12px 0;
+            font-size: 14px;
+            outline: none;
+            cursor: pointer;
+            letter-spacing: 1px;
+            appearance: none;
+            -webkit-appearance: none;
+            text-align: left;
+        }
+        /* 自定义下拉箭头 */
+        .select-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .select-wrapper::after {
+            content: '▾';
+            color: #666;
+            font-size: 10px;
+            margin-left: 8px;
+            pointer-events: none;
+        }
+        select option {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 10px;
+        }
+        /* 分隔线 */
+        .divider {
+            width: 1px;
+            height: 20px;
+            background: #444;
+            margin: 0 12px;
+        }
+
+        /* 输入框样式调整 */
+        input {
+            background: transparent; border: none;
+            color: white; padding: 12px 0; flex: 1;
+            font-size: 16px; outline: none; text-align: left;
+        }
+        input::placeholder { color: #666; }
+
         button {
             display: block; margin: 40px auto 0; background: #fff; color: #000;
             border: none; padding: 12px 50px; cursor: pointer; font-weight: bold;
@@ -35,7 +92,18 @@
     <div class="login-card">
         <h1>生活部</h1>
         <div class="eng-title">SHENGHUOBU CULTURE MEDIA</div>
-        <input type="text" id="userInput" placeholder="输入成员姓名" onkeydown="if(event.keyCode==13) doLogin()">
+
+        <div class="input-group">
+            <div class="select-wrapper">
+                <select id="roleSelect">
+                    <option value="member">员工</option>
+                    <option value="admin">管理</option>
+                </select>
+            </div>
+            <div class="divider"></div>
+            <input type="text" id="userInput" placeholder="输入成员姓名" onkeydown="if(event.keyCode==13) doLogin()">
+        </div>
+
         <button onclick="doLogin()">ACCESS / 进入</button>
     </div>
 
@@ -46,15 +114,26 @@
     <script>
         function doLogin() {
             const name = document.getElementById('userInput').value.trim();
-            // 这里你可以预设跳转逻辑
+            const role = document.getElementById('roleSelect').value;
+
+            if (name === "") {
+                alert("请输入有效身份信息");
+                return;
+            }
+
+            // 根据角色和姓名进行不同跳转或处理
+            if (role === "admin") {
+                console.log("管理员登录:", name);
+                // 可以添加管理员特定逻辑
+            } else {
+                console.log("员工登录:", name);
+            }
+
             if (name === "全体成员" || name === "生活部") {
-                window.location.href = "main.html"; // 之后我们要写的正式主页
-            } else if (name !== "") {
-                // 如果你想给特定的人做专属页面，可以这样：
-                // window.location.href = "members/" + name + ".html";
                 window.location.href = "main.html";
             } else {
-                alert("请输入有效身份信息");
+                // 可以传递角色参数到主页
+                window.location.href = "main.html?role=" + role + "&name=" + encodeURIComponent(name);
             }
         }
     </script>
