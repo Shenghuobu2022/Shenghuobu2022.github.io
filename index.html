@@ -121,7 +121,7 @@
         © 2022-2026 SHENGHUOBU CULTURE MEDIA CO., LTD.
     </div>
 
-    <script>
+     <script>
         function doLogin() {
             const name = document.getElementById('userInput').value.trim();
             const role = document.getElementById('roleSelect').value;
@@ -131,43 +131,77 @@
                 return;
             }
 
+            // 用户配置表：角色 -> 允许的别名列表 & 跳转页面
+            const users = {
+                "ceo": {
+                    names: ["信愿", "小信", "小·真正的老总·吉祥物·信", "生活部", "老总"],
+                    page: "ceo.html"
+                },
+                "foreman": {
+                    names: ["姜文雨", "姜姜", "吃瓜大王", "猪策划", "姜", "部长"],
+                    page: "jiang.html"
+                },
+                "deputy": {
+                    names: ["孔祥冰", "冰冰", "冰狗", "血狼头号铁粉", "冰", "Pilgrimage"],
+                    page: "bingo.html"
+                },
+                "secretary": {
+                    names: ["杨硕", "楠桶", "硕宝", "此群坐镇骑士长", "硕"],
+                    page: "sure.html"
+                },
+                "partner": {
+                    names: ["高赓", "歌神", "量子力学传承人", "Aron", "赓"],
+                    page: "geng.html"
+                },
+                "scientist": {
+                    names: ["兰艳芝", "兰陈儿", "成毅", "莲花楼楼主夫人", "姑"],
+                    page: "gu.html"
+                },
+                "hr": {
+                    names: ["王子瑶", "电竞迷妹", "阿贡面包", "奇妙能力帅哥", "瑶"],
+                    page: "yao.html"
+                },
+                "security": {
+                    names: ["玄海强", "生活部梅西", "L1chaPup6", "史上第0位100级强者", "强"],
+                    page: "qiang.html"
+                },
+                "teacher": {
+                    names: ["玄洪远", "刘欢老师", "章若楠男朋友", "骑三轮车卖地瓜", "远"],
+                    page: "liuhuan.html"
+                },
+                "worker": {
+                    names: ["邬小钢", "电竞达人", "Nivana", "187体育生", "钢"],
+                    page: "gang.html"
+                },
+                "sales": {
+                    names: ["丁俊熙", "小丁", "恋爱大王", "冰冰爱凯神", "丁"],
+                    page: "ding.html"
+                }
+            };
 
-            if (role === "ceo" && name === "信愿" || name ==="小信"|| name==="小·真正的老总·吉祥物·信" || name==="生活部"||name==="老总") {
-                window.location.href = "ceo.html";
+            // 检查是否在特定角色名单中
+            if (users[role] && users[role].names.includes(name)) {
+                window.location.href = users[role].page;
             }
-            else if (role==="foreman" && name==="姜文雨" || name==="姜姜" || name==="吃瓜大王" || name==="猪策划" || name==="姜" || name==="部长" ){
-                window.location.href = "jiang.html";
-            }
-            else if (role==="deputy" && name==="孔祥冰" || name==="冰冰" || name==="冰狗" || name==="血狼头号铁粉" || name==="冰"||name==="Pilgrimage" ){
-                window.location.href = "bingo.html";
-            }
-            else if (role==="secretary" && name==="杨硕" || name==="楠桶" || name==="硕宝" || name==="此群坐镇骑士长" || name==="硕" ){
-                window.location.href = "sure.html";
-            }
-            else if (role==="partner" && name==="高赓" || name==="歌神" || name==="量子力学传承人" || name==="Aron" || name==="赓" ){
-                window.location.href = "geng.html";
-            }
-            else if (role==="scientist" && name==="兰艳芝" || name==="兰陈儿" || name==="成毅" || name==="莲花楼楼主夫人" || name==="姑" ){
-                window.location.href = "gu.html";
-            }
-            else if (role==="hr" && name==="王子瑶" || name==="电竞迷妹" || name==="阿贡面包" || name==="奇妙能力帅哥" || name==="瑶" ){
-                window.location.href = "yao.html";
-            }
-            else if (role==="hr" && name==="玄海强" || name==="生活部梅西" || name==="L1chaPup6" || name==="史上第0位100级强者" || name==="强" ){
-                window.location.href = "yao.html";
-            }
-            else if (role==="teacher" && name==="玄洪远" || name==="刘欢老师" || name==="章若楠男朋友" || name==="骑三轮车卖地瓜" || name==="远" ){
-                window.location.href = "liuhuan.html";
-            }
-            else if (role==="worker" && name==="邬小钢" || name==="电竞达人" || name==="Nivana" || name==="187体育生" || name==="钢" ){
-                window.location.href = "gang.html";
-            }
-            else if (role==="sales" && name==="丁俊熙" || name==="小丁" || name==="恋爱大王" || name==="冰冰爱凯神" || name==="丁" ) {
-                window.location.href = "ding.html";
-            }
-            else if (role==="guest" && name !=="") {
-                // 可以传递角色参数到主页
+            // 游客特殊处理：任意非空名字均可
+            else if (role === "guest" && name !== "") {
                 window.location.href = "main.html?role=" + role + "&name=" + encodeURIComponent(name);
+            }
+            // 都不匹配：随机提示错误
+            else {
+                const errorMsgs = [
+                    "暗号错误",
+                    "口令对不上，再想想？",
+                    "身份验证失败，系统怀疑你是卧底",
+                    "此路不通，回去再练练",
+                    "暗号错误！报上正确的名号",
+                    "验证失败，请检查身份和暗号",
+                    "对不上暗号，无法放行",
+                    "接头失败，建议换个暗号试试",
+                    "系统无法识别您的身份",
+                    "暗号有误，请重新对暗号"
+                ];
+                alert(errorMsgs[Math.floor(Math.random() * errorMsgs.length)]);
             }
         }
     </script>
