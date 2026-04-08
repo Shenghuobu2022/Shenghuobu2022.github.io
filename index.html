@@ -96,8 +96,18 @@
         <div class="input-group">
             <div class="select-wrapper">
                 <select id="roleSelect">
-                    <option value="member">员工</option>
-                    <option value="admin">管理</option>
+                    <option value="ceo">老总</option>
+                    <option value="foreman">打工人头头</option>
+                    <option value="deputy">打工人负头头</option>
+                    <option value="secretary">秘书长</option>
+                    <option value="partner">公司合伙人</option>
+                    <option value="scientist">研发部科学家</option>
+                    <option value="hr">人事部经理</option>
+                    <option value="security">安保分队队长</option>
+                    <option value="teacher">老师</option>
+                    <option value="worker">一线工人</option>
+                    <option value="sales">世一流销售</option>
+                    <option value="guest">游客</option>
                 </select>
             </div>
             <div class="divider"></div>
@@ -121,17 +131,41 @@
                 return;
             }
 
-            // 根据角色和姓名进行不同跳转或处理
-            if (role === "admin") {
-                console.log("管理员登录:", name);
-                // 可以添加管理员特定逻辑
-            } else {
-                console.log("员工登录:", name);
-            }
 
-            if (name === "全体成员" || name === "生活部") {
-                window.location.href = "main.html";
-            } else {
+            if (role === "ceo" && name === "信愿" || name ==="小信"|| name==="小·真正的老总·吉祥物·信" || name==="生活部"||name==="老总") {
+                window.location.href = "ceo.html";
+            }
+            else if (role==="foreman" && name==="姜文雨" || name==="姜姜" || name==="吃瓜大王" || name==="猪策划" || name==="姜" || name==="部长" ){
+                window.location.href = "jiang.html";
+            }
+            else if (role==="deputy" && name==="孔祥冰" || name==="冰冰" || name==="冰狗" || name==="血狼头号铁粉" || name==="冰"||name==="Pilgrimage" ){
+                window.location.href = "bingo.html";
+            }
+            else if (role==="secretary" && name==="杨硕" || name==="楠桶" || name==="硕宝" || name==="此群坐镇骑士长" || name==="硕" ){
+                window.location.href = "sure.html";
+            }
+            else if (role==="partner" && name==="高赓" || name==="歌神" || name==="量子力学传承人" || name==="Aron" || name==="赓" ){
+                window.location.href = "geng.html";
+            }
+            else if (role==="scientist" && name==="兰艳芝" || name==="兰陈儿" || name==="成毅" || name==="莲花楼楼主夫人" || name==="姑" ){
+                window.location.href = "gu.html";
+            }
+            else if (role==="hr" && name==="王子瑶" || name==="电竞迷妹" || name==="阿贡面包" || name==="奇妙能力帅哥" || name==="瑶" ){
+                window.location.href = "yao.html";
+            }
+            else if (role==="hr" && name==="玄海强" || name==="生活部梅西" || name==="L1chaPup6" || name==="史上第0位100级强者" || name==="强" ){
+                window.location.href = "yao.html";
+            }
+            else if (role==="teacher" && name==="玄洪远" || name==="刘欢老师" || name==="章若楠男朋友" || name==="骑三轮车卖地瓜" || name==="远" ){
+                window.location.href = "liuhuan.html";
+            }
+            else if (role==="worker" && name==="邬小钢" || name==="电竞达人" || name==="Nivana" || name==="187体育生" || name==="钢" ){
+                window.location.href = "gang.html";
+            }
+            else if (role==="sales" && name==="丁俊熙" || name==="小丁" || name==="恋爱大王" || name==="冰冰爱凯神" || name==="丁" ) {
+                window.location.href = "ding.html";
+            }
+            else if (role==="guest" && name !=="") {
                 // 可以传递角色参数到主页
                 window.location.href = "main.html?role=" + role + "&name=" + encodeURIComponent(name);
             }
