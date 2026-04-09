@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>生活部文化有限公司 | SHENGHUOBU MEDIA</title>
+    <link rel="icon" href="assets/picture/专业团队.jpg" type="image/jpeg">
     <style>
         body {
             margin: 0; padding: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -122,7 +123,7 @@
     </div>
 
      <script>
-        function doLogin() {
+        async function doLogin() {
             const name = document.getElementById('userInput').value.trim();
             const role = document.getElementById('roleSelect').value;
 
@@ -131,53 +132,62 @@
                 return;
             }
 
-            // 用户配置表：角色 -> 允许的别名列表 & 跳转页面
-            const users = {
-                "ceo": {
-                    names: ["信愿", "小信", "小·真正的老总·吉祥物·信", "生活部", "老总"],
-                    page: "ceo.html"
-                },
-                "foreman": {
-                    names: ["姜文雨", "姜姜", "吃瓜大王", "猪策划", "姜", "部长"],
-                    page: "jiang.html"
-                },
-                "deputy": {
-                    names: ["孔祥冰", "冰冰", "冰狗", "血狼头号铁粉", "冰", "Pilgrimage"],
-                    page: "bingo.html"
-                },
-                "secretary": {
-                    names: ["杨硕", "楠桶", "硕宝", "此群坐镇骑士长", "硕"],
-                    page: "sure.html"
-                },
-                "partner": {
-                    names: ["高赓", "歌神", "量子力学传承人", "Aron", "赓"],
-                    page: "geng.html"
-                },
-                "scientist": {
-                    names: ["兰艳芝", "兰陈儿", "成毅", "莲花楼楼主夫人", "姑"],
-                    page: "gu.html"
-                },
-                "hr": {
-                    names: ["王子瑶", "电竞迷妹", "阿贡面包", "奇妙能力帅哥", "瑶"],
-                    page: "yao.html"
-                },
-                "security": {
-                    names: ["玄海强", "生活部梅西", "L1chaPup6", "史上第0位100级强者", "强"],
-                    page: "qiang.html"
-                },
-                "teacher": {
-                    names: ["玄洪远", "刘欢老师", "章若楠男朋友", "骑三轮车卖地瓜", "远"],
-                    page: "liuhuan.html"
-                },
-                "worker": {
-                    names: ["邬小钢", "电竞达人", "Nivana", "187体育生", "钢"],
-                    page: "gang.html"
-                },
-                "sales": {
-                    names: ["丁俊熙", "小丁", "恋爱大王", "冰冰爱凯神", "丁"],
-                    page: "ding.html"
-                }
-            };
+            // // 用户配置表：角色 -> 允许的别名列表 & 跳转页面
+            // const users = {
+            //     "ceo": {
+            //         names: ["信愿", "小信", "小·真正的老总·吉祥物·信", "生活部", "老总"],
+            //         page: "ceo.html"
+            //     },
+            //     "foreman": {
+            //         names: ["姜文雨", "姜姜", "吃瓜大王", "猪策划", "姜", "部长"],
+            //         page: "jiang.html"
+            //     },
+            //     "deputy": {
+            //         names: ["孔祥冰", "冰冰", "冰狗", "血狼头号铁粉", "冰", "Pilgrimage"],
+            //         page: "bingo.html"
+            //     },
+            //     "secretary": {
+            //         names: ["杨硕", "楠桶", "硕宝", "此群坐镇骑士长", "硕"],
+            //         page: "sure.html"
+            //     },
+            //     "partner": {
+            //         names: ["高赓", "歌神", "量子力学传承人", "Aron", "赓"],
+            //         page: "geng.html"
+            //     },
+            //     "scientist": {
+            //         names: ["兰艳芝", "兰陈儿", "成毅", "莲花楼楼主夫人", "姑"],
+            //         page: "gu.html"
+            //     },
+            //     "hr": {
+            //         names: ["王子瑶", "电竞迷妹", "阿贡面包", "奇妙能力帅哥", "瑶"],
+            //         page: "yao.html"
+            //     },
+            //     "security": {
+            //         names: ["玄海强", "生活部梅西", "L1chaPup6", "史上第0位100级强者", "强"],
+            //         page: "qiang.html"
+            //     },
+            //     "teacher": {
+            //         names: ["玄洪远", "刘欢老师", "章若楠男朋友", "骑三轮车卖地瓜", "远"],
+            //         page: "liuhuan.html"
+            //     },
+            //     "worker": {
+            //         names: ["邬小钢", "电竞达人", "Nivana", "187体育生", "钢"],
+            //         page: "gang.html"
+            //     },
+            //     "sales": {
+            //         names: ["丁俊熙", "小丁", "恋爱大王", "冰冰爱凯神", "丁"],
+            //         page: "ding.html"
+            //     }
+            // };
+            // 1. 从外部文件读取 JSON 数据
+            const response = await fetch('assets/text/user.json');
+
+            if (!response.ok) {
+                throw new Error("无法读取用户配置文件");
+            }
+
+            const users = await response.json();
+
 
             // 检查是否在特定角色名单中
             if (users[role] && users[role].names.includes(name)) {
