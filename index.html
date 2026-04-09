@@ -7,148 +7,165 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/aerial_assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/aerial_assets/css/noscript.css" /></noscript>
-		<style>
-          /* 融合原有业务逻辑的自定义样式 */
-          .input-group {
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             background: rgba(255, 255, 255, 0.1);
-             border-radius: 4px;
-             padding: 5px 15px;
-             margin: 20px auto;
-             max-width: 400px;
-             border: 1px solid rgba(255, 255, 255, 0.2);
-             transition: border-color 0.3s ease;
-          }
+        <style>
+            /* 1. 登录框整体容器 */
+            .input-group {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(255, 255, 255, 0.1); /* 保持轻微的透明感 */
+                border-radius: 4px;
+                padding: 5px 15px;
+                margin: 20px auto;
+                max-width: 400px;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                transition: border-color 0.3s ease;
+            }
 
-          .input-group:focus-within {
-             border-color: rgba(255, 255, 255, 0.5);
-          }
+            .input-group:focus-within {
+                border-color: rgba(255, 255, 255, 0.5);
+            }
 
-         /* 模拟下拉框容器 */
-        .custom-select {
-            position: relative;
-            width: 140px;
-            cursor: pointer;
-            font-size: 0.9em;
-            color: #fff;
-            text-align: left;
-        }
+            /* 2. 模拟下拉框容器 */
+            .custom-select {
+                position: relative;
+                width: 140px;
+                cursor: pointer;
+                font-size: 0.9em;
+                text-align: left;
+            }
 
-        /* 触发器部分 */
-        .select-trigger {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-right: 5px;
-        }
+            /* 3. 角色显示文字 - 强制纯白 */
+            #selectedDisplay {
+                color: #ffffff !important;
+                opacity: 1 !important;
+                font-weight: 500;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* 防止背景过亮看不清 */
+            }
 
-        .select-trigger .arrow {
-            border: solid rgba(255,255,255,0.6);
-            border-width: 0 2px 2px 0;
-            display: inline-block;
-            padding: 3px;
-            transform: rotate(45deg);
-            transition: transform 0.3s;
-        }
+            /* 4. 下拉触发器及箭头 */
+            .select-trigger {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-right: 5px;
+            }
 
-        .custom-select.open .arrow {
-            transform: rotate(-135deg);
-        }
+            .select-trigger .arrow {
+                border: solid #ffffff; /* 箭头也用纯白 */
+                border-width: 0 2px 2px 0;
+                display: inline-block;
+                padding: 3px;
+                transform: rotate(45deg);
+                transition: transform 0.3s;
+                opacity: 0.8;
+            }
 
-        /* 下拉选项列表 - 核心美化部分 */
-        .select-options {
-            position: absolute;
-            top: calc(100% + 15px);
-            left: -15px; /* 补齐 input-group 的 padding */
-            width: calc(100% + 30px);
-            background: rgba(255, 255, 255, 0.1); /* 半透明背景 */
-            backdrop-filter: blur(10px); /* 磨砂玻璃效果 */
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-            display: none; /* 默认隐藏 */
-            z-index: 100;
-            max-height: 250px;
-            overflow-y: auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
+            .custom-select.open .arrow {
+                transform: rotate(-135deg);
+            }
 
-        .custom-select.open .select-options {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
+            /* 5. 下拉选项列表 - 深色磨砂质感 */
+            .select-options {
+                position: absolute;
+                top: calc(100% + 12px);
+                left: -15px;
+                width: calc(100% + 30px);
+                background: rgba(15, 15, 15, 0.85); /* 深色背景确保白色文字清晰 */
+                backdrop-filter: blur(15px);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                border-radius: 8px;
+                display: none;
+                z-index: 100;
+                max-height: 250px;
+                overflow-y: auto;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            }
 
-        .option {
-            padding: 12px 20px;
-            transition: background 0.2s;
-        }
+            .custom-select.open .select-options {
+                display: block;
+                animation: selectAppear 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            }
 
-        .option:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
+            /* 6. 单个选项样式 */
+            .option {
+                padding: 12px 20px;
+                color: #ffffff !important;
+                opacity: 1 !important;
+                transition: all 0.2s ease;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+            /* 选项悬停效果：白底黑字 */
+            .option:hover {
+                background: rgba(255, 255, 255, 0.95) !important;
+                color: #000000 !important;
+                text-shadow: none;
+                font-weight: bold;
+            }
 
-        /* 隐藏滚动条样式 */
-        .select-options::-webkit-scrollbar { width: 4px; }
-        .select-options::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+            /* 7. 分割线 - 提高亮度 */
+            .divider {
+                width: 1px;
+                height: 20px;
+                background: rgba(255, 255, 255, 0.6);
+                margin: 0 15px;
+            }
 
-          .divider {
-             width: 1px;
-             height: 20px;
-             background: rgba(255, 255, 255, 0.3);
-             margin: 0 15px;
-          }
+            /* 8. 姓名输入框 - 强制纯白 & 修复白底 */
+            input[type="text"] {
+                background: transparent !important;
+                border: none;
+                color: #ffffff !important; /* 强制纯白文字 */
+                opacity: 1 !important;
+                outline: none;
+                flex-grow: 1;
+                text-align: left;
+                box-shadow: none !important;
+                font-size: 0.9em;
+            }
 
-          /* 输入框样式 & 修复白底问题 */
-          input[type="text"] {
-             background: transparent !important;
-             border: none;
-             color: #fff !important;
-             outline: none;
-             flex-grow: 1;
-             text-align: left;
-             box-shadow: none !important;
-             font-size: 0.9em;
-          }
+            /* 修复浏览器自动填充导致的白底蓝字问题 */
+            input:-webkit-autofill,
+            input:-webkit-autofill:hover,
+            input:-webkit-autofill:focus,
+            input:-webkit-autofill:active  {
+                -webkit-text-fill-color: #ffffff !important;
+                transition: background-color 5000s ease-in-out 0s;
+                box-shadow: 0 0 0px 1000px transparent inset !important;
+            }
 
-          /* 核心修复：强制覆盖浏览器自动填充带来的白底蓝字 */
-          input:-webkit-autofill,
-          input:-webkit-autofill:hover,
-          input:-webkit-autofill:focus,
-          input:-webkit-autofill:active  {
-             -webkit-text-fill-color: #fff !important;
-             transition: background-color 5000s ease-in-out 0s; /* 通过极长延迟让背景色变相透明 */
-             box-shadow: 0 0 0px 1000px transparent inset !important;
-          }
+            /* 9. 进入按钮 */
+            .login-btn {
+                margin-top: 20px;
+                letter-spacing: 2px;
+                font-weight: bold;
+                background: #ffffff !important;
+                color: #000000 !important;
+                padding: 0 40px;
+                line-height: 3em;
+                height: 3em;
+                border-radius: 4px;
+                display: inline-block;
+                text-decoration: none;
+                transition: all 0.3s ease;
+            }
 
-          #header nav ul li a {
-             cursor: pointer;
-          }
+            .login-btn:hover {
+                transform: scale(1.05);
+                background: #dddddd !important;
+            }
 
-          .login-btn {
-             margin-top: 20px;
-             letter-spacing: 2px;
-             font-weight: bold;
-             background: #fff !important;
-             color: #000 !important;
-             padding: 0 30px;
-             line-height: 3em;
-             height: 3em;
-             border-radius: 4px;
-             display: inline-block;
-             text-decoration: none;
-             transition: all 0.3s ease;
-          }
+            /* 10. 动画与滚动条 */
+            @keyframes selectAppear {
+                from { opacity: 0; transform: translateY(-10px) scale(0.95); }
+                to { opacity: 1; transform: translateY(0) scale(1); }
+            }
 
-          .login-btn:hover {
-             transform: scale(1.05);
-             background: #ddd !important;
-          }
+            .select-options::-webkit-scrollbar { width: 4px; }
+            .select-options::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+
+            #header nav ul li a { cursor: pointer; }
         </style>
 	</head>
 	<body class="is-preload">
