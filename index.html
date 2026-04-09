@@ -2,82 +2,154 @@
 <html lang="zh-CN">
 	<head>
 		<title>生活部文化有限公司 | SHENGHUOBU MEDIA</title>
+        <link rel="icon" href="assets/picture/专业团队.jpg" type="image/jpeg">
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/aerial_assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/aerial_assets/css/noscript.css" /></noscript>
 		<style>
-			/* 融合原有业务逻辑的自定义样式 */
-			.input-group {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				background: rgba(255, 255, 255, 0.1);
-				border-radius: 4px;
-				padding: 5px 15px;
-				margin: 20px auto;
-				max-width: 400px;
-				border: 1px solid rgba(255, 255, 255, 0.2);
-			}
+          /* 融合原有业务逻辑的自定义样式 */
+          .input-group {
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             background: rgba(255, 255, 255, 0.1);
+             border-radius: 4px;
+             padding: 5px 15px;
+             margin: 20px auto;
+             max-width: 400px;
+             border: 1px solid rgba(255, 255, 255, 0.2);
+             transition: border-color 0.3s ease;
+          }
 
-			select {
-				background: transparent;
-				border: none;
-				color: #fff;
-				font-size: 0.9em;
-				outline: none;
-				cursor: pointer;
-				appearance: none;
-				-webkit-appearance: none;
-				padding-right: 10px;
-			}
+          .input-group:focus-within {
+             border-color: rgba(255, 255, 255, 0.5);
+          }
 
-			select option {
-				background: #222;
-				color: #fff;
-			}
+         /* 模拟下拉框容器 */
+        .custom-select {
+            position: relative;
+            width: 140px;
+            cursor: pointer;
+            font-size: 0.9em;
+            color: #fff;
+            text-align: left;
+        }
 
-			.divider {
-				width: 1px;
-				height: 20px;
-				background: rgba(255, 255, 255, 0.3);
-				margin: 0 15px;
-			}
+        /* 触发器部分 */
+        .select-trigger {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-right: 5px;
+        }
 
-			input[type="text"] {
-				background: transparent;
-				border: none;
-				color: #fff;
-				outline: none;
-				flex-grow: 1;
-				text-align: left;
-				box-shadow: none !important;
-			}
+        .select-trigger .arrow {
+            border: solid rgba(255,255,255,0.6);
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 3px;
+            transform: rotate(45deg);
+            transition: transform 0.3s;
+        }
 
-			#header nav ul li a {
-				cursor: pointer;
-			}
+        .custom-select.open .arrow {
+            transform: rotate(-135deg);
+        }
 
-			.login-btn {
-				margin-top: 20px;
-				letter-spacing: 2px;
-				font-weight: bold;
-				background: #fff !important;
-				color: #000 !important;
-				padding: 0 30px;
-				line-height: 3em;
-				height: 3em;
-				border-radius: 4px;
-				display: inline-block;
-				text-decoration: none;
-				transition: all 0.3s ease;
-			}
+        /* 下拉选项列表 - 核心美化部分 */
+        .select-options {
+            position: absolute;
+            top: calc(100% + 15px);
+            left: -15px; /* 补齐 input-group 的 padding */
+            width: calc(100% + 30px);
+            background: rgba(255, 255, 255, 0.1); /* 半透明背景 */
+            backdrop-filter: blur(10px); /* 磨砂玻璃效果 */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            display: none; /* 默认隐藏 */
+            z-index: 100;
+            max-height: 250px;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
 
-			.login-btn:hover {
-				transform: scale(1.05);
-				background: #ddd !important;
-			}
-		</style>
+        .custom-select.open .select-options {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .option {
+            padding: 12px 20px;
+            transition: background 0.2s;
+        }
+
+        .option:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 隐藏滚动条样式 */
+        .select-options::-webkit-scrollbar { width: 4px; }
+        .select-options::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+
+          .divider {
+             width: 1px;
+             height: 20px;
+             background: rgba(255, 255, 255, 0.3);
+             margin: 0 15px;
+          }
+
+          /* 输入框样式 & 修复白底问题 */
+          input[type="text"] {
+             background: transparent !important;
+             border: none;
+             color: #fff !important;
+             outline: none;
+             flex-grow: 1;
+             text-align: left;
+             box-shadow: none !important;
+             font-size: 0.9em;
+          }
+
+          /* 核心修复：强制覆盖浏览器自动填充带来的白底蓝字 */
+          input:-webkit-autofill,
+          input:-webkit-autofill:hover,
+          input:-webkit-autofill:focus,
+          input:-webkit-autofill:active  {
+             -webkit-text-fill-color: #fff !important;
+             transition: background-color 5000s ease-in-out 0s; /* 通过极长延迟让背景色变相透明 */
+             box-shadow: 0 0 0px 1000px transparent inset !important;
+          }
+
+          #header nav ul li a {
+             cursor: pointer;
+          }
+
+          .login-btn {
+             margin-top: 20px;
+             letter-spacing: 2px;
+             font-weight: bold;
+             background: #fff !important;
+             color: #000 !important;
+             padding: 0 30px;
+             line-height: 3em;
+             height: 3em;
+             border-radius: 4px;
+             display: inline-block;
+             text-decoration: none;
+             transition: all 0.3s ease;
+          }
+
+          .login-btn:hover {
+             transform: scale(1.05);
+             background: #ddd !important;
+          }
+        </style>
 	</head>
 	<body class="is-preload">
 		<div id="wrapper">
@@ -90,39 +162,37 @@
 						<p>SHENGHUOBU CULTURE MEDIA &nbsp;&bull;&nbsp; 2022-2026</p>
 
 						<div class="input-group">
-							<div class="select-wrapper">
-								<select id="roleSelect">
-									<option value="ceo">老总</option>
-									<option value="foreman">打工人头头</option>
-									<option value="deputy">打工人负头头</option>
-									<option value="secretary">秘书长</option>
-									<option value="partner">公司合伙人</option>
-									<option value="scientist">研发部科学家</option>
-									<option value="hr">人事部经理</option>
-									<option value="security">安保分队队长</option>
-									<option value="teacher">老师</option>
-									<option value="worker">一线工人</option>
-									<option value="sales">世一流销售</option>
-									<option value="guest">游客</option>
-								</select>
-							</div>
+                            <div class="custom-select" id="customSelect">
+                                <div class="select-trigger">
+                                    <span id="selectedDisplay">老总</span>
+                                    <i class="arrow"></i>
+                                </div>
+                                <div class="select-options">
+                                    <div class="option" data-value="ceo">老总</div>
+                                    <div class="option" data-value="foreman">打工人头头</div>
+                                    <div class="option" data-value="deputy">打工人负头头</div>
+                                    <div class="option" data-value="secretary">秘书长</div>
+                                    <div class="option" data-value="partner">公司合伙人</div>
+                                    <div class="option" data-value="scientist">研发部科学家</div>
+                                    <div class="option" data-value="hr">人事部经理</div>
+                                    <div class="option" data-value="security">安保分队队长</div>
+                                    <div class="option" data-value="teacher">老师</div>
+                                    <div class="option" data-value="worker">一线工人</div>
+                                    <div class="option" data-value="sales">世一流销售</div>
+                                    <div class="option" data-value="guest">游客</div>
+                                </div>
+                                <input type="hidden" id="roleSelect" value="ceo">
+                            </div>
 							<div class="divider"></div>
 							<input type="text" id="userInput" placeholder="输入成员姓名" onkeydown="if(event.keyCode==13) doLogin()">
 						</div>
 
 						<a href="javascript:void(0);" class="login-btn" onclick="doLogin()">ACCESS / 进入</a>
 
-						<nav>
-							<ul>
-								<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-								<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-							</ul>
-						</nav>
 					</header>
 
 				<footer id="footer">
-						<span class="copyright">&copy; SHENGHUOBU MEDIA. Design: <a href="http://html5up.net">HTML5 UP</a>.</span>
+						<span class="copyright">&copy; SHENGHUOBU MEDIA.2022-2026</span>
 					</footer>
 
 			</div>
@@ -169,6 +239,38 @@
 					alert("系统初始化失败，请稍后再试");
 				}
 			}
+
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const customSelect = document.getElementById('customSelect');
+                const trigger = customSelect.querySelector('.select-trigger');
+                const options = customSelect.querySelectorAll('.option');
+                const hiddenInput = document.getElementById('roleSelect');
+                const display = document.getElementById('selectedDisplay');
+
+                // 点击开关下拉列表
+                trigger.addEventListener('click', (e) => {
+                    customSelect.classList.toggle('open');
+                    e.stopPropagation();
+                });
+
+                // 选择选项
+                options.forEach(opt => {
+                    opt.addEventListener('click', () => {
+                        const value = opt.getAttribute('data-value');
+                        const text = opt.innerText;
+
+                        display.innerText = text;
+                        hiddenInput.value = value;
+                        customSelect.classList.remove('open');
+                    });
+                });
+
+                // 点击页面其他地方关闭下拉框
+                document.addEventListener('click', () => {
+                    customSelect.classList.remove('open');
+                });
+            });
 		</script>
 	</body>
 </html>
