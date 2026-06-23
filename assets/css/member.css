@@ -695,6 +695,38 @@ nav.top-nav a:hover { color: var(--accent); }
   gap: 10px;
 }
 
+.reply-to-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(240, 192, 64, 0.12);
+  border: 1px solid var(--accent-dim);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  width: fit-content;
+}
+
+.reply-to-tag .reply-to-name {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.reply-to-tag .reply-to-close {
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 0.7rem;
+  margin-left: 2px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.reply-to-tag .reply-to-close:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
 .comment-reply-form .reply-name,
 .comment-reply-form .reply-text {
   background: rgba(255,255,255,0.05);

@@ -83,7 +83,7 @@
   }
 
   // ============ 加载留言列表（支持楼中楼）============
-  var PAGE_SIZE = 10; // 默认显示条数
+  var PAGE_SIZE = 5; // 默认显示条数
   var allTopLevel = [];
   var allReplies = {};
 
@@ -170,6 +170,7 @@
       '<div class="comment-body">' + esc(c.content) + '</div>' +
       '<button class="comment-reply-btn" data-reply="' + c.id + '">回复</button>' +
       '<div class="comment-reply-form" id="reply-form-' + c.id + '" style="display:none;">' +
+        '<div class="reply-to-tag" style="display:none;">回复 <strong class="reply-to-name"></strong><span class="reply-to-close">✕</span></div>' +
         '<input type="text" class="reply-name" placeholder="你的名字（选填）" maxlength="30">' +
         '<textarea class="reply-text" placeholder="回复..." maxlength="500"></textarea>' +
         '<div class="reply-btns">' +
@@ -250,16 +251,33 @@
           var form = document.getElementById('reply-form-' + replyId);
           if (form) {
             form.style.display = 'block';
-            // 回复楼中楼时自动填 @名字
+            // 回复楼中楼时显示 @名字 标签
             var item = target.closest('.comment-item');
-            if (item && item.classList.contains('comment-reply')) {
-              var replyName = item.getAttribute('data-name') || '';
-              var txt = form.querySelector('.reply-text');
-              if (txt && replyName && txt.value.indexOf('@') !== 0) {
-                txt.value = '@' + replyName + ' ';
-              }
+            var tag = form.querySelector('.reply-to-tag');
+            var tagName = form.querySelector('.reply-to-name');
+            var txt = form.querySelector('.reply-text');
+            if (item && item.classList.contains('comment-reply') && tag && tagName) {
+              tagName.textContent = '@' + (item.getAttribute('data-name') || '');
+              tag.style.display = 'flex';
+              tag.setAttribute('data-reply-to', item.getAttribute('data-id') || '');
+            } else if (tag) {
+              tag.style.display = 'none';
+              tag.removeAttribute('data-reply-to');
             }
+            // 每次展开都清空之前的输入
+            if (txt) txt.value = '';
+            var nameInp = form.querySelector('.reply-name');
+            if (nameInp) nameInp.value = '';
             form.querySelector('.reply-text').focus();
+          }
+        }
+
+        // 点击 @标签上的 ✕ → 还原为回复主楼
+        if (target.classList.contains('reply-to-close')) {
+          var tag = target.closest('.reply-to-tag');
+          if (tag) {
+            tag.style.display = 'none';
+            tag.removeAttribute('data-reply-to');
           }
         }
 
@@ -279,6 +297,12 @@
           if (!replyForm) return;
           var rName = (replyForm.querySelector('.reply-name').value || '').trim();
           var rText = replyForm.querySelector('.reply-text').value.trim();
+          // 如果标签可见，自动在内容前加 @名字
+          var tag = replyForm.querySelector('.reply-to-tag');
+          if (tag && tag.style.display !== 'none') {
+            var atWho = tag.querySelector('.reply-to-name').textContent || '';
+            if (atWho) rText = atWho + ' ' + rText;
+          }
           if (!rText) return;
           if (rText.length > 500) { alert('回复太长了'); return; }
 
