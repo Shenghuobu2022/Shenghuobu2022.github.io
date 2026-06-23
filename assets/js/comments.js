@@ -133,10 +133,10 @@
     var html = '';
     for (var i = 0; i < count; i++) {
       var c = allTopLevel[i];
-      html += renderComment(c, false);
+      html += renderComment(c, false, c.id);
       var children = allReplies[c.id] || [];
       children.forEach(function (child) {
-        html += renderComment(child, true);
+        html += renderComment(child, true, c.id);
       });
     }
     // 展开更多按钮
@@ -156,13 +156,13 @@
     }
   }
 
-  function renderComment(c, isReply) {
+  function renderComment(c, isReply, topId) {
     var cls = isReply ? 'comment-item comment-reply' : 'comment-item';
     var name = c.name || '匿名同学';
     var date = new Date(c.created_at);
     var time = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' +
       pad(date.getHours()) + ':' + pad(date.getMinutes());
-    return '<div class="' + cls + '" data-id="' + c.id + '">' +
+    return '<div class="' + cls + '" data-id="' + c.id + '" data-top="' + topId + '" data-name="' + esc(name) + '">' +
       '<div class="comment-meta">' +
         '<span class="comment-author">' + esc(name) + '</span>' +
         '<span class="comment-time">' + esc(time) + '</span>' +
@@ -248,7 +248,19 @@
           allForms.forEach(function (f) { f.style.display = 'none'; });
           // 展开当前
           var form = document.getElementById('reply-form-' + replyId);
-          if (form) form.style.display = 'block';
+          if (form) {
+            form.style.display = 'block';
+            // 回复楼中楼时自动填 @名字
+            var item = target.closest('.comment-item');
+            if (item && item.classList.contains('comment-reply')) {
+              var replyName = item.getAttribute('data-name') || '';
+              var txt = form.querySelector('.reply-text');
+              if (txt && replyName && txt.value.indexOf('@') !== 0) {
+                txt.value = '@' + replyName + ' ';
+              }
+            }
+            form.querySelector('.reply-text').focus();
+          }
         }
 
         // 点击「取消」
@@ -260,9 +272,10 @@
         // 点击「发送回复」
         if (target.classList.contains('reply-submit')) {
           var form = target.closest('.comment-item');
-          var parentId = form ? form.getAttribute('data-id') : null;
-          if (!parentId) return;
-          var replyForm = document.getElementById('reply-form-' + parentId);
+          // 统一挂在主楼下面（data-top），不额外缩进
+          var topId = form ? form.getAttribute('data-top') : null;
+          if (!topId) return;
+          var replyForm = document.getElementById('reply-form-' + form.getAttribute('data-id'));
           if (!replyForm) return;
           var rName = (replyForm.querySelector('.reply-name').value || '').trim();
           var rText = replyForm.querySelector('.reply-text').value.trim();
@@ -274,7 +287,7 @@
           target.disabled = true;
           target.textContent = '发送中...';
 
-          doInsert({ page: page, name: rName || null, content: rText, parent_id: parseInt(parentId, 10) }, function () {
+          doInsert({ page: page, name: rName || null, content: rText, parent_id: parseInt(topId, 10) }, function () {
             target.disabled = false;
             target.textContent = '回复';
             replyForm.style.display = 'none';
