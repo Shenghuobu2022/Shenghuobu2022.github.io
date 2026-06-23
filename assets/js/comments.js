@@ -167,7 +167,7 @@
         '<span class="comment-author">' + esc(name) + '</span>' +
         '<span class="comment-time">' + esc(time) + '</span>' +
       '</div>' +
-      '<div class="comment-body">' + esc(c.content) + '</div>' +
+      '<div class="comment-body">' + formatBody(c.content, isReply) + '</div>' +
       '<button class="comment-reply-btn" data-reply="' + c.id + '">回复</button>' +
       '<div class="comment-reply-form" id="reply-form-' + c.id + '" style="display:none;">' +
         '<div class="reply-to-tag" style="display:none;">回复 <strong class="reply-to-name"></strong><span class="reply-to-close">✕</span></div>' +
@@ -185,6 +185,16 @@
     var d = document.createElement('div');
     d.textContent = str;
     return d.innerHTML;
+  }
+
+  // 楼中楼回复高亮 @名字 前缀
+  function formatBody(content, isReply) {
+    if (!isReply) return esc(content);
+    var m = content.match(/^@(\S+)\s/);
+    if (m) {
+      return '<span class="comment-mention">@' + esc(m[1]) + '</span> ' + esc(content.slice(m[0].length));
+    }
+    return esc(content);
   }
 
   function pad(n) { return ('0' + n).slice(-2); }
