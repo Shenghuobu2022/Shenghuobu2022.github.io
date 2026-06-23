@@ -10,6 +10,7 @@
   var page = location.pathname.split('/').pop() || '';
   var tickerEl = null;
   var secondsEl = null;
+  var countdownEl = null;
 
   // ============ 注入走字时钟 HTML ============
   function injectTicker() {
@@ -23,6 +24,7 @@
       '<div class="ticker-label">生活部文化有限公司已成立</div>' +
       '<div class="ticker-digits" id="ticker-digits">--</div>' +
       '<div class="ticker-seconds" id="ticker-seconds">--:--:--</div>' +
+      '<div class="ticker-countdown" id="ticker-countdown"></div>' +
       '<div class="ticker-btns">' +
         '<button class="ticker-trigger" id="trigger-anniversary">🎉 周年庆</button>' +
         '<button class="ticker-trigger" id="trigger-birthday" style="display:none;">🎂 生日祝福</button>' +
@@ -31,20 +33,31 @@
     container.insertBefore(div, container.firstChild);
     tickerEl = document.getElementById('ticker-digits');
     secondsEl = document.getElementById('ticker-seconds');
+    countdownEl = document.getElementById('ticker-countdown');
   }
 
   // ============ 注入生日行 ============
-  function injectBirthdayRow(nameText, dateStr) {
+  function injectBirthdayRow(nameText, dateStr, diff) {
     var hero = document.querySelector('.hero');
     if (!hero) return;
+
+    var countdownHtml = '';
+    if (diff === 0) {
+      countdownHtml = '<span style="color:var(--accent);font-weight:700;"> 🎉 今天就是TA的生日！</span>';
+    } else if (diff > 0) {
+      countdownHtml = '<span style="color:var(--text-dim);"> · 距离生日还有 <strong style="color:var(--accent);">' + diff + '</strong> 天</span>';
+    } else {
+      countdownHtml = '<span style="color:var(--text-dim);"> · 生日已过 <strong style="color:var(--accent);">' + Math.abs(diff) + '</strong> 天</span>';
+    }
+
     var row = document.createElement('div');
     row.className = 'birthday-inline';
     row.innerHTML =
       '🎂 ' + nameText + ' 的生日：<strong style="color:var(--accent);">' + dateStr + '</strong>' +
+      countdownHtml +
       ' <button class="bday-trigger" id="manual-bday-trigger">祝福TA 🎂</button>';
     hero.appendChild(row);
 
-    // 同时让时钟区的生日按钮可见
     var btn = document.getElementById('trigger-birthday');
     if (btn) btn.style.display = 'inline-block';
   }
@@ -83,6 +96,21 @@
       secondsEl.textContent = pad(h, 2) + ':' + pad(min, 2) + ':' + pad(s, 2);
     }
 
+    // 周年倒计时
+    if (countdownEl) {
+      var anniDiff = dayDiff(9, 18);
+      var anniYears = new Date().getFullYear() - 2022;
+      var cdText = '';
+      if (anniDiff === 0) {
+        cdText = '🎉 今天是生活部成立 <strong>' + anniYears + '</strong> 周年！';
+      } else if (anniDiff > 0) {
+        cdText = '距成立 <strong>' + anniYears + '</strong> 周年还有 <strong>' + anniDiff + '</strong> 天';
+      } else {
+        cdText = '成立 <strong>' + anniYears + '</strong> 周年已过 <strong>' + Math.abs(anniDiff) + '</strong> 天';
+      }
+      countdownEl.innerHTML = cdText;
+    }
+
     // 同步更新底部的小字计数器
     var durEl = document.getElementById('establish-duration');
     if (durEl) {
@@ -115,7 +143,9 @@
 
       // 注入生日行
       if (myData) {
-        injectBirthdayRow(myData.name, fmtDate(myData.date.split('-')));
+        var parts = myData.date.split('-');
+        var diff = dayDiff(parseInt(parts[0], 10), parseInt(parts[1], 10));
+        injectBirthdayRow(myData.name, fmtDate(parts), diff);
       }
 
       // 检测成员生日（7天内自动弹窗，否则绑定手动触发）
@@ -125,12 +155,14 @@
         if (diff >= -BDAY_RANGE && diff <= BDAY_RANGE) {
           setTimeout(function () { showBirthday(myData.name, diff, myData.note || ''); }, 800);
         }
-        // 手动触发按钮
+        // 手动触发按钮 — 实时计算diff
         bindTrigger('trigger-birthday', function () {
-          showBirthday(myData.name, 0, myData.note || '');
+          var realDiff = dayDiff(parseInt(parts[0], 10), parseInt(parts[1], 10));
+          showBirthday(myData.name, realDiff, myData.note || '');
         });
         bindTrigger('manual-bday-trigger', function () {
-          showBirthday(myData.name, 0, myData.note || '');
+          var realDiff = dayDiff(parseInt(parts[0], 10), parseInt(parts[1], 10));
+          showBirthday(myData.name, realDiff, myData.note || '');
         });
       }
 
@@ -141,7 +173,9 @@
         setTimeout(function () { showAnniversary(anniYears, anniDiff); }, 800);
       }
       bindTrigger('trigger-anniversary', function () {
-        showAnniversary(anniYears, 0);
+        var realAnniDiff = dayDiff(9, 18);
+        var realAnniYears = new Date().getFullYear() - 2022;
+        showAnniversary(realAnniYears, realAnniDiff);
       });
     })
     .catch(function () { /* 静默 */ });
@@ -167,13 +201,14 @@
     popup.className = 'bday-popup';
 
     var isToday = diff === 0;
+    var absDiff = Math.abs(diff);
     var emoji = isToday ? '🎂' : (diff > 0 ? '🎁' : '🍰');
     var title = isToday
       ? name + ' 生日快乐！'
-      : (diff > 0 ? name + ' 即将过生日！🎉' : name + ' 刚过完生日！💫');
+      : (diff > 0 ? '提前 ' + diff + ' 天祝 ' + name + ' 生日快乐！🎉' : name + ' 生日已过 ' + absDiff + ' 天，迟到的祝福！💫');
     var sub = isToday
       ? '生活部全体成员祝你生日快乐，万事如意！'
-      : (diff > 0 ? '还有 ' + diff + ' 天就是 TA 的生日啦～' : '已经过去 ' + Math.abs(diff) + ' 天了，祝福不打折！');
+      : (diff > 0 ? '虽然还有 ' + diff + ' 天，但祝福不嫌早～' : '祝福不打折，每天都值得被祝福！');
 
     if (note) {
       sub += '<br><span style="font-size:.78rem;opacity:.7;">' + note + '</span>';
@@ -237,15 +272,16 @@
     popup.className = 'bday-popup';
 
     var isToday = diff === 0;
+    var absDiff = Math.abs(diff);
     var emoji = isToday ? '🏢🎉' : '🏢';
     var title = isToday
       ? '生活部成立 ' + years + ' 周年快乐！'
-      : (diff > 0 ? '生活部成立 ' + years + ' 周年倒计时！' : '生活部成立 ' + years + ' 周年刚过！');
+      : (diff > 0 ? '提前 ' + diff + ' 天庆祝生活部成立 ' + years + ' 周年！' : '生活部成立 ' + years + ' 周年已过 ' + absDiff + ' 天！');
     var sub = isToday
       ? '2022年9月18日 — 生活部群正式建立。感谢每一位成员的陪伴！'
       : (diff > 0
-        ? '还有 ' + diff + ' 天就是生活部 ' + years + ' 岁生日啦！'
-        : '迟到的庆祝，但我们永远在一起！');
+        ? '距离 9月18日还有 ' + diff + ' 天，但我们想提前庆祝！'
+        : '迟到的纪念，但我们永远在一起！');
 
     popup.innerHTML =
       '<div class="bday-emoji" style="font-size:2.8rem;">' + emoji + '</div>' +
