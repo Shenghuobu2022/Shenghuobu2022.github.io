@@ -82,13 +82,14 @@
     container.appendChild(div);
   }
 
-  // ============ 加载留言列表（支持楼中楼）============
-  var PAGE_SIZE = 5; // 默认显示条数
-  var expanded = false; // 是否已展开全部
+  // ============ 加载留言列表（B站风格分页 + 楼中楼）============
+  var PAGE_SIZE = 5; // 每页主楼条数
+  var currentPage = 1;
+  var expandedReplies = {}; // 已展开回复的主楼 ID 集合
   var allTopLevel = [];
   var allReplies = {};
 
-  function loadComments(showAll) {
+  function loadComments() {
     if (!client) return;
     var list = document.getElementById('comment-list');
     if (!list) return;
@@ -122,40 +123,52 @@
         // 最新优先
         allTopLevel.reverse();
 
-        renderList(list, showAll ? Infinity : PAGE_SIZE);
+        renderList(list, 1);
       })
       .catch(function (err) {
         list.innerHTML = isPaused(err) ? PAUSED_MSG : '<div class="comment-empty">加载失败，请稍后重试</div>';
       });
   }
 
-  function renderList(list, limit) {
-    var count = Math.min(limit, allTopLevel.length);
+  function renderList(list, pageNum) {
+    var totalPages = Math.ceil(allTopLevel.length / PAGE_SIZE) || 1;
+    if (pageNum < 1) pageNum = 1;
+    if (pageNum > totalPages) pageNum = totalPages;
+    currentPage = pageNum;
+
+    var start = (pageNum - 1) * PAGE_SIZE;
+    var end = Math.min(start + PAGE_SIZE, allTopLevel.length);
     var html = '';
-    for (var i = 0; i < count; i++) {
+
+    for (var i = start; i < end; i++) {
       var c = allTopLevel[i];
       html += renderComment(c, false, c.id);
       var children = allReplies[c.id] || [];
-      children.forEach(function (child) {
-        html += renderComment(child, true, c.id);
-      });
+      if (children.length > 0) {
+        if (expandedReplies[c.id]) {
+          // 已展开：显示全部回复
+          children.forEach(function (child) {
+            html += renderComment(child, true, c.id);
+          });
+        } else {
+          // 折叠：显示展开按钮
+          html += '<div class="comment-replies-toggle" data-expand="' + c.id + '">' +
+            '共 <strong>' + children.length + '</strong> 条回复 ▼</div>';
+        }
+      }
     }
-    // 展开更多按钮
-    if (allTopLevel.length > PAGE_SIZE && limit < allTopLevel.length) {
-      html += '<div class="comment-more" id="comment-more">' +
-        '查看全部 <strong>' + allTopLevel.length + '</strong> 条评论 ▼' +
-      '</div>';
-    }
-    list.innerHTML = html;
 
-    // 绑定展开按钮
-    var moreBtn = document.getElementById('comment-more');
-    if (moreBtn) {
-      moreBtn.addEventListener('click', function () {
-        expanded = true;
-        renderList(list, Infinity);
-      });
+    // 页码导航
+    if (totalPages > 1) {
+      html += '<div class="comment-pager">';
+      for (var p = 1; p <= totalPages; p++) {
+        var cls = p === currentPage ? ' comment-page-btn active' : 'comment-page-btn';
+        html += '<button class="' + cls + '" data-page="' + p + '">' + p + '</button>';
+      }
+      html += '</div>';
     }
+
+    list.innerHTML = html;
   }
 
   function renderComment(c, isReply, topId) {
@@ -242,7 +255,7 @@
           submitBtn.textContent = '发送留言';
           if (newRow) {
             allTopLevel.unshift(newRow);
-            renderList(list, expanded ? Infinity : PAGE_SIZE);
+            renderList(list, 1);
           }
         }, function () {
           submitBtn.disabled = false;
@@ -303,6 +316,22 @@
           if (form) form.style.display = 'none';
         }
 
+        // 点击页码 → 翻页
+        if (target.classList.contains('comment-page-btn')) {
+          var p = parseInt(target.getAttribute('data-page'), 10);
+          if (p) renderList(list, p);
+          return;
+        }
+
+        // 点击「共 X 条回复」→ 展开回复
+        if (target.closest('.comment-replies-toggle')) {
+          var btn = target.closest('.comment-replies-toggle');
+          var expandId = btn.getAttribute('data-expand');
+          expandedReplies[expandId] = true;
+          renderList(list, currentPage);
+          return;
+        }
+
         // 点击「发送回复」
         if (target.classList.contains('reply-submit')) {
           var form = target.closest('.comment-item');
@@ -336,7 +365,14 @@
             if (newRow) {
               if (!allReplies[topId]) allReplies[topId] = [];
               allReplies[topId].push(newRow);
-              renderList(list, expanded ? Infinity : PAGE_SIZE);
+              // 找到父留言所在页
+              var parentIdx = -1;
+              for (var i = 0; i < allTopLevel.length; i++) {
+                if (String(allTopLevel[i].id) === String(topId)) { parentIdx = i; break; }
+              }
+              var parentPage = parentIdx >= 0 ? Math.floor(parentIdx / PAGE_SIZE) + 1 : currentPage;
+              expandedReplies[topId] = true;
+              renderList(list, parentPage);
             }
           }, function () {
             target.disabled = false;
@@ -375,7 +411,7 @@
         // 服务器返回的数据优先，否则用本地参数构建（保证一定有一行可渲染）
         var serverRow = res.data && res.data[0];
         var newRow = serverRow || Object.assign({}, row, {
-          id: 'local_' + Date.now(),
+          id: -Date.now(),
           created_at: new Date().toISOString()
         });
         onSuccess(newRow);

@@ -800,24 +800,62 @@ nav.top-nav a:hover { color: var(--accent); }
   background: rgba(255,255,255,0.1);
 }
 
-/* ---- 展开更多 ---- */
-.comment-more {
-  text-align: center;
-  padding: 14px 0 6px;
+/* ---- 回复折叠按钮（B站风格） ---- */
+.comment-replies-toggle {
+  margin-left: 28px;
+  padding: 6px 0 2px;
   color: var(--accent);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   cursor: pointer;
-  transition: opacity 0.3s;
+  transition: opacity 0.2s;
+  user-select: none;
 }
 
-.comment-more:hover {
-  opacity: 0.7;
+.comment-replies-toggle:hover {
+  opacity: 0.65;
+}
+
+/* ---- 分页器 ---- */
+.comment-pager {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 0 4px;
+}
+
+.comment-page-btn {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.04);
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comment-page-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.comment-page-btn.active {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+  font-weight: 700;
 }
 
 @media (max-width: 640px) {
   .est-ticker .ticker-digits { font-size: 1.8rem; }
   .two-col { grid-template-columns: 1fr; }
   .comment-reply { margin-left: 16px; padding-left: 10px; }
+  .comment-replies-toggle { margin-left: 16px; }
   .comment-reply-form .reply-name { max-width: 130px; }
   .hero .main-title { font-size: 1.6rem; }
   .team-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
