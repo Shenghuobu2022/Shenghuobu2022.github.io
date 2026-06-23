@@ -84,6 +84,7 @@
 
   // ============ 加载留言列表（支持楼中楼）============
   var PAGE_SIZE = 5; // 默认显示条数
+  var expanded = false; // 是否已展开全部
   var allTopLevel = [];
   var allReplies = {};
 
@@ -151,6 +152,7 @@
     var moreBtn = document.getElementById('comment-more');
     if (moreBtn) {
       moreBtn.addEventListener('click', function () {
+        expanded = true;
         renderList(list, Infinity);
       });
     }
@@ -233,11 +235,15 @@
         submitBtn.disabled = true;
         submitBtn.textContent = '发送中...';
 
-        doInsert({ page: page, name: name || null, content: text }, function () {
+        doInsert({ page: page, name: name || null, content: text }, function (newRow) {
           nameInp.value = '';
           textInp.value = '';
           submitBtn.disabled = false;
           submitBtn.textContent = '发送留言';
+          if (newRow) {
+            allTopLevel.unshift(newRow);
+            renderList(list, expanded ? Infinity : PAGE_SIZE);
+          }
         }, function () {
           submitBtn.disabled = false;
           submitBtn.textContent = '发送失败，重试';
@@ -321,12 +327,17 @@
           target.disabled = true;
           target.textContent = '发送中...';
 
-          doInsert({ page: page, name: rName || null, content: rText, parent_id: parseInt(topId, 10) }, function () {
+          doInsert({ page: page, name: rName || null, content: rText, parent_id: parseInt(topId, 10) }, function (newRow) {
             target.disabled = false;
             target.textContent = '回复';
             replyForm.style.display = 'none';
             replyForm.querySelector('.reply-name').value = '';
             replyForm.querySelector('.reply-text').value = '';
+            if (newRow) {
+              if (!allReplies[topId]) allReplies[topId] = [];
+              allReplies[topId].push(newRow);
+              renderList(list, expanded ? Infinity : PAGE_SIZE);
+            }
           }, function () {
             target.disabled = false;
             target.textContent = '发送失败，重试';
@@ -361,8 +372,7 @@
           return;
         }
         localStorage.setItem('shb_cmt_ts_' + page, Date.now().toString());
-        onSuccess();
-        loadComments();
+        onSuccess(res.data && res.data[0]);
       })
       .catch(function (err) {
         if (isPaused(err)) {
