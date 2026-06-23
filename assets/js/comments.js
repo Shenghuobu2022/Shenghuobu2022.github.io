@@ -82,7 +82,7 @@
     container.appendChild(div);
   }
 
-  // ============ 加载留言列表 ============
+  // ============ 加载留言列表（支持楼中楼）============
   function loadComments() {
     if (!client) return;
     var list = document.getElementById('comment-list');
@@ -91,8 +91,8 @@
     client.from('comments')
       .select('*')
       .eq('page', page)
-      .order('created_at', { ascending: false })
-      .limit(50)
+      .order('created_at', { ascending: true })
+      .limit(100)
       .then(function (res) {
         if (res.error) {
           list.innerHTML = isPaused(res.error) ? PAUSED_MSG : '<div class="comment-empty">加载失败，请稍后重试</div>';
@@ -103,26 +103,55 @@
           return;
         }
 
-        var html = '';
+        // 拆分为主楼和回复
+        var topLevel = [];
+        var replies = {};
         res.data.forEach(function (c) {
-          var name = c.name || '匿名同学';
-          var date = new Date(c.created_at);
-          var time = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' +
-            pad(date.getHours()) + ':' + pad(date.getMinutes());
-          html +=
-            '<div class="comment-item">' +
-              '<div class="comment-meta">' +
-                '<span class="comment-author">' + esc(name) + '</span>' +
-                '<span class="comment-time">' + esc(time) + '</span>' +
-              '</div>' +
-              '<div class="comment-body">' + esc(c.content) + '</div>' +
-            '</div>';
+          if (!c.parent_id) {
+            topLevel.push(c);
+          } else {
+            if (!replies[c.parent_id]) replies[c.parent_id] = [];
+            replies[c.parent_id].push(c);
+          }
+        });
+
+        var html = '';
+        topLevel.forEach(function (c) {
+          html += renderComment(c, false);
+          var children = replies[c.id] || [];
+          children.forEach(function (child) {
+            html += renderComment(child, true);
+          });
         });
         list.innerHTML = html;
       })
       .catch(function (err) {
         list.innerHTML = isPaused(err) ? PAUSED_MSG : '<div class="comment-empty">加载失败，请稍后重试</div>';
       });
+  }
+
+  function renderComment(c, isReply) {
+    var cls = isReply ? 'comment-item comment-reply' : 'comment-item';
+    var name = c.name || '匿名同学';
+    var date = new Date(c.created_at);
+    var time = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' +
+      pad(date.getHours()) + ':' + pad(date.getMinutes());
+    return '<div class="' + cls + '" data-id="' + c.id + '">' +
+      '<div class="comment-meta">' +
+        '<span class="comment-author">' + esc(name) + '</span>' +
+        '<span class="comment-time">' + esc(time) + '</span>' +
+      '</div>' +
+      '<div class="comment-body">' + esc(c.content) + '</div>' +
+      '<button class="comment-reply-btn" data-reply="' + c.id + '">回复</button>' +
+      '<div class="comment-reply-form" id="reply-form-' + c.id + '" style="display:none;">' +
+        '<input type="text" class="reply-name" placeholder="你的名字（选填）" maxlength="30">' +
+        '<textarea class="reply-text" placeholder="回复..." maxlength="500"></textarea>' +
+        '<div class="reply-btns">' +
+          '<button class="reply-submit">回复</button>' +
+          '<button class="reply-cancel">取消</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
   }
 
   function esc(str) {
@@ -148,60 +177,123 @@
     );
   }
 
-  // ============ 发送留言 ============
+  // ============ 发送留言 + 回复（事件委托）============
   function setupForm() {
-    var btn = document.getElementById('comment-submit');
+    var submitBtn = document.getElementById('comment-submit');
     var nameInp = document.getElementById('comment-name');
     var textInp = document.getElementById('comment-text');
-    if (!btn || !textInp) return;
 
-    btn.addEventListener('click', function () {
-      var name = (nameInp.value || '').trim();
-      var text = textInp.value.trim();
-      if (!text) return;
-      if (text.length > 500) { alert('留言太长了，最多 500 字'); return; }
+    // 顶层留言
+    if (submitBtn) {
+      submitBtn.addEventListener('click', function () {
+        var name = (nameInp.value || '').trim();
+        var text = textInp.value.trim();
+        if (!text) return;
+        if (text.length > 500) { alert('留言太长了，最多 500 字'); return; }
 
-      // 频率限制
-      var rateKey = 'shb_cmt_ts_' + page;
-      var last = localStorage.getItem(rateKey);
-      var now = Date.now();
-      if (last && (now - parseInt(last, 10)) < RATE_LIMIT) {
-        var left = Math.ceil((RATE_LIMIT - (now - parseInt(last, 10))) / 1000);
-        alert('发太快啦，请 ' + left + ' 秒后再试');
-        return;
-      }
+        if (!checkRate()) return;
 
-      btn.disabled = true;
-      btn.textContent = '发送中...';
+        submitBtn.disabled = true;
+        submitBtn.textContent = '发送中...';
 
-      client.from('comments')
-        .insert([{ page: page, name: name || null, content: text }])
-        .then(function (res) {
-          if (res.error) {
-            if (isPaused(res.error)) {
-              var list = document.getElementById('comment-list');
-              if (list) list.innerHTML = PAUSED_MSG;
-            }
-            btn.disabled = false;
-            btn.textContent = '发送失败，重试';
-            return;
-          }
+        doInsert({ page: page, name: name || null, content: text }, function () {
           nameInp.value = '';
           textInp.value = '';
-          btn.disabled = false;
-          btn.textContent = '发送留言';
-          localStorage.setItem('shb_cmt_ts_' + page, Date.now().toString());
-          loadComments();
-        })
-        .catch(function (err) {
-          if (isPaused(err)) {
-            var list = document.getElementById('comment-list');
-            if (list) list.innerHTML = PAUSED_MSG;
-          }
-          btn.disabled = false;
-          btn.textContent = '发送失败，重试';
+          submitBtn.disabled = false;
+          submitBtn.textContent = '发送留言';
+        }, function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = '发送失败，重试';
         });
-    });
+      });
+    }
+
+    // 回复按钮：事件委托在留言列表上
+    var list = document.getElementById('comment-list');
+    if (list) {
+      list.addEventListener('click', function (e) {
+        var target = e.target;
+
+        // 点击「回复」按钮
+        if (target.classList.contains('comment-reply-btn')) {
+          var replyId = target.getAttribute('data-reply');
+          var form = document.getElementById('reply-form-' + replyId);
+          if (form) form.style.display = 'block';
+        }
+
+        // 点击「取消」
+        if (target.classList.contains('reply-cancel')) {
+          var form = target.closest('.comment-reply-form');
+          if (form) form.style.display = 'none';
+        }
+
+        // 点击「发送回复」
+        if (target.classList.contains('reply-submit')) {
+          var form = target.closest('.comment-item');
+          var parentId = form ? form.getAttribute('data-id') : null;
+          if (!parentId) return;
+          var replyForm = document.getElementById('reply-form-' + parentId);
+          if (!replyForm) return;
+          var rName = (replyForm.querySelector('.reply-name').value || '').trim();
+          var rText = replyForm.querySelector('.reply-text').value.trim();
+          if (!rText) return;
+          if (rText.length > 500) { alert('回复太长了'); return; }
+
+          if (!checkRate()) return;
+
+          target.disabled = true;
+          target.textContent = '发送中...';
+
+          doInsert({ page: page, name: rName || null, content: rText, parent_id: parseInt(parentId, 10) }, function () {
+            target.disabled = false;
+            target.textContent = '回复';
+            replyForm.style.display = 'none';
+            replyForm.querySelector('.reply-name').value = '';
+            replyForm.querySelector('.reply-text').value = '';
+          }, function () {
+            target.disabled = false;
+            target.textContent = '发送失败，重试';
+          });
+        }
+      });
+    }
+  }
+
+  function checkRate() {
+    var rateKey = 'shb_cmt_ts_' + page;
+    var last = localStorage.getItem(rateKey);
+    var now = Date.now();
+    if (last && (now - parseInt(last, 10)) < RATE_LIMIT) {
+      var left = Math.ceil((RATE_LIMIT - (now - parseInt(last, 10))) / 1000);
+      alert('发太快啦，请 ' + left + ' 秒后再试');
+      return false;
+    }
+    return true;
+  }
+
+  function doInsert(row, onSuccess, onError) {
+    client.from('comments')
+      .insert([row])
+      .then(function (res) {
+        if (res.error) {
+          if (isPaused(res.error)) {
+            var lst = document.getElementById('comment-list');
+            if (lst) lst.innerHTML = PAUSED_MSG;
+          }
+          onError();
+          return;
+        }
+        localStorage.setItem('shb_cmt_ts_' + page, Date.now().toString());
+        onSuccess();
+        loadComments();
+      })
+      .catch(function (err) {
+        if (isPaused(err)) {
+          var lst = document.getElementById('comment-list');
+          if (lst) lst.innerHTML = PAUSED_MSG;
+        }
+        onError();
+      });
   }
 
   injectCommentSection();
