@@ -95,7 +95,7 @@
         res.data.forEach(function (c) {
           var name = c.name || '匿名同学';
           var date = new Date(c.created_at);
-          var time = (date.getMonth() + 1) + '/' + date.getDate() + ' ' +
+          var time = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() + ' ' +
             pad(date.getHours()) + ':' + pad(date.getMinutes());
           html +=
             '<div class="comment-item">' +
