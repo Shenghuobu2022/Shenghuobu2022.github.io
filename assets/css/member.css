@@ -707,9 +707,14 @@ nav.top-nav a:hover { color: var(--accent); }
   transition: border-color 0.3s;
 }
 
+.comment-reply-form .reply-name {
+  max-width: 180px;
+}
+
 .comment-reply-form .reply-text {
   resize: vertical;
   min-height: 50px;
+  max-width: 100%;
 }
 
 .comment-reply-form .reply-name:focus,
@@ -754,9 +759,25 @@ nav.top-nav a:hover { color: var(--accent); }
   background: rgba(255,255,255,0.1);
 }
 
+/* ---- 展开更多 ---- */
+.comment-more {
+  text-align: center;
+  padding: 14px 0 6px;
+  color: var(--accent);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.comment-more:hover {
+  opacity: 0.7;
+}
+
 @media (max-width: 640px) {
   .est-ticker .ticker-digits { font-size: 1.8rem; }
   .two-col { grid-template-columns: 1fr; }
+  .comment-reply { margin-left: 16px; padding-left: 10px; }
+  .comment-reply-form .reply-name { max-width: 130px; }
   .hero .main-title { font-size: 1.6rem; }
   .team-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
   .page-container { padding: 80px 16px 40px; }

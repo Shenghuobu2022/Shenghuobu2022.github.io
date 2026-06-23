@@ -83,7 +83,11 @@
   }
 
   // ============ 加载留言列表（支持楼中楼）============
-  function loadComments() {
+  var PAGE_SIZE = 10; // 默认显示条数
+  var allTopLevel = [];
+  var allReplies = {};
+
+  function loadComments(showAll) {
     if (!client) return;
     var list = document.getElementById('comment-list');
     if (!list) return;
@@ -92,7 +96,7 @@
       .select('*')
       .eq('page', page)
       .order('created_at', { ascending: true })
-      .limit(100)
+      .limit(200)
       .then(function (res) {
         if (res.error) {
           list.innerHTML = isPaused(res.error) ? PAUSED_MSG : '<div class="comment-empty">加载失败，请稍后重试</div>';
@@ -104,30 +108,52 @@
         }
 
         // 拆分为主楼和回复
-        var topLevel = [];
-        var replies = {};
+        allTopLevel = [];
+        allReplies = {};
         res.data.forEach(function (c) {
           if (!c.parent_id) {
-            topLevel.push(c);
+            allTopLevel.push(c);
           } else {
-            if (!replies[c.parent_id]) replies[c.parent_id] = [];
-            replies[c.parent_id].push(c);
+            if (!allReplies[c.parent_id]) allReplies[c.parent_id] = [];
+            allReplies[c.parent_id].push(c);
           }
         });
+        // 最新优先
+        allTopLevel.reverse();
 
-        var html = '';
-        topLevel.forEach(function (c) {
-          html += renderComment(c, false);
-          var children = replies[c.id] || [];
-          children.forEach(function (child) {
-            html += renderComment(child, true);
-          });
-        });
-        list.innerHTML = html;
+        renderList(list, showAll ? Infinity : PAGE_SIZE);
       })
       .catch(function (err) {
         list.innerHTML = isPaused(err) ? PAUSED_MSG : '<div class="comment-empty">加载失败，请稍后重试</div>';
       });
+  }
+
+  function renderList(list, limit) {
+    var count = Math.min(limit, allTopLevel.length);
+    var html = '';
+    for (var i = 0; i < count; i++) {
+      var c = allTopLevel[i];
+      html += renderComment(c, false);
+      var children = allReplies[c.id] || [];
+      children.forEach(function (child) {
+        html += renderComment(child, true);
+      });
+    }
+    // 展开更多按钮
+    if (allTopLevel.length > PAGE_SIZE && limit < allTopLevel.length) {
+      html += '<div class="comment-more" id="comment-more">' +
+        '查看全部 <strong>' + allTopLevel.length + '</strong> 条评论 ▼' +
+      '</div>';
+    }
+    list.innerHTML = html;
+
+    // 绑定展开按钮
+    var moreBtn = document.getElementById('comment-more');
+    if (moreBtn) {
+      moreBtn.addEventListener('click', function () {
+        renderList(list, Infinity);
+      });
+    }
   }
 
   function renderComment(c, isReply) {
@@ -214,9 +240,13 @@
       list.addEventListener('click', function (e) {
         var target = e.target;
 
-        // 点击「回复」按钮
+        // 点击「回复」按钮 — 先收起其他，再展开当前
         if (target.classList.contains('comment-reply-btn')) {
           var replyId = target.getAttribute('data-reply');
+          // 收起所有回复框
+          var allForms = list.querySelectorAll('.comment-reply-form');
+          allForms.forEach(function (f) { f.style.display = 'none'; });
+          // 展开当前
           var form = document.getElementById('reply-form-' + replyId);
           if (form) form.style.display = 'block';
         }
