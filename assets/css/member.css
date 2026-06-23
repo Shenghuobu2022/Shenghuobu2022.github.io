@@ -1,0 +1,394 @@
+/* ========================================
+   生活部文化有限公司 — 成员页面共享样式
+   ======================================== */
+
+/* ---- 全局重置 ---- */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  /* 默认主题色（可被各页面覆盖） */
+  --accent: #F0C040;
+  --accent-dim: rgba(240, 192, 64, 0.2);
+  --accent-glow: rgba(240, 192, 64, 0.4);
+  --card-bg: rgba(20, 20, 20, 0.75);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --text: #e0e0e0;
+  --text-dim: #999;
+  --bg-1: #0a0a0a;
+  --bg-2: #111;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  background: var(--bg-1);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* 动态背景 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, var(--accent-dim) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.02) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, var(--accent-dim) 0%, transparent 50%);
+  z-index: 0;
+  pointer-events: none;
+  animation: bgPulse 8s ease-in-out infinite;
+}
+
+@keyframes bgPulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* ---- 导航 ---- */
+nav.top-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, transparent 100%);
+}
+
+nav.top-nav a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  transition: color 0.3s;
+  position: relative;
+  z-index: 1;
+}
+
+nav.top-nav a:hover { color: var(--accent); }
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.back-btn::before {
+  content: '\2190';
+  font-size: 1.1rem;
+}
+
+/* ---- 容器 ---- */
+.page-container {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 100px 24px 60px;
+}
+
+/* ---- 英雄区 ---- */
+.hero {
+  text-align: center;
+  padding: 40px 0 50px;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.hero .role-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+  display: block;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.hero .main-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-shadow: 0 0 40px var(--accent-glow);
+}
+
+.hero .subtitle {
+  font-size: 1rem;
+  color: var(--text-dim);
+  margin-top: 8px;
+  letter-spacing: 1px;
+}
+
+.hero .divider-line {
+  width: 60px;
+  height: 2px;
+  background: var(--accent);
+  margin: 20px auto;
+  border-radius: 1px;
+}
+
+/* ---- 卡片 ---- */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 28px 30px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: border-color 0.3s, transform 0.3s;
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+.card:hover {
+  border-color: var(--accent-dim);
+  transform: translateY(-2px);
+}
+
+.card h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card h2 .section-icon { font-size: 1.3rem; }
+
+/* ---- 身份标签列表 ---- */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  border: 1px solid var(--accent-dim);
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
+  transition: all 0.3s;
+}
+
+.tag:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.tag.primary {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+  font-weight: 700;
+}
+
+/* ---- 高亮文本 ---- */
+.highlight {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ---- 技能/属性条 ---- */
+.stat-bar {
+  margin-bottom: 14px;
+}
+
+.stat-bar .label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.stat-bar .label span:last-child { color: var(--accent); }
+
+.stat-bar .bar {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+
+.stat-bar .bar .fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+  animation: barFill 1.2s ease-out forwards;
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+@keyframes barFill { to { transform: scaleX(1); } }
+
+/* ---- 时间线 (CEO专用) ---- */
+.timeline {
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent), transparent);
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 28px;
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -26px; top: 6px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.timeline-item .date {
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+
+.timeline-item .event {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+/* ---- 团队网格 (CEO专用) ---- */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 14px;
+}
+
+.team-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: block;
+}
+
+.team-card:hover {
+  border-color: var(--accent-dim);
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-3px);
+}
+
+.team-card .member-icon { font-size: 1.6rem; margin-bottom: 6px; }
+.team-card .member-name { font-size: 0.9rem; color: var(--text); font-weight: 600; }
+.team-card .member-role { font-size: 0.7rem; color: var(--accent); margin-top: 2px; }
+
+/* ---- 吉祥物卡片 (CEO专用) ---- */
+.mascot-card {
+  background: linear-gradient(135deg, rgba(240,192,64,0.1), rgba(240,192,64,0.02));
+  border: 2px solid var(--accent-dim);
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.mascot-card::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: conic-gradient(from 0deg, transparent, var(--accent-dim), transparent, var(--accent-dim), transparent);
+  animation: rotate 6s linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes rotate { to { transform: rotate(360deg); } }
+
+.mascot-card .inner {
+  position: relative;
+  z-index: 1;
+}
+
+.mascot-card .mascot-emoji { font-size: 4rem; display: block; margin-bottom: 12px; animation: float 2.5s ease-in-out infinite; }
+
+.mascot-card h2 {
+  font-size: 1.5rem;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+/* ---- 语录/引用 ---- */
+.quote-block {
+  border-left: 3px solid var(--accent);
+  padding: 12px 20px;
+  margin: 16px 0;
+  font-style: italic;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  background: rgba(255,255,255,0.02);
+  border-radius: 0 8px 8px 0;
+}
+
+/* ---- 底部 ---- */
+.page-footer {
+  text-align: center;
+  padding: 40px 0 30px;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  opacity: 0.6;
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+/* ---- 动画 ---- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.anim-delay-1 { animation-delay: 0.1s; }
+.anim-delay-2 { animation-delay: 0.2s; }
+.anim-delay-3 { animation-delay: 0.3s; }
+.anim-delay-4 { animation-delay: 0.4s; }
+.anim-delay-5 { animation-delay: 0.5s; }
+
+/* ---- 通用网格 ---- */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 640px) {
+  .two-col { grid-template-columns: 1fr; }
+  .hero .main-title { font-size: 1.6rem; }
+  .team-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+  .page-container { padding: 80px 16px 40px; }
+  .card { padding: 20px; }
+}

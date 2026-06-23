@@ -1,10 +1,240 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生活部文化有限公司 | SHENGHUOBU CULTURE MEDIA</title>
+    <link rel="icon" href="assets/picture/专业团队.jpg" type="image/jpeg">
+    <link rel="stylesheet" href="assets/css/member.css">
+    <style>
+        :root {
+            --accent: #F0C040;
+            --accent-dim: rgba(240, 192, 64, 0.15);
+            --accent-glow: rgba(240, 192, 64, 0.5);
+            --card-bg: rgba(20, 20, 18, 0.78);
+            --card-border: rgba(240, 192, 64, 0.15);
+        }
+
+        .company-hero {
+            text-align: center;
+            padding: 50px 0 40px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .company-logo {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px var(--accent-glow));
+        }
+
+        .company-name {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: var(--accent);
+            text-shadow: 0 0 40px var(--accent-glow);
+            margin-bottom: 6px;
+        }
+
+        .company-tagline {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .company-intro {
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* 吉祥物专区 */
+        .mascot-section {
+            margin: 30px 0;
+        }
+
+        .mascot-card .mascot-motto {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        .mascot-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        /* 数据面板 */
+        .company-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .stat-card .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 640px) {
+            .company-stats { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .company-name { font-size: 1.4rem; }
+            .stat-card .stat-number { font-size: 1.5rem; }
+            .stat-card { padding: 14px 8px; }
+        }
+    </style>
 </head>
 <body>
-<h1>欢迎来到公司老总、ceo、小信、小·真正的老总·吉祥物·信、生活部老总、生活部终极BOSS、吉祥物成精、生活部灵魂人物、永远的老大——信愿的主页！！！</h1>
+
+<nav class="top-nav">
+    <a href="index.html" class="back-btn">返回登录</a>
+    <a href="main.html">公司回忆录</a>
+</nav>
+
+<div class="page-container">
+
+    <!-- 公司英雄区 -->
+    <div class="company-hero">
+        <span class="company-logo">🏢</span>
+        <h1 class="company-name">生活部文化有限公司</h1>
+        <p class="company-tagline">SHENGHUOBU CULTURE MEDIA &nbsp;·&nbsp; EST. 2022</p>
+        <div class="divider-line"></div>
+        <p class="company-intro">
+            创立于2022年夏，坐落于山东大学信息学院。<br>
+            以"吃瓜、团建、快乐"为核心价值观，致力于打造最具幸福感的学生组织。
+        </p>
+    </div>
+
+    <!-- 公司关键数据 -->
+    <div class="company-stats">
+        <div class="stat-card anim-delay-1">
+            <span class="stat-number">11</span>
+            <span class="stat-label">核心成员</span>
+        </div>
+        <div class="stat-card anim-delay-2">
+            <span class="stat-number">3</span>
+            <span class="stat-label">年征程</span>
+        </div>
+        <div class="stat-card anim-delay-3">
+            <span class="stat-number">∞</span>
+            <span class="stat-label">欢乐回忆</span>
+        </div>
+    </div>
+
+    <!-- 吉祥物CEO专区 -->
+    <div class="mascot-section">
+        <div class="mascot-card anim-delay-1">
+            <div class="inner">
+                <span class="mascot-emoji">🌟</span>
+                <h2>公司吉祥物 · 信愿</h2>
+                <p class="mascot-motto">"小信，真正的老总，生活部终极BOSS，吉祥物已然成精"</p>
+                <div class="mascot-tags">
+                    <span class="tag primary">老总 / CEO</span>
+                    <span class="tag">生活部灵魂人物</span>
+                    <span class="tag">永远的老大</span>
+                    <span class="tag">吉祥物成精</span>
+                    <span class="tag">终极BOSS</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 公司发展大事记 -->
+    <div class="card anim-delay-2">
+        <h2><span class="section-icon">📅</span>公司发展大事记</h2>
+        <div class="timeline">
+            <div class="timeline-item anim-delay-1">
+                <div class="date">2022.06</div>
+                <div class="event">冰和姜选择留部，生活部文化有限公司正式立项</div>
+            </div>
+            <div class="timeline-item anim-delay-2">
+                <div class="date">2022.09.16</div>
+                <div class="event">线上面试 —— 初见未来的同事们</div>
+            </div>
+            <div class="timeline-item anim-delay-3">
+                <div class="date">2022.09.18</div>
+                <div class="event">生活部群正式建立，公司架构初步形成</div>
+            </div>
+            <div class="timeline-item anim-delay-4">
+                <div class="date">2022 · 秋</div>
+                <div class="event">第一次外出团建（强策划）—— 上午登山失败，下午密室逃脱 + 狼人杀，<span class="highlight">梦的开始</span></div>
+            </div>
+            <div class="timeline-item anim-delay-5">
+                <div class="date">2022-2025</div>
+                <div class="event">图书馆研讨间 E208 —— 大家的秘密基地</div>
+            </div>
+            <div class="timeline-item anim-delay-1">
+                <div class="date">2022 · 冬</div>
+                <div class="event">群里一起看世界杯，熬夜呐喊的日子</div>
+            </div>
+            <div class="timeline-item anim-delay-2">
+                <div class="date">2023</div>
+                <div class="event">5个男生一起去游蓬莱，说走就走的旅行</div>
+            </div>
+            <div class="timeline-item anim-delay-3">
+                <div class="date">2024</div>
+                <div class="event">剧本杀《暗黑者》（涂小猫）—— 脑洞与演技的大碰撞</div>
+            </div>
+            <div class="timeline-item anim-delay-4">
+                <div class="date">2025 · 夏</div>
+                <div class="event">三年之约到期，各位股东纷纷毕业，但<span class="highlight">公司永不散场</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 团队成员 -->
+    <div class="card anim-delay-3">
+        <h2><span class="section-icon">👥</span>核心团队</h2>
+        <div class="team-grid">
+            <a href="jiang.html" class="team-card"><span class="member-icon">🍉</span><div class="member-name">姜文雨</div><div class="member-role">打工人头头</div></a>
+            <a href="bingo.html" class="team-card"><span class="member-icon">🐺</span><div class="member-name">孔祥冰</div><div class="member-role">打工人负头头</div></a>
+            <a href="sure.html" class="team-card"><span class="member-icon">🛡️</span><div class="member-name">杨硕</div><div class="member-role">秘书长</div></a>
+            <a href="geng.html" class="team-card"><span class="member-icon">🎤</span><div class="member-name">高赓</div><div class="member-role">公司合伙人</div></a>
+            <a href="gu.html" class="team-card"><span class="member-icon">🔬</span><div class="member-name">兰艳芝</div><div class="member-role">研发部科学家</div></a>
+            <a href="yao.html" class="team-card"><span class="member-icon">👑</span><div class="member-name">王子瑶</div><div class="member-role">人事部经理</div></a>
+            <a href="qiang.html" class="team-card"><span class="member-icon">⚽</span><div class="member-name">玄海强</div><div class="member-role">安保分队队长</div></a>
+            <a href="liuhuan.html" class="team-card"><span class="member-icon">🎓</span><div class="member-name">玄洪远</div><div class="member-role">老师</div></a>
+            <a href="gang.html" class="team-card"><span class="member-icon">💪</span><div class="member-name">邬小钢</div><div class="member-role">一线工人</div></a>
+            <a href="ding.html" class="team-card"><span class="member-icon">💼</span><div class="member-name">丁俊熙</div><div class="member-role">世一流销售</div></a>
+        </div>
+    </div>
+
+</div>
+
+<footer class="page-footer">
+    &copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.<br>
+    生活部文化有限公司 · 山东大学信息学院2022级学生会生活部
+</footer>
+
 </body>
 </html>

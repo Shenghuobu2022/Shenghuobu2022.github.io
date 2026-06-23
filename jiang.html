@@ -1,11 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>姜文雨 | 打工人头头 · 生活部文化有限公司</title>
+    <link rel="icon" href="assets/picture/专业团队.jpg" type="image/jpeg">
+    <link rel="stylesheet" href="assets/css/member.css">
+    <style>
+        :root {
+            --accent: #FF6B6B;
+            --accent-dim: rgba(255, 107, 107, 0.15);
+            --accent-glow: rgba(255, 107, 107, 0.5);
+        }
+        .melon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            text-align: center;
+        }
+        .melon-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 10px;
+            padding: 16px 10px;
+            transition: all 0.3s;
+        }
+        .melon-item:hover { border-color: var(--accent-dim); transform: translateY(-2px); }
+        .melon-item .icon { font-size: 1.5rem; display: block; margin-bottom: 6px; }
+        .melon-item .title { font-size: 0.85rem; color: var(--accent); font-weight: 600; }
+        .melon-item .desc { font-size: 0.72rem; color: var(--text-dim); margin-top: 4px; }
+        @media (max-width: 640px) { .melon-grid { grid-template-columns: repeat(2, 1fr); } }
+    </style>
 </head>
 <body>
-<h1>欢迎来到公司打工人头头、姜姜、吃瓜大王、猪策划、瓜田守望者、生活部部长、吃瓜一线记者、生活部最准后羿、甄姬人间体、姜姜公主——jiangwenyu的主页！！！
-</h1>
+
+<nav class="top-nav">
+    <a href="index.html" class="back-btn">返回登录</a>
+    <a href="ceo.html">公司主页</a>
+</nav>
+
+<div class="page-container">
+
+    <div class="hero">
+        <span class="role-icon">🍉</span>
+        <h1 class="main-title">打工人头头 · 姜文雨</h1>
+        <p class="subtitle">姜姜 · 生活部部长 · 吃瓜大王 · 瓜田守望者</p>
+        <div class="divider-line"></div>
+    </div>
+
+    <!-- 身份标签 -->
+    <div class="card anim-delay-1">
+        <h2><span class="section-icon">🏷️</span>多重身份</h2>
+        <div class="tag-list">
+            <span class="tag primary">打工人头头</span>
+            <span class="tag">生活部部长</span>
+            <span class="tag">姜姜</span>
+            <span class="tag">吃瓜大王</span>
+            <span class="tag">猪策划</span>
+            <span class="tag">瓜田守望者</span>
+            <span class="tag">吃瓜一线记者</span>
+            <span class="tag">姜姜公主</span>
+        </div>
+    </div>
+
+    <!-- 技能面板 -->
+    <div class="card anim-delay-2">
+        <h2><span class="section-icon">📊</span>能力评估报告</h2>
+        <div class="stat-bar">
+            <div class="label"><span>吃瓜敏锐度</span><span>99%</span></div>
+            <div class="bar"><div class="fill" style="width:99%"></div></div>
+        </div>
+        <div class="stat-bar">
+            <div class="label"><span>策划力</span><span>88%</span></div>
+            <div class="bar"><div class="fill" style="width:88%"></div></div>
+        </div>
+        <div class="stat-bar">
+            <div class="label"><span>后羿命中率</span><span>95%</span></div>
+            <div class="bar"><div class="fill" style="width:95%"></div></div>
+        </div>
+        <div class="stat-bar">
+            <div class="label"><span>公主气质</span><span>100%</span></div>
+            <div class="bar"><div class="fill" style="width:100%"></div></div>
+        </div>
+        <div class="stat-bar">
+            <div class="label"><span>甄姬代入感</span><span>92%</span></div>
+            <div class="bar"><div class="fill" style="width:92%"></div></div>
+        </div>
+    </div>
+
+    <!-- 吃瓜情报局 -->
+    <div class="card anim-delay-3">
+        <h2><span class="section-icon">🔍</span>吃瓜情报局</h2>
+        <div class="melon-grid">
+            <div class="melon-item">
+                <span class="icon">🕵️</span>
+                <div class="title">一线记者</div>
+                <div class="desc">瓜田信息采集第一名</div>
+            </div>
+            <div class="melon-item">
+                <span class="icon">📡</span>
+                <div class="title">瓜田守望</div>
+                <div class="desc">24h 全天候雷达覆盖</div>
+            </div>
+            <div class="melon-item">
+                <span class="icon">🏹</span>
+                <div class="title">最准后羿</div>
+                <div class="desc">生活部远程火力担当</div>
+            </div>
+            <div class="melon-item">
+                <span class="icon">👸</span>
+                <div class="title">姜姜公主</div>
+                <div class="desc">生活部指定公主殿下</div>
+            </div>
+            <div class="melon-item">
+                <span class="icon">🐷</span>
+                <div class="title">猪策划</div>
+                <div class="desc">活动策划必备大脑</div>
+            </div>
+            <div class="melon-item">
+                <span class="icon">💧</span>
+                <div class="title">甄姬人间体</div>
+                <div class="desc">峡谷里最美的那个</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 经典语录 -->
+    <div class="card anim-delay-4">
+        <h2><span class="section-icon">💬</span>姜姜金句</h2>
+        <div class="quote-block">"又有新瓜了！速来！"</div>
+        <div class="quote-block">"这个活动我策划一下……不对，你们有没有人先帮我把这个瓜吃完"</div>
+    </div>
+
+</div>
+
+<footer class="page-footer">
+    &copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.
+</footer>
+
 </body>
 </html>

@@ -1,11 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>丁俊熙 | 世一流销售 · 生活部文化有限公司</title>
+    <link rel="icon" href="assets/picture/专业团队.jpg" type="image/jpeg">
+    <link rel="stylesheet" href="assets/css/member.css">
+    <style>
+        :root {
+            --accent: #E74C3C;
+            --accent-dim: rgba(231, 76, 60, 0.15);
+            --accent-glow: rgba(231, 76, 60, 0.4);
+        }
+        .sales-pitch {
+            background: linear-gradient(135deg, rgba(231,76,60,0.08), transparent);
+            border: 2px solid rgba(231,76,60,0.2);
+            border-radius: 16px;
+            padding: 28px;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+        .sales-pitch .pitch-icon { font-size: 3rem; margin-bottom: 8px; }
+        .sales-pitch .pitch-line { font-size: 1rem; color: var(--accent); font-weight: 600; letter-spacing: 1px; }
+        .king-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .king-item {
+            background: rgba(231,76,60,0.04); border: 1px solid rgba(231,76,60,0.1);
+            border-radius: 10px; padding: 16px; text-align: center; transition: all 0.3s;
+        }
+        .king-item:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .king-item .king-icon { font-size: 1.6rem; display: block; margin-bottom: 4px; }
+        .king-item .king-title { font-size: 0.85rem; color: var(--accent); font-weight: 600; }
+        .king-item .king-desc { font-size: 0.72rem; color: var(--text-dim); margin-top: 4px; }
+        @media (max-width: 640px) { .king-grid { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
-<h1>欢迎来到公司世一流销售、丁丁、小丁、生活部最强刘邦、前星穹铁道主包、皇帝养成计划蓟县挑战者、异兽迷城读者——dingjunxi的主页！！！
-</h1>
+
+<nav class="top-nav">
+    <a href="index.html" class="back-btn">返回登录</a>
+    <a href="ceo.html">公司主页</a>
+</nav>
+
+<div class="page-container">
+
+    <div class="hero">
+        <span class="role-icon">💼</span>
+        <h1 class="main-title">世一流销售 · 丁俊熙</h1>
+        <p class="subtitle">小丁 · 丁丁 · 生活部最强刘邦 · 恋爱大王 · 前星穹铁道主包</p>
+        <div class="divider-line"></div>
+    </div>
+
+    <!-- 销售宣言 -->
+    <div class="sales-pitch anim-delay-1">
+        <div class="pitch-icon">📢</div>
+        <p class="pitch-line">"这位朋友，我看你骨骼惊奇，"</p>
+        <p class="pitch-line">"要不要来一份生活部的快乐？限时免费，过期不候！"</p>
+        <p style="color:var(--text-dim);font-size:0.8rem;margin-top:12px;">—— 世一流销售 · 小丁</p>
+    </div>
+
+    <!-- 身份标签 -->
+    <div class="card anim-delay-2">
+        <h2><span class="section-icon">🏷️</span>多重身份</h2>
+        <div class="tag-list">
+            <span class="tag primary">世一流销售</span>
+            <span class="tag">丁丁 / 小丁</span>
+            <span class="tag">生活部最强刘邦</span>
+            <span class="tag">前星穹铁道主包</span>
+            <span class="tag">皇帝养成计划蓟县挑战者</span>
+            <span class="tag">异兽迷城读者</span>
+            <span class="tag">恋爱大王</span>
+        </div>
+    </div>
+
+    <!-- 多面手展示 -->
+    <div class="card anim-delay-3">
+        <h2><span class="section-icon">🎯</span>小丁的多面人生</h2>
+        <div class="king-grid">
+            <div class="king-item">
+                <span class="king-icon">👑</span>
+                <div class="king-title">最强刘邦</div>
+                <div class="king-desc">峡谷里的辅助之神，生活部指定后排守护者</div>
+            </div>
+            <div class="king-item">
+                <span class="king-icon">🚂</span>
+                <div class="king-title">前星穹铁道主包</div>
+                <div class="king-desc">曾是一名列车长，现已到站</div>
+            </div>
+            <div class="king-item">
+                <span class="king-icon">🏛️</span>
+                <div class="king-title">蓟县挑战者</div>
+                <div class="king-desc">皇帝养成计划高难度模式玩家</div>
+            </div>
+            <div class="king-item">
+                <span class="king-icon">📖</span>
+                <div class="king-title">异兽迷城读者</div>
+                <div class="king-desc">阅读与想象的深度爱好者</div>
+            </div>
+            <div class="king-item">
+                <span class="king-icon">💕</span>
+                <div class="king-title">恋爱大王</div>
+                <div class="king-desc">感情副本全通，成就100%</div>
+            </div>
+            <div class="king-item">
+                <span class="king-icon">💼</span>
+                <div class="king-title">销售冠军</div>
+                <div class="king-desc">卖快乐，我们是专业的</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 战力面板 -->
+    <div class="card anim-delay-4">
+        <h2><span class="section-icon">📊</span>销售能力面板</h2>
+        <div class="stat-bar"><div class="label"><span>口才与销售力</span><span>99%</span></div><div class="bar"><div class="fill" style="width:99%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>刘邦辅助水平</span><span>96%</span></div><div class="bar"><div class="fill" style="width:96%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>皇帝养成进度</span><span>??%</span></div><div class="bar"><div class="fill" style="width:60%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>阅读涉猎广度</span><span>90%</span></div><div class="bar"><div class="fill" style="width:90%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>恋爱成就达成</span><span>MAX</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div>
+    </div>
+
+</div>
+
+<footer class="page-footer">
+    &copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.
+</footer>
+
 </body>
 </html>

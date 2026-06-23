@@ -1,11 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玄洪远 | 老师 · 生活部文化有限公司</title>
+    <link rel="icon" href="assets/picture/专业团队.jpg" type="image/jpeg">
+    <link rel="stylesheet" href="assets/css/member.css">
+    <style>
+        :root {
+            --accent: #4488FF;
+            --accent-dim: rgba(68, 136, 255, 0.15);
+            --accent-glow: rgba(68, 136, 255, 0.4);
+        }
+        .genius-card {
+            background: linear-gradient(135deg, rgba(68,136,255,0.1), rgba(68,136,255,0.02));
+            border: 2px solid rgba(68,136,255,0.2);
+            border-radius: 16px;
+            padding: 28px;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+        .genius-card::after {
+            content: 'E=mc²';
+            position: absolute; bottom: 8px; right: 20px;
+            font-size: 2.5rem; font-weight: 900; opacity: 0.05; color: var(--accent);
+            font-family: serif;
+        }
+        .genius-icon { font-size: 3rem; margin-bottom: 8px; }
+        .side-business { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .biz-item {
+            background: rgba(68,136,255,0.04); border: 1px solid rgba(68,136,255,0.1);
+            border-radius: 10px; padding: 16px; text-align: center; transition: all 0.3s;
+        }
+        .biz-item:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .biz-item .biz-icon { font-size: 1.8rem; display: block; margin-bottom: 4px; }
+        .biz-item .biz-name { font-size: 0.85rem; color: var(--accent); font-weight: 600; }
+        .biz-item .biz-desc { font-size: 0.72rem; color: var(--text-dim); margin-top: 4px; }
+        @media (max-width: 640px) { .side-business { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
-<h1>欢迎来到公司老师、刘欢老师、章若楠男朋友、骑三轮车卖地瓜、远、生活部刘欢分欢、章若楠圈外男友、生活部爱因斯坦、生活部Magixx——xuanhongyuan的主页！！！
-</h1>
+
+<nav class="top-nav">
+    <a href="index.html" class="back-btn">返回登录</a>
+    <a href="ceo.html">公司主页</a>
+</nav>
+
+<div class="page-container">
+
+    <div class="hero">
+        <span class="role-icon">🎓</span>
+        <h1 class="main-title">老师 · 玄洪远</h1>
+        <p class="subtitle">远 · 刘欢老师 · 章若楠男朋友 · 生活部爱因斯坦</p>
+        <div class="divider-line"></div>
+    </div>
+
+    <!-- 爱因斯坦 & 刘欢 双面人生 -->
+    <div class="genius-card anim-delay-1">
+        <div class="genius-icon">🧠</div>
+        <h2 style="font-size:1.3rem;color:var(--accent);">生活部爱因斯坦 & 刘欢分欢</h2>
+        <p style="color:var(--text-dim);font-size:0.85rem;margin-top:8px;">白天：智慧和才华的代名词，生活部的学术担当</p>
+        <p style="color:var(--text-dim);font-size:0.85rem;">夜晚：骑着三轮车卖地瓜，顺便跟章若楠谈恋爱</p>
+    </div>
+
+    <!-- 身份标签 -->
+    <div class="card anim-delay-2">
+        <h2><span class="section-icon">🏷️</span>多重身份</h2>
+        <div class="tag-list">
+            <span class="tag primary">老师</span>
+            <span class="tag">刘欢老师 / 生活部刘欢分欢</span>
+            <span class="tag">章若楠男朋友 / 圈外男友</span>
+            <span class="tag">骑三轮车卖地瓜</span>
+            <span class="tag">生活部爱因斯坦</span>
+            <span class="tag">生活部 Magixx</span>
+        </div>
+    </div>
+
+    <!-- 副业版图 -->
+    <div class="card anim-delay-3">
+        <h2><span class="section-icon">💼</span>斜杠青年副业版图</h2>
+        <div class="side-business">
+            <div class="biz-item">
+                <span class="biz-icon">🎤</span>
+                <div class="biz-name">刘欢分欢</div>
+                <div class="biz-desc">唱《好汉歌》的专业人士</div>
+            </div>
+            <div class="biz-item">
+                <span class="biz-icon">🍠</span>
+                <div class="biz-name">地瓜产业</div>
+                <div class="biz-desc">三轮车流动摊位 CEO</div>
+            </div>
+            <div class="biz-item">
+                <span class="biz-icon">🎬</span>
+                <div class="biz-name">章若楠男友</div>
+                <div class="biz-desc">圈外男友认证（自封）</div>
+            </div>
+            <div class="biz-item">
+                <span class="biz-icon">⚡</span>
+                <div class="biz-name">Magixx 魔法师</div>
+                <div class="biz-desc">知识与脑洞的神秘结合</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 战力 -->
+    <div class="card anim-delay-4">
+        <h2><span class="section-icon">📊</span>远哥能力面板</h2>
+        <div class="stat-bar"><div class="label"><span>智慧指数</span><span>99%</span></div><div class="bar"><div class="fill" style="width:99%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>刘欢相似度</span><span>90%</span></div><div class="bar"><div class="fill" style="width:90%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>三轮车驾驶技术</span><span>95%</span></div><div class="bar"><div class="fill" style="width:95%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>地瓜烤制水平</span><span>92%</span></div><div class="bar"><div class="fill" style="width:92%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>Magixx 魔法力</span><span>∞</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div>
+    </div>
+
+</div>
+
+<footer class="page-footer">
+    &copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.
+</footer>
+
 </body>
 </html>

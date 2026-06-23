@@ -1,11 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>兰艳芝 | 研发部科学家 · 生活部文化有限公司</title>
+    <link rel="icon" href="assets/picture/专业团队.jpg" type="image/jpeg">
+    <link rel="stylesheet" href="assets/css/member.css">
+    <style>
+        :root {
+            --accent: #FF8C42;
+            --accent-dim: rgba(255, 140, 66, 0.15);
+            --accent-glow: rgba(255, 140, 66, 0.4);
+        }
+        .aunt-card {
+            background: linear-gradient(135deg, rgba(255,140,66,0.08), rgba(255,140,66,0.02));
+            border: 2px solid rgba(255,140,66,0.2);
+            border-radius: 16px;
+            padding: 28px;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+        .aunt-card .aunt-icon { font-size: 3rem; margin-bottom: 8px; animation: float 3s ease-in-out infinite; }
+        .aunt-card .aunt-title { font-size: 1.3rem; color: var(--accent); font-weight: 700; letter-spacing: 2px; }
+        .star-power { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .star-card {
+            background: rgba(255,140,66,0.04); border: 1px solid rgba(255,140,66,0.1);
+            border-radius: 10px; padding: 16px; text-align: center;
+        }
+        .star-card .star-icon { font-size: 1.8rem; display: block; margin-bottom: 4px; }
+        .star-card .star-name { color: var(--accent); font-weight: 600; font-size: 0.9rem; }
+        .star-card .star-desc { color: var(--text-dim); font-size: 0.75rem; margin-top: 4px; }
+        @media (max-width: 640px) { .star-power { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
-<h1>欢迎来到公司研发部科学家、生活部分公司头头子、兰陈儿、所有人的姑姑、姑、成毅最大粉丝、莲花楼楼主夫人、生活部追星协会娱乐圈记者、生活部最健康生活之人、打麻将手气大王——lanyanzhi的主页！！！
-</h1>
+
+<nav class="top-nav">
+    <a href="index.html" class="back-btn">返回登录</a>
+    <a href="ceo.html">公司主页</a>
+</nav>
+
+<div class="page-container">
+
+    <div class="hero">
+        <span class="role-icon">🔬</span>
+        <h1 class="main-title">研发部科学家 · 兰艳芝</h1>
+        <p class="subtitle">兰陈儿 · 所有人的姑姑 · 成毅最大粉丝 · 生活部分公司头头子</p>
+        <div class="divider-line"></div>
+    </div>
+
+    <!-- 姑姑认证 -->
+    <div class="aunt-card anim-delay-1">
+        <div class="aunt-icon">🏠</div>
+        <div class="aunt-title">所有人的姑姑</div>
+        <p style="color:var(--text-dim);font-size:0.9rem;margin-top:8px;">
+            这个称号不是随便叫的——她是生活部真正温暖的后盾。<br>
+            从追星到麻将，从娱乐八卦到健康生活，姑姑永远在线。
+        </p>
+    </div>
+
+    <!-- 身份标签 -->
+    <div class="card anim-delay-2">
+        <h2><span class="section-icon">🏷️</span>多重身份</h2>
+        <div class="tag-list">
+            <span class="tag primary">研发部科学家</span>
+            <span class="tag">生活部分公司头头子</span>
+            <span class="tag">兰陈儿</span>
+            <span class="tag">所有人的姑姑</span>
+            <span class="tag">成毅最大粉丝</span>
+            <span class="tag">莲花楼楼主夫人</span>
+            <span class="tag">追星协会娱乐圈记者</span>
+            <span class="tag">最健康生活之人</span>
+            <span class="tag">打麻将手气大王</span>
+        </div>
+    </div>
+
+    <!-- 追星 & 娱乐圈 -->
+    <div class="card anim-delay-3">
+        <h2><span class="section-icon">🌟</span>娱乐圈专线</h2>
+        <div class="star-power">
+            <div class="star-card">
+                <span class="star-icon">🎬</span>
+                <div class="star-name">成毅最大粉丝</div>
+                <div class="star-desc">应援打榜从不缺席</div>
+            </div>
+            <div class="star-card">
+                <span class="star-icon">🏯</span>
+                <div class="star-name">莲花楼楼主夫人</div>
+                <div class="star-desc">沉浸式追剧认证</div>
+            </div>
+            <div class="star-card">
+                <span class="star-icon">📰</span>
+                <div class="star-name">娱乐圈一线记者</div>
+                <div class="star-desc">消息比营销号快</div>
+            </div>
+            <div class="star-card">
+                <span class="star-icon">🀄</span>
+                <div class="star-name">手气大王</div>
+                <div class="star-desc">麻将桌上的幸运女神</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 战力 -->
+    <div class="card anim-delay-4">
+        <h2><span class="section-icon">📊</span>科学家档案</h2>
+        <div class="stat-bar"><div class="label"><span>姑姑温暖指数</span><span>100%</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>追星狂热程度</span><span>99%</span></div><div class="bar"><div class="fill" style="width:99%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>健康生活方式</span><span>95%</span></div><div class="bar"><div class="fill" style="width:95%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>麻将运势</span><span>98%</span></div><div class="bar"><div class="fill" style="width:98%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>娱乐圈信息密度</span><span>MAX</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div>
+    </div>
+
+</div>
+
+<footer class="page-footer">
+    &copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.
+</footer>
+
 </body>
 </html>

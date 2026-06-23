@@ -1,11 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王子瑶 | 人事部经理 · 生活部文化有限公司</title>
+    <link rel="icon" href="assets/picture/专业团队.jpg" type="image/jpeg">
+    <link rel="stylesheet" href="assets/css/member.css">
+    <style>
+        :root {
+            --accent: #FF69B4;
+            --accent-dim: rgba(255, 105, 180, 0.15);
+            --accent-glow: rgba(255, 105, 180, 0.4);
+        }
+        .bread-review {
+            background: linear-gradient(135deg, rgba(255,105,180,0.08), transparent);
+            border: 2px solid rgba(255,105,180,0.2);
+            border-radius: 16px;
+            padding: 28px;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+        .bread-review .bread-icon { font-size: 3rem; margin-bottom: 8px; animation: float 3s ease-in-out infinite; }
+        .esports-fans { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .fan-card {
+            background: rgba(255,105,180,0.04); border: 1px solid rgba(255,105,180,0.1);
+            border-radius: 10px; padding: 16px; text-align: center; transition: all 0.3s;
+        }
+        .fan-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .fan-card .team-icon { font-size: 2rem; display: block; margin-bottom: 4px; }
+        .fan-card .team-name { color: var(--accent); font-weight: 600; font-size: 0.9rem; }
+        .fan-card .team-desc { color: var(--text-dim); font-size: 0.75rem; margin-top: 4px; }
+        @media (max-width: 640px) { .esports-fans { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
-<h1>欢迎来到公司人事部经理、hr、瑶瑶公主、电竞迷妹、阿贡面包、奇妙能力帅哥、瑶、狼队粉丝、无畏粉丝、生活部追星协会电竞圈、聚餐拍照者、阿贡面包品鉴师——wangziyao的主页！！！
-</h1>
+
+<nav class="top-nav">
+    <a href="index.html" class="back-btn">返回登录</a>
+    <a href="ceo.html">公司主页</a>
+</nav>
+
+<div class="page-container">
+
+    <div class="hero">
+        <span class="role-icon">👑</span>
+        <h1 class="main-title">人事部经理 · 王子瑶</h1>
+        <p class="subtitle">瑶瑶公主 · HR · 电竞迷妹 · 阿贡面包品鉴师</p>
+        <div class="divider-line"></div>
+    </div>
+
+    <!-- 阿贡面包品鉴师认证 -->
+    <div class="bread-review anim-delay-1">
+        <div class="bread-icon">🍞</div>
+        <h2 style="font-size:1.2rem;color:var(--accent);">阿贡面包品鉴师</h2>
+        <p style="color:var(--text-dim);font-size:0.85rem;margin-top:8px;">经生活部官方认证，唯一指定面包品鉴权威。</p>
+        <p style="color:var(--text-dim);font-size:0.85rem;">"阿贡面包，好吃！"——瑶瑶公主亲测</p>
+    </div>
+
+    <!-- 身份标签 -->
+    <div class="card anim-delay-2">
+        <h2><span class="section-icon">🏷️</span>多重身份</h2>
+        <div class="tag-list">
+            <span class="tag primary">人事部经理 / HR</span>
+            <span class="tag">瑶瑶公主</span>
+            <span class="tag">电竞迷妹</span>
+            <span class="tag">阿贡面包品鉴师</span>
+            <span class="tag">狼队粉丝</span>
+            <span class="tag">无畏粉丝</span>
+            <span class="tag">追星协会电竞圈</span>
+            <span class="tag">聚餐拍照者</span>
+            <span class="tag">奇妙能力帅哥</span>
+        </div>
+    </div>
+
+    <!-- 电竞关注列表 -->
+    <div class="card anim-delay-3">
+        <h2><span class="section-icon">🎮</span>电竞关注列表</h2>
+        <div class="esports-fans">
+            <div class="fan-card">
+                <span class="team-icon">🐺</span>
+                <div class="team-name">狼队铁粉</div>
+                <div class="team-desc">重庆狼队，永远的主队</div>
+            </div>
+            <div class="fan-card">
+                <span class="team-icon">⚔️</span>
+                <div class="team-name">无畏粉丝</div>
+                <div class="team-desc">实力与颜值并存</div>
+            </div>
+            <div class="fan-card">
+                <span class="team-icon">📸</span>
+                <div class="team-name">聚餐拍照者</div>
+                <div class="team-desc">记录每一个干饭瞬间</div>
+            </div>
+            <div class="fan-card">
+                <span class="team-icon">🎤</span>
+                <div class="team-name">奇妙能力帅哥</div>
+                <div class="team-desc">不可定义的神秘存在</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HR 战力 -->
+    <div class="card anim-delay-4">
+        <h2><span class="section-icon">📊</span>HR经理档案</h2>
+        <div class="stat-bar"><div class="label"><span>人员管理能力</span><span>92%</span></div><div class="bar"><div class="fill" style="width:92%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>面包品鉴权威</span><span>100%</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>电竞沉迷度</span><span>95%</span></div><div class="bar"><div class="fill" style="width:95%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>拍照技术</span><span>88%</span></div><div class="bar"><div class="fill" style="width:88%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>公主气场</span><span>MAX</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div>
+    </div>
+
+</div>
+
+<footer class="page-footer">
+    &copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.
+</footer>
+
 </body>
 </html>

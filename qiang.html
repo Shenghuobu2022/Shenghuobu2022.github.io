@@ -1,11 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玄海强 | 安保分队队长 · 生活部文化有限公司</title>
+    <link rel="icon" href="assets/picture/专业团队.jpg" type="image/jpeg">
+    <link rel="stylesheet" href="assets/css/member.css">
+    <style>
+        :root {
+            --accent: #00CC66;
+            --accent-dim: rgba(0, 204, 102, 0.15);
+            --accent-glow: rgba(0, 204, 102, 0.4);
+        }
+        .stadium-banner {
+            background: linear-gradient(135deg, rgba(0,204,102,0.08), transparent);
+            border: 1px solid rgba(0,204,102,0.2);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+        .stadium-banner .pitch-icon { font-size: 3.5rem; margin-bottom: 8px; animation: float 3s ease-in-out infinite; }
+        .goal-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 0; }
+        .goal-stat {
+            background: rgba(0,204,102,0.05); border: 1px solid rgba(0,204,102,0.1);
+            border-radius: 10px; padding: 14px 8px; text-align: center;
+        }
+        .goal-stat .num { font-size: 1.4rem; font-weight: 800; color: var(--accent); display: block; }
+        .goal-stat .lbl { font-size: 0.7rem; color: var(--text-dim); margin-top: 2px; }
+        .level-display {
+            text-align: center; padding: 20px;
+            background: linear-gradient(135deg, rgba(0,204,102,0.1), rgba(0,204,102,0.02));
+            border: 2px solid var(--accent-dim);
+            border-radius: 16px;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+        .level-display .level-num { font-size: 4rem; font-weight: 900; color: var(--accent); display: block; text-shadow: 0 0 30px var(--accent-glow); }
+        .level-display .level-label { color: var(--text-dim); font-size: 0.85rem; letter-spacing: 2px; }
+        @media (max-width: 640px) { .goal-stats { grid-template-columns: repeat(2, 1fr); } }
+    </style>
 </head>
 <body>
-<h1>欢迎来到公司安保分队队长、生活部梅西、L1chaPup6、史上第0位100级强者、强、满级大佬、生活部球王、生活部驻美使者——xuanhaiqiang的主页！！！
-</h1>
+
+<nav class="top-nav">
+    <a href="index.html" class="back-btn">返回登录</a>
+    <a href="ceo.html">公司主页</a>
+</nav>
+
+<div class="page-container">
+
+    <div class="hero">
+        <span class="role-icon">⚽</span>
+        <h1 class="main-title">安保分队队长 · 玄海强</h1>
+        <p class="subtitle">强 · 生活部梅西 · 史上第0位100级强者 · 生活部球王</p>
+        <div class="divider-line"></div>
+    </div>
+
+    <!-- 球王认证 -->
+    <div class="stadium-banner anim-delay-1">
+        <div class="pitch-icon">🏟️</div>
+        <h2 style="color:var(--accent);font-size:1.3rem;">生活部梅西 & 球王认证</h2>
+        <p style="color:var(--text-dim);font-size:0.85rem;margin-top:8px;">脚法细腻，走位灵活，生活部足球第一人</p>
+        <div class="goal-stats" style="margin-top:14px;">
+            <div class="goal-stat"><span class="num">10</span><span class="lbl">梅西指数</span></div>
+            <div class="goal-stat"><span class="num">⚽</span><span class="lbl">球王称号</span></div>
+            <div class="goal-stat"><span class="num">🇺🇸</span><span class="lbl">驻美使者</span></div>
+            <div class="goal-stat"><span class="num">🔒</span><span class="lbl">安保队长</span></div>
+        </div>
+    </div>
+
+    <!-- 满级大佬展示 -->
+    <div class="level-display anim-delay-2">
+        <span class="level-num">100</span>
+        <span class="level-label">Lv. 100 · 满级大佬 · 史上第0位</span>
+        <p style="color:var(--text-dim);font-size:0.8rem;margin-top:6px;">在所有人还在努力升级的时候，他已经在终点站买好了爆米花</p>
+    </div>
+
+    <!-- 身份标签 -->
+    <div class="card anim-delay-3">
+        <h2><span class="section-icon">🏷️</span>多重身份</h2>
+        <div class="tag-list">
+            <span class="tag primary">安保分队队长</span>
+            <span class="tag">生活部梅西</span>
+            <span class="tag">L1chaPup6</span>
+            <span class="tag">史上第0位100级强者</span>
+            <span class="tag">满级大佬</span>
+            <span class="tag">生活部球王</span>
+            <span class="tag">生活部驻美使者</span>
+        </div>
+    </div>
+
+    <!-- 战力面板 -->
+    <div class="card anim-delay-4">
+        <h2><span class="section-icon">📊</span>强者面板</h2>
+        <div class="stat-bar"><div class="label"><span>满级等级</span><span>100/100</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>足球实力</span><span>98%</span></div><div class="bar"><div class="fill" style="width:98%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>安保能力</span><span>95%</span></div><div class="bar"><div class="fill" style="width:95%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>国际视野</span><span>90%</span></div><div class="bar"><div class="fill" style="width:90%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>大佬气质</span><span>MAX</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div>
+    </div>
+
+</div>
+
+<footer class="page-footer">
+    &copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.
+</footer>
+
 </body>
 </html>

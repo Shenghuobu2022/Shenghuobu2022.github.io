@@ -1,11 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高赓 | 公司合伙人 · 生活部文化有限公司</title>
+    <link rel="icon" href="assets/picture/专业团队.jpg" type="image/jpeg">
+    <link rel="stylesheet" href="assets/css/member.css">
+    <style>
+        :root {
+            --accent: #9B59B6;
+            --accent-dim: rgba(155, 89, 182, 0.15);
+            --accent-glow: rgba(155, 89, 182, 0.4);
+        }
+        .quantum-box {
+            background: linear-gradient(135deg, rgba(155,89,182,0.08), transparent);
+            border: 1px solid rgba(155,89,182,0.2);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .quantum-box::before {
+            content: ''; position: absolute; top: -24px; right: -24px;
+            width: 80px; height: 80px;
+            background: radial-gradient(circle, rgba(155,89,182,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .quantum-state { font-size: 0.85rem; color: var(--text-dim); margin-top: 8px; font-style: italic; }
+        .song-list { list-style: none; }
+        .song-list li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
+        .song-list li .note-icon { font-size: 1.2rem; }
+        .song-list li .song-title { color: var(--accent); font-weight: 600; }
+        .song-list li .song-note { color: var(--text-dim); margin-left: auto; font-size: 0.78rem; }
+    </style>
 </head>
 <body>
-<h1>欢迎来到公司合伙人、生活部歌神、量子力学传承人、Aron、赓、麦霸、？？、LPL二号支持者、二游尝鲜第一人（飞速退坑版）、薛定谔的合伙人——gaogeng的主页！！！
-</h1>
+
+<nav class="top-nav">
+    <a href="index.html" class="back-btn">返回登录</a>
+    <a href="ceo.html">公司主页</a>
+</nav>
+
+<div class="page-container">
+
+    <div class="hero">
+        <span class="role-icon">🎤</span>
+        <h1 class="main-title">公司合伙人 · 高赓</h1>
+        <p class="subtitle">赓 · 生活部歌神 · 量子力学传承人 · 薛定谔的合伙人</p>
+        <div class="divider-line"></div>
+    </div>
+
+    <!-- 薛定谔的合伙人 -->
+    <div class="quantum-box anim-delay-1">
+        <div style="font-size:3rem;margin-bottom:8px;">📦</div>
+        <h2 style="color:var(--accent);font-size:1.2rem;">薛定谔的合伙人</h2>
+        <p class="quantum-state">在打开聊天框之前，他同时处于"在"和"不在"的叠加态。</p>
+        <p class="quantum-state">一旦观测，坍缩为"刚来，发生啥了？"</p>
+    </div>
+
+    <!-- 身份标签 -->
+    <div class="card anim-delay-2">
+        <h2><span class="section-icon">🏷️</span>多重身份</h2>
+        <div class="tag-list">
+            <span class="tag primary">公司合伙人</span>
+            <span class="tag">生活部歌神</span>
+            <span class="tag">量子力学传承人</span>
+            <span class="tag">Aron</span>
+            <span class="tag">麦霸</span>
+            <span class="tag">LPL二号支持者</span>
+            <span class="tag">二游尝鲜第一人（飞速退坑版）</span>
+            <span class="tag">薛定谔的合伙人</span>
+            <span class="tag">??</span>
+        </div>
+    </div>
+
+    <!-- 歌神经典曲目 -->
+    <div class="card anim-delay-3">
+        <h2><span class="section-icon">🎵</span>歌神经典曲目（推测）</h2>
+        <ul class="song-list">
+            <li><span class="note-icon">🎶</span><span class="song-title">量子纠缠</span><span class="song-note">又名：你找我时我不在</span></li>
+            <li><span class="note-icon">🎶</span><span class="song-title">麦霸进行曲</span><span class="song-note">KTV 自动循环播放</span></li>
+            <li><span class="note-icon">🎶</span><span class="song-title">LPL战歌</span><span class="song-note">二号位支援入场</span></li>
+            <li><span class="note-icon">🎶</span><span class="song-title">退坑练习曲</span><span class="song-note">二游尝鲜→飞速卸载</span></li>
+        </ul>
+    </div>
+
+    <!-- 战力 -->
+    <div class="card anim-delay-4">
+        <h2><span class="section-icon">📊</span>合伙人指数</h2>
+        <div class="stat-bar"><div class="label"><span>歌唱实力</span><span>98%</span></div><div class="bar"><div class="fill" style="width:98%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>量子存在概率</span><span>50%</span></div><div class="bar"><div class="fill" style="width:50%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>二游坚持天数</span><span>≈3天</span></div><div class="bar"><div class="fill" style="width:10%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>LPL观赛投入度</span><span>85%</span></div><div class="bar"><div class="fill" style="width:85%"></div></div></div>
+        <div class="stat-bar"><div class="label"><span>麦霸模式启动速度</span><span>瞬间</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div>
+    </div>
+
+</div>
+
+<footer class="page-footer">
+    &copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.
+</footer>
+
 </body>
 </html>
