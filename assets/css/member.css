@@ -698,10 +698,10 @@ nav.top-nav a:hover { color: var(--accent); }
 }
 
 .comment-reply-form {
-  margin-top: 12px;
+  margin-top: 14px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .reply-to-tag {
