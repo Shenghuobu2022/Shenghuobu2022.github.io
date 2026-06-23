@@ -89,6 +89,9 @@
   var allTopLevel = [];
   var allReplies = {};
 
+  // 删除密码（SHA-256 哈希，源码不可见原始密码）
+  var DELETE_PW_HASH = 'f933ceafed37def75235ec78c4d94f6a1b6448cd4c22b67a0c9dee800c8c4e93';
+
   function loadComments() {
     if (!client) return;
     var list = document.getElementById('comment-list');
@@ -185,6 +188,7 @@
       '</div>' +
       '<div class="comment-body">' + formatBody(c.content, isReply) + '</div>' +
       '<button class="comment-reply-btn" data-reply="' + c.id + '">回复</button>' +
+      '<button class="comment-delete-btn" data-delete="' + c.id + '">删除</button>' +
       '<div class="comment-reply-form" id="reply-form-' + c.id + '" style="display:none;">' +
         '<div class="reply-to-tag" style="display:none;">回复 <strong class="reply-to-name"></strong><span class="reply-to-close">✕</span></div>' +
         '<input type="text" class="reply-name" placeholder="你的名字（选填）" maxlength="30">' +
@@ -214,6 +218,16 @@
   }
 
   function pad(n) { return ('0' + n).slice(-2); }
+
+  // SHA-256 哈希（用于删除密码验证）
+  function sha256(str) {
+    var encoder = new TextEncoder();
+    var data = encoder.encode(str);
+    return crypto.subtle.digest('SHA-256', data).then(function (hashBuffer) {
+      var hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+    });
+  }
 
   // 判断是否为 Supabase 项目暂停（503 / 无法连接 / project not found）
   function isPaused(err) {
@@ -339,6 +353,41 @@
           var collapseId = btn.getAttribute('data-collapse');
           expandedReplies[collapseId] = false;
           renderList(list, currentPage);
+          return;
+        }
+
+        // 点击「删除」
+        if (target.classList.contains('comment-delete-btn')) {
+          var delId = target.getAttribute('data-delete');
+          var pw = prompt('请输入删除密码：');
+          if (!pw) return;
+          sha256(pw).then(function (hash) {
+            if (hash !== DELETE_PW_HASH) {
+              alert('密码错误');
+              return;
+            }
+            if (!confirm('确认删除这条留言？')) return;
+            client.from('comments').delete().eq('id', parseInt(delId, 10) || delId).then(function (res) {
+              if (res.error) {
+                alert('删除失败，请稍后重试');
+                return;
+              }
+              // 从本地数据中移除
+              allTopLevel = allTopLevel.filter(function (c) { return String(c.id) !== String(delId); });
+              var topId = target.closest('.comment-item').getAttribute('data-top');
+              if (topId && allReplies[topId]) {
+                allReplies[topId] = allReplies[topId].filter(function (c) { return String(c.id) !== String(delId); });
+              }
+              // 如果被删的是主楼，同时清理其所有回复
+              if (topId === delId) {
+                delete allReplies[delId];
+                delete expandedReplies[delId];
+              }
+              renderList(list, currentPage);
+            }).catch(function () {
+              alert('网络错误，请稍后重试');
+            });
+          });
           return;
         }
 

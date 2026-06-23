@@ -697,6 +697,23 @@ nav.top-nav a:hover { color: var(--accent); }
   color: var(--accent);
 }
 
+.comment-delete-btn {
+  display: inline-block;
+  margin-top: 8px;
+  margin-left: 12px;
+  padding: 2px 10px;
+  background: none;
+  border: none;
+  color: #5a5a5a;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.comment-delete-btn:hover {
+  color: #e05555;
+}
+
 .comment-reply-form {
   margin-top: 14px;
   display: flex;
