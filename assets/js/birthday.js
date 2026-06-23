@@ -1,67 +1,164 @@
 /**
- * 生活部文化有限公司 — 生日祝福 & 成立周年
- * 成立日：2022年9月18日
- * 生日范围：前后7天
+ * 生活部文化有限公司 — 走字时钟 + 生日祝福 + 成立周年
+ * 成立日：2022年9月18日  |  生日窗口：前后7天
  */
 (function () {
   'use strict';
 
-  const ESTABLISH_DATE = new Date(2022, 8, 18); // 2022年9月18日（生活部群建立）
-  const BDAY_RANGE = 7; // 前后7天
-
-  // ---- 成立时长 ----
-  function updateDuration() {
-    var el = document.getElementById('establish-duration');
-    if (!el) return;
-    var now = new Date();
-    var years = now.getFullYear() - ESTABLISH_DATE.getFullYear();
-    var months = now.getMonth() - ESTABLISH_DATE.getMonth();
-    var days = now.getDate() - ESTABLISH_DATE.getDate();
-    if (days < 0) {
-      months--;
-      var prev = new Date(now.getFullYear(), now.getMonth(), 0);
-      days += prev.getDate();
-    }
-    if (months < 0) { years--; months += 12; }
-    el.textContent = years + '年' + months + '个月' + days + '天';
-  }
-  updateDuration();
-  setInterval(updateDuration, 60000);
-
+  var ESTABLISH_DATE = new Date(2022, 8, 18); // 2022-09-18
+  var BDAY_RANGE = 7;
   var page = location.pathname.split('/').pop() || '';
+  var tickerEl = null;
+  var secondsEl = null;
 
-  // ---- 计算与目标日期的天数差 ----
+  // ============ 注入走字时钟 HTML ============
+  function injectTicker() {
+    var container = document.querySelector('.page-container');
+    if (!container) return;
+
+    var div = document.createElement('div');
+    div.className = 'est-ticker';
+    div.innerHTML =
+      '<span class="ticker-icon">⏳</span>' +
+      '<div class="ticker-label">生活部文化有限公司已成立</div>' +
+      '<div class="ticker-digits" id="ticker-digits">--</div>' +
+      '<div class="ticker-seconds" id="ticker-seconds">--:--:--</div>' +
+      '<div class="ticker-btns">' +
+        '<button class="ticker-trigger" id="trigger-anniversary">🎉 周年庆</button>' +
+        '<button class="ticker-trigger" id="trigger-birthday" style="display:none;">🎂 生日祝福</button>' +
+      '</div>';
+
+    container.insertBefore(div, container.firstChild);
+    tickerEl = document.getElementById('ticker-digits');
+    secondsEl = document.getElementById('ticker-seconds');
+  }
+
+  // ============ 注入生日行 ============
+  function injectBirthdayRow(nameText, dateStr) {
+    var hero = document.querySelector('.hero');
+    if (!hero) return;
+    var row = document.createElement('div');
+    row.className = 'birthday-inline';
+    row.innerHTML =
+      '🎂 ' + nameText + ' 的生日：<strong style="color:var(--accent);">' + dateStr + '</strong>' +
+      ' <button class="bday-trigger" id="manual-bday-trigger">祝福TA 🎂</button>';
+    hero.appendChild(row);
+
+    // 同时让时钟区的生日按钮可见
+    var btn = document.getElementById('trigger-birthday');
+    if (btn) btn.style.display = 'inline-block';
+  }
+
+  // ============ 走字更新 ============
+  function updateTicker() {
+    if (!tickerEl) return;
+    var now = new Date();
+    var diff = now - ESTABLISH_DATE;
+
+    // 算年月日
+    var y = now.getFullYear() - ESTABLISH_DATE.getFullYear();
+    var m = now.getMonth() - ESTABLISH_DATE.getMonth();
+    var d = now.getDate() - ESTABLISH_DATE.getDate();
+    if (d < 0) {
+      m--;
+      var prev = new Date(now.getFullYear(), now.getMonth(), 0);
+      d += prev.getDate();
+    }
+    if (m < 0) { y--; m += 12; }
+
+    tickerEl.innerHTML =
+      '<span>' + pad(y, 2) + '</span>' +
+      '<span class="ticker-digi-label">年</span>' +
+      '<span>' + pad(m, 2) + '</span>' +
+      '<span class="ticker-digi-label">月</span>' +
+      '<span>' + pad(d, 2) + '</span>' +
+      '<span class="ticker-digi-label">天</span>';
+
+    // 时分秒
+    var totalSec = Math.floor(diff / 1000);
+    var h = Math.floor((totalSec % 86400) / 3600);
+    var min = Math.floor((totalSec % 3600) / 60);
+    var s = totalSec % 60;
+    if (secondsEl) {
+      secondsEl.textContent = pad(h, 2) + ':' + pad(min, 2) + ':' + pad(s, 2);
+    }
+
+    // 同步更新底部的小字计数器
+    var durEl = document.getElementById('establish-duration');
+    if (durEl) {
+      durEl.textContent = y + '年' + m + '个月' + d + '天';
+    }
+  }
+
+  function pad(n, len) { return ('00' + n).slice(-len); }
+
+  // ============ 日期工具 ============
   function dayDiff(month, day) {
     var now = new Date();
     var target = new Date(now.getFullYear(), month - 1, day);
     return Math.floor((target - new Date(now.getFullYear(), now.getMonth(), now.getDate())) / 86400000);
   }
 
-  // ---- 生日检测 ----
+  function fmtDate(parts) {
+    return parseInt(parts[0], 10) + '月' + parseInt(parts[1], 10) + '日';
+  }
+
+  // ============ 初始化（fetch birthday.json 后统一处理） ============
+  injectTicker();
+  updateTicker();
+  setInterval(updateTicker, 1000);
+
   fetch('assets/text/birthday.json')
     .then(function (r) { return r.json(); })
     .then(function (data) {
-      // 1. 当前页面的生日
-      if (data[page]) {
-        var b = data[page];
-        var parts = b.date.split('-');
-        var diff = dayDiff(parseInt(parts[0], 10), parseInt(parts[1], 10));
-        if (diff >= -BDAY_RANGE && diff <= BDAY_RANGE) {
-          showBirthday(b.name, diff, b.note || '');
-        }
+      var myData = data[page] || null;
+
+      // 注入生日行
+      if (myData) {
+        injectBirthdayRow(myData.name, fmtDate(myData.date.split('-')));
       }
 
-      // 2. 部门成立周年 (9月18日)，在所有页面触发
-      var anniDiff = dayDiff(9, 18);
-      if (anniDiff >= -BDAY_RANGE && anniDiff <= BDAY_RANGE) {
-        var years = new Date().getFullYear() - 2022;
-        showAnniversary(years, anniDiff);
+      // 检测成员生日（7天内自动弹窗，否则绑定手动触发）
+      if (myData) {
+        var parts = myData.date.split('-');
+        var diff = dayDiff(parseInt(parts[0], 10), parseInt(parts[1], 10));
+        if (diff >= -BDAY_RANGE && diff <= BDAY_RANGE) {
+          setTimeout(function () { showBirthday(myData.name, diff, myData.note || ''); }, 800);
+        }
+        // 手动触发按钮
+        bindTrigger('trigger-birthday', function () {
+          showBirthday(myData.name, 0, myData.note || '');
+        });
+        bindTrigger('manual-bday-trigger', function () {
+          showBirthday(myData.name, 0, myData.note || '');
+        });
       }
+
+      // 检测成立周年（7天内自动弹窗，否则绑定手动触发）
+      var anniDiff = dayDiff(9, 18);
+      var anniYears = new Date().getFullYear() - 2022;
+      if (anniDiff >= -BDAY_RANGE && anniDiff <= BDAY_RANGE) {
+        setTimeout(function () { showAnniversary(anniYears, anniDiff); }, 800);
+      }
+      bindTrigger('trigger-anniversary', function () {
+        showAnniversary(anniYears, 0);
+      });
     })
     .catch(function () { /* 静默 */ });
 
-  // ---- 生日弹窗 ----
+  function bindTrigger(id, fn) {
+    var btn = document.getElementById(id);
+    if (!btn) return;
+    btn.addEventListener('click', fn);
+  }
+
+  // ============ 弹窗：生日 ============
   function showBirthday(name, diff, note) {
+    var existing = document.querySelector('.bday-overlay');
+    if (existing) existing.remove();
+    var existingP = document.querySelector('.bday-popup');
+    if (existingP) existingP.remove();
+
     var overlay = document.createElement('div');
     overlay.className = 'bday-overlay';
     document.body.appendChild(overlay);
@@ -85,7 +182,7 @@
     var btnHtml = isToday
       ? '<button class="bday-btn">吹蜡烛 ✨</button>'
       : '<button class="bday-btn bday-btn--blow">吹蜡烛 ✨</button>' +
-        '<button class="bday-btn bday-btn--cake" style="margin-left:10px;">看看蛋糕 🎂</button>';
+        '<button class="bday-btn bday-btn--cake">看看蛋糕 🎂</button>';
 
     popup.innerHTML =
       '<div class="bday-emoji">' + emoji + '</div>' +
@@ -98,8 +195,14 @@
       '<div class="bday-btns">' + btnHtml + '</div>';
 
     document.body.appendChild(popup);
+    setupBdayButtons(popup, overlay, isToday);
 
-    // 吹蜡烛按钮
+    setTimeout(function () {
+      popup.classList.add('bday-popup--show');
+    }, 300);
+  }
+
+  function setupBdayButtons(popup, overlay, isToday) {
     var blowBtn = popup.querySelector('.bday-btn--blow') || popup.querySelector('.bday-btn');
     blowBtn.addEventListener('click', function () {
       spawnHearts();
@@ -107,31 +210,25 @@
       setTimeout(function () { popup.remove(); overlay.remove(); }, 800);
     });
 
-    // "看看蛋糕" 按钮 (非当天才有)
     var cakeBtn = popup.querySelector('.bday-btn--cake');
     if (cakeBtn) {
       cakeBtn.addEventListener('click', function () {
-        var cake = popup.querySelector('.bday-cake');
-        cake.style.display = 'block';
+        popup.querySelector('.bday-cake').style.display = 'block';
         spawnHearts();
         cakeBtn.style.display = 'none';
-        // 把吹蜡烛按钮变成关闭
         var btn = popup.querySelector('.bday-btn--blow');
         btn.textContent = '爱心够了，收工！💝';
-        btn.addEventListener('click', function () {
-          popup.classList.add('bday-popup--done');
-          setTimeout(function () { popup.remove(); overlay.remove(); }, 800);
-        });
       });
     }
-
-    setTimeout(function () {
-      popup.classList.add('bday-popup--show');
-    }, 400);
   }
 
-  // ---- 部门周年弹窗 ----
+  // ============ 弹窗：周年 ============
   function showAnniversary(years, diff) {
+    var existing = document.querySelector('.bday-overlay');
+    if (existing) existing.remove();
+    var existingP = document.querySelector('.bday-popup');
+    if (existingP) existingP.remove();
+
     var overlay = document.createElement('div');
     overlay.className = 'bday-overlay';
     document.body.appendChild(overlay);
@@ -142,7 +239,7 @@
     var isToday = diff === 0;
     var emoji = isToday ? '🏢🎉' : '🏢';
     var title = isToday
-      ? '生活部成立 ' + years +  ' 周年快乐！'
+      ? '生活部成立 ' + years + ' 周年快乐！'
       : (diff > 0 ? '生活部成立 ' + years + ' 周年倒计时！' : '生活部成立 ' + years + ' 周年刚过！');
     var sub = isToday
       ? '2022年9月18日 — 生活部群正式建立。感谢每一位成员的陪伴！'
@@ -154,8 +251,7 @@
       '<div class="bday-emoji" style="font-size:2.8rem;">' + emoji + '</div>' +
       '<h2 class="bday-title">' + title + '</h2>' +
       '<p class="bday-sub">' + sub + '</p>' +
-      '<p class="bday-sub" style="font-size:.8rem;opacity:.7;">' +
-        '冰和姜选择留部 → 线上面试 → 群聊建立 → 第一次团建 → 三年陪伴</p>' +
+      '<p class="bday-sub" style="font-size:.8rem;opacity:.7;">冰和姜选择留部 → 线上面试 → 群聊建立 → 第一次团建 → 三年陪伴</p>' +
       '<div class="bday-cake">' +
         '<div class="cake-body"></div>' +
         '<div class="cake-candle"><div class="flame"></div></div>' +
@@ -167,17 +263,17 @@
     var btn = popup.querySelector('.bday-btn');
     btn.addEventListener('click', function () {
       spawnHearts();
-      spawnHearts(); // 周年双倍爱心
+      spawnHearts();
       popup.classList.add('bday-popup--done');
       setTimeout(function () { popup.remove(); overlay.remove(); }, 800);
     });
 
     setTimeout(function () {
       popup.classList.add('bday-popup--show');
-    }, 500);
+    }, 400);
   }
 
-  // ---- 爱心雨 ----
+  // ============ 爱心雨 ============
   function spawnHearts() {
     for (var i = 0; i < 35; i++) {
       setTimeout(function () {
@@ -193,7 +289,7 @@
     }
   }
 
-  // ---- 样式注入 ----
+  // ============ CSS 注入 ============
   function injectStyles() {
     var css =
       '.bday-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:9999;animation:bdayFadeIn .4s ease-out}' +
@@ -223,7 +319,6 @@
       '@keyframes bdayFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}' +
       '@keyframes flameFlicker{from{transform:scale(1,.9)}to{transform:scale(.9,1.1)}}' +
       '@keyframes bdayFall{to{top:105vh;transform:rotate(360deg)}}';
-
     var style = document.createElement('style');
     style.textContent = css;
     document.head.appendChild(style);

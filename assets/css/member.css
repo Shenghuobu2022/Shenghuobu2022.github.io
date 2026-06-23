@@ -385,7 +385,139 @@ nav.top-nav a:hover { color: var(--accent); }
   gap: 20px;
 }
 
+/* ---- 走字时钟（JS自动注入） ---- */
+.est-ticker {
+  text-align: center;
+  padding: 26px 20px 20px;
+  margin-bottom: 28px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: fadeInUp 0.5s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.est-ticker::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 0 0 2px 2px;
+  opacity: 0.5;
+}
+
+.est-ticker .ticker-icon {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.est-ticker .ticker-label {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.est-ticker .ticker-digits {
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: var(--accent);
+  font-family: 'Courier New', 'Consolas', monospace;
+  letter-spacing: 3px;
+  text-shadow: 0 0 24px var(--accent-glow);
+}
+
+.est-ticker .ticker-digits span {
+  display: inline-block;
+  min-width: 1.6ch;
+  text-align: center;
+}
+
+.est-ticker .ticker-digi-label {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  margin: 0 2px;
+}
+
+.est-ticker .ticker-seconds {
+  font-size: 1rem;
+  color: var(--text-dim);
+  margin-top: 8px;
+  font-family: 'Courier New', 'Consolas', monospace;
+  letter-spacing: 4px;
+  opacity: 0.7;
+}
+
+.est-ticker .ticker-btns {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.ticker-trigger {
+  display: inline-block;
+  padding: 6px 18px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--accent-dim);
+  color: var(--accent);
+  border-radius: 20px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  letter-spacing: 1px;
+}
+
+.ticker-trigger:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  transform: scale(1.06);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* ---- 生日行（JS自动注入） ---- */
+.birthday-inline {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.birthday-inline .bday-trigger {
+  display: inline-block;
+  padding: 3px 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--accent-dim);
+  color: var(--accent);
+  border-radius: 12px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.birthday-inline .bday-trigger:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  transform: scale(1.05);
+}
+
 @media (max-width: 640px) {
+  .est-ticker .ticker-digits { font-size: 1.8rem; }
   .two-col { grid-template-columns: 1fr; }
   .hero .main-title { font-size: 1.6rem; }
   .team-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
