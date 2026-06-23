@@ -15,19 +15,36 @@
 
   // ============ 加载 Supabase CDN ============
   function loadSupabase(cb) {
-    var script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
-    script.onload = function () {
-      if (typeof supabase !== 'undefined') {
-        client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    // 国内 jsdelivr 不稳定，尝试 fastly 线路
+    var urls = [
+      'https://fastly.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js',
+      'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js'
+    ];
+    var idx = 0;
+
+    function tryLoad() {
+      if (idx >= urls.length) {
+        var list = document.getElementById('comment-list');
+        if (list) list.innerHTML = '<div class="comment-empty">留言板加载失败，请检查网络后刷新页面</div>';
+        cb();
+        return;
       }
-      cb();
-    };
-    script.onerror = function () {
-      var list = document.getElementById('comment-list');
-      if (list) list.innerHTML = '<div class="comment-empty">留言板加载失败，请刷新页面重试</div>';
-    };
-    document.head.appendChild(script);
+      var script = document.createElement('script');
+      script.src = urls[idx];
+      script.onload = function () {
+        var s = window.supabase || self.supabase || (typeof supabase !== 'undefined' ? supabase : null);
+        if (s) {
+          client = s.createClient(SUPABASE_URL, SUPABASE_KEY);
+        }
+        cb();
+      };
+      script.onerror = function () {
+        idx++;
+        tryLoad();
+      };
+      document.head.appendChild(script);
+    }
+    tryLoad();
   }
 
   // ============ 注入留言板 DOM ============
@@ -119,7 +136,13 @@
 
       client.from('comments')
         .insert([{ page: page, name: name || null, content: text }])
-        .then(function () {
+        .then(function (res) {
+          if (res.error) {
+            console.error('留言失败:', res.error);
+            btn.disabled = false;
+            btn.textContent = '发送失败，重试';
+            return;
+          }
           nameInp.value = '';
           textInp.value = '';
           btn.disabled = false;
