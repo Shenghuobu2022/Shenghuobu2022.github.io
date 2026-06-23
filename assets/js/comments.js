@@ -280,7 +280,7 @@
           // 展开当前
           var form = document.getElementById('reply-form-' + replyId);
           if (form) {
-            form.style.display = 'block';
+            form.style.display = 'flex';
             // 回复楼中楼时显示 @名字 标签
             var item = target.closest('.comment-item');
             var tag = form.querySelector('.reply-to-tag');

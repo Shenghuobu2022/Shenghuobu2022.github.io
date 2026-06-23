@@ -701,7 +701,7 @@ nav.top-nav a:hover { color: var(--accent); }
   margin-top: 14px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 .reply-to-tag {
