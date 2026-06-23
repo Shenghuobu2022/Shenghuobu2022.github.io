@@ -815,6 +815,21 @@ nav.top-nav a:hover { color: var(--accent); }
   opacity: 0.65;
 }
 
+/* ---- 收起回复按钮 ---- */
+.comment-replies-collapse {
+  margin-left: 28px;
+  padding: 2px 0 4px;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  user-select: none;
+}
+
+.comment-replies-collapse:hover {
+  color: var(--accent);
+}
+
 /* ---- 分页器 ---- */
 .comment-pager {
   display: flex;
@@ -856,6 +871,7 @@ nav.top-nav a:hover { color: var(--accent); }
   .two-col { grid-template-columns: 1fr; }
   .comment-reply { margin-left: 16px; padding-left: 10px; }
   .comment-replies-toggle { margin-left: 16px; }
+  .comment-replies-collapse { margin-left: 16px; }
   .comment-reply-form .reply-name { max-width: 130px; }
   .hero .main-title { font-size: 1.6rem; }
   .team-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }

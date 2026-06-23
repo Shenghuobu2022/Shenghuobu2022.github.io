@@ -146,10 +146,11 @@
       var children = allReplies[c.id] || [];
       if (children.length > 0) {
         if (expandedReplies[c.id]) {
-          // 已展开：显示全部回复
+          // 已展开：显示全部回复 + 底部收起按钮
           children.forEach(function (child) {
             html += renderComment(child, true, c.id);
           });
+          html += '<div class="comment-replies-collapse" data-collapse="' + c.id + '">收起回复 ▲</div>';
         } else {
           // 折叠：显示展开按钮
           html += '<div class="comment-replies-toggle" data-expand="' + c.id + '">' +
@@ -328,6 +329,15 @@
           var btn = target.closest('.comment-replies-toggle');
           var expandId = btn.getAttribute('data-expand');
           expandedReplies[expandId] = true;
+          renderList(list, currentPage);
+          return;
+        }
+
+        // 点击「收起回复」→ 折叠回复
+        if (target.closest('.comment-replies-collapse')) {
+          var btn = target.closest('.comment-replies-collapse');
+          var collapseId = btn.getAttribute('data-collapse');
+          expandedReplies[collapseId] = false;
           renderList(list, currentPage);
           return;
         }
