@@ -372,7 +372,13 @@
           return;
         }
         localStorage.setItem('shb_cmt_ts_' + page, Date.now().toString());
-        onSuccess(res.data && res.data[0]);
+        // 服务器返回的数据优先，否则用本地参数构建（保证一定有一行可渲染）
+        var serverRow = res.data && res.data[0];
+        var newRow = serverRow || Object.assign({}, row, {
+          id: 'local_' + Date.now(),
+          created_at: new Date().toISOString()
+        });
+        onSuccess(newRow);
       })
       .catch(function (err) {
         if (isPaused(err)) {
