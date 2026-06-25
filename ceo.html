@@ -5,112 +5,160 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>生活部文化有限公司 | SHENGHUOBU CULTURE MEDIA</title>
     <link rel="icon" href="assets/picture/专业团队.jpg" type="image/jpeg">
-    <link rel="stylesheet" href="assets/css/member.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/member.css?v=2">
     <style>
         :root {
-            --accent: #F0C040;
-            --accent-dim: rgba(240, 192, 64, 0.15);
-            --accent-glow: rgba(240, 192, 64, 0.5);
-            --card-bg: rgba(20, 20, 18, 0.78);
-            --card-border: rgba(240, 192, 64, 0.15);
+            --accent: #D4A843;
+            --accent-dim: rgba(212, 168, 67, 0.12);
+            --accent-glow: rgba(212, 168, 67, 0.45);
+            --accent-rgb: 212, 168, 67;
+        }
+
+        /* 金色粒子 */
+        body::before {
+            background:
+                radial-gradient(ellipse 70% 50% at 20% 15%, rgba(212,168,67,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 50% 45% at 75% 55%, rgba(212,168,67,0.1) 0%, transparent 50%),
+                radial-gradient(ellipse 40% 35% at 50% 45%, rgba(240,200,100,0.07) 0%, transparent 50%);
+        }
+        body::after {
+            background-image:
+                linear-gradient(rgba(212,168,67,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212,168,67,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
         }
 
         .company-hero {
             text-align: center;
-            padding: 50px 0 40px;
-            animation: fadeInUp 0.8s ease-out;
+            padding: 40px 0 30px;
+            position: relative;
+        }
+        .company-hero::after {
+            content: '';
+            position: absolute;
+            top: -150px; left: 50%;
+            transform: translateX(-50%);
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(212,168,67,0.15) 0%, transparent 55%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            animation: orbPulse 5s ease-in-out infinite;
+        }
+        @keyframes orbPulse {
+            0%, 100% { transform: translateX(-50%) scale(0.9); opacity: 0.6; }
+            50% { transform: translateX(-50%) scale(1.15); opacity: 1; }
         }
 
         .company-logo {
-            font-size: 3.5rem;
+            font-size: 4rem;
             margin-bottom: 10px;
-            display: block;
-            animation: float 3s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px var(--accent-glow));
+            display: inline-block;
+            animation: heroFloat 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(212,168,67,0.5));
+        }
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
         .company-name {
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: 3px;
-            color: var(--accent);
-            text-shadow: 0 0 40px var(--accent-glow);
-            margin-bottom: 6px;
+            font-size: 2.3rem;
+            font-weight: 900;
+            letter-spacing: 5px;
+            background: linear-gradient(135deg, #F5E0A0, #D4A843, #B8922E, #D4A843, #F5E0A0);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: goldShimmer 4s linear infinite;
+            margin-bottom: 8px;
+            font-family: 'Playfair Display', 'Inter', serif;
         }
+        @keyframes goldShimmer { to { background-position: 300% center; } }
 
         .company-tagline {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-dim);
-            letter-spacing: 4px;
+            letter-spacing: 6px;
             text-transform: uppercase;
         }
-
         .company-intro {
             text-align: center;
             color: var(--text-dim);
-            font-size: 0.95rem;
-            max-width: 600px;
+            font-size: 0.9rem;
+            max-width: 550px;
             margin: 0 auto;
-            line-height: 1.8;
+            line-height: 1.9;
         }
 
-        /* 吉祥物专区 */
-        .mascot-section {
-            margin: 30px 0;
+        .company-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: rgba(20,20,22,0.8);
+            border: 1px solid rgba(212,168,67,0.15);
+            border-radius: 16px;
+            padding: 24px 14px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.35s ease;
+        }
+        .stat-card:hover {
+            border-color: rgba(212,168,67,0.35);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 40px rgba(212,168,67,0.08);
+        }
+        .stat-card .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #D4A843;
+            display: block;
+            font-family: 'Playfair Display', 'Inter', serif;
+            text-shadow: 0 0 20px rgba(212,168,67,0.35);
+        }
+        .stat-card .stat-label {
+            font-size: 0.74rem;
+            color: var(--text-dim);
+            margin-top: 4px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
+        .mascot-section { margin: 30px 0; }
+
+        .mascot-card {
+            border-color: rgba(212,168,67,0.25);
+            background: linear-gradient(135deg, rgba(212,168,67,0.12), rgba(212,168,67,0.02));
+        }
         .mascot-card .mascot-motto {
             color: var(--text-dim);
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-style: italic;
             margin-top: 8px;
+            line-height: 1.6;
         }
-
         .mascot-tags {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             margin-top: 16px;
         }
 
-        /* 数据面板 */
-        .company-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            animation: fadeInUp 0.6s ease-out both;
-        }
-
-        .stat-card .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--accent);
-            display: block;
-        }
-
-        .stat-card .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            margin-top: 4px;
-            letter-spacing: 1px;
-        }
-
         @media (max-width: 640px) {
-            .company-stats { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-            .company-name { font-size: 1.4rem; }
-            .stat-card .stat-number { font-size: 1.5rem; }
-            .stat-card { padding: 14px 8px; }
+            .company-stats { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+            .company-name { font-size: 1.4rem; letter-spacing: 2px; }
+            .stat-card .stat-number { font-size: 1.8rem; }
+            .stat-card { padding: 16px 8px; }
+            .company-logo { font-size: 2.8rem; }
         }
     </style>
 </head>
@@ -123,8 +171,7 @@
 
 <div class="page-container">
 
-    <!-- 公司英雄区 -->
-    <div class="company-hero">
+    <div class="company-hero anim-delay-1">
         <span class="company-logo">🏢</span>
         <h1 class="company-name">生活部文化有限公司</h1>
         <p class="company-tagline">SHENGHUOBU CULTURE MEDIA &nbsp;·&nbsp; EST. 2022</p>
@@ -135,23 +182,12 @@
         </p>
     </div>
 
-    <!-- 公司关键数据 -->
     <div class="company-stats">
-        <div class="stat-card anim-delay-1">
-            <span class="stat-number">11</span>
-            <span class="stat-label">核心成员</span>
-        </div>
-        <div class="stat-card anim-delay-2">
-            <span class="stat-number">3</span>
-            <span class="stat-label">年征程</span>
-        </div>
-        <div class="stat-card anim-delay-3">
-            <span class="stat-number">∞</span>
-            <span class="stat-label">欢乐回忆</span>
-        </div>
+        <div class="stat-card anim-delay-2"><span class="stat-number">11</span><span class="stat-label">核心成员</span></div>
+        <div class="stat-card anim-delay-3"><span class="stat-number">3</span><span class="stat-label">年征程</span></div>
+        <div class="stat-card anim-delay-4"><span class="stat-number">∞</span><span class="stat-label">欢乐回忆</span></div>
     </div>
 
-    <!-- 吉祥物CEO专区 -->
     <div class="mascot-section">
         <div class="mascot-card anim-delay-1">
             <div class="inner">
@@ -169,50 +205,21 @@
         </div>
     </div>
 
-    <!-- 公司发展大事记 -->
     <div class="card anim-delay-2">
         <h2><span class="section-icon">📅</span>公司发展大事记</h2>
         <div class="timeline">
-            <div class="timeline-item anim-delay-1">
-                <div class="date">2022.06</div>
-                <div class="event">冰和姜选择留部，生活部文化有限公司正式立项</div>
-            </div>
-            <div class="timeline-item anim-delay-2">
-                <div class="date">2022.09.16</div>
-                <div class="event">线上面试 —— 初见未来的同事们</div>
-            </div>
-            <div class="timeline-item anim-delay-3">
-                <div class="date">2022.09.18</div>
-                <div class="event">生活部群正式建立，公司架构初步形成</div>
-            </div>
-            <div class="timeline-item anim-delay-4">
-                <div class="date">2022 · 秋</div>
-                <div class="event">第一次外出团建（强策划）—— 上午登山失败，下午密室逃脱 + 狼人杀，<span class="highlight">梦的开始</span></div>
-            </div>
-            <div class="timeline-item anim-delay-5">
-                <div class="date">2022-2025</div>
-                <div class="event">图书馆研讨间 E208 —— 大家的秘密基地</div>
-            </div>
-            <div class="timeline-item anim-delay-1">
-                <div class="date">2022 · 冬</div>
-                <div class="event">群里一起看世界杯，熬夜呐喊的日子</div>
-            </div>
-            <div class="timeline-item anim-delay-2">
-                <div class="date">2023</div>
-                <div class="event">5个男生一起去游蓬莱，说走就走的旅行</div>
-            </div>
-            <div class="timeline-item anim-delay-3">
-                <div class="date">2024</div>
-                <div class="event">剧本杀《暗黑者》（涂小猫）—— 脑洞与演技的大碰撞</div>
-            </div>
-            <div class="timeline-item anim-delay-4">
-                <div class="date">2025 · 夏</div>
-                <div class="event">三年之约到期，各位股东纷纷毕业，但<span class="highlight">公司永不散场</span></div>
-            </div>
+            <div class="timeline-item anim-delay-1"><div class="date">2022.06</div><div class="event">冰和姜选择留部，生活部文化有限公司正式立项</div></div>
+            <div class="timeline-item anim-delay-2"><div class="date">2022.09.16</div><div class="event">线上面试 —— 初见未来的同事们</div></div>
+            <div class="timeline-item anim-delay-3"><div class="date">2022.09.18</div><div class="event">生活部群正式建立，公司架构初步形成</div></div>
+            <div class="timeline-item anim-delay-4"><div class="date">2022 · 秋</div><div class="event">第一次外出团建（强策划）—— 上午登山失败，下午密室逃脱 + 狼人杀，<span class="highlight">梦的开始</span></div></div>
+            <div class="timeline-item anim-delay-5"><div class="date">2022-2025</div><div class="event">图书馆研讨间 E208 —— 大家的秘密基地</div></div>
+            <div class="timeline-item anim-delay-1"><div class="date">2022 · 冬</div><div class="event">群里一起看世界杯，熬夜呐喊的日子</div></div>
+            <div class="timeline-item anim-delay-2"><div class="date">2023</div><div class="event">5个男生一起去游蓬莱，说走就走的旅行</div></div>
+            <div class="timeline-item anim-delay-3"><div class="date">2024</div><div class="event">剧本杀《暗黑者》（涂小猫）—— 脑洞与演技的大碰撞</div></div>
+            <div class="timeline-item anim-delay-4"><div class="date">2025 · 夏</div><div class="event">三年之约到期，各位股东纷纷毕业，但<span class="highlight">公司永不散场</span></div></div>
         </div>
     </div>
 
-    <!-- 团队成员 -->
     <div class="card anim-delay-3">
         <h2><span class="section-icon">👥</span>核心团队</h2>
         <div class="team-grid">

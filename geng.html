@@ -5,105 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>高赓 | 公司合伙人 · 生活部文化有限公司</title>
     <link rel="icon" href="assets/picture/专业团队.jpg" type="image/jpeg">
-    <link rel="stylesheet" href="assets/css/member.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/member.css?v=2">
     <style>
-        :root {
-            --accent: #9B59B6;
-            --accent-dim: rgba(155, 89, 182, 0.15);
-            --accent-glow: rgba(155, 89, 182, 0.4);
-        }
-        .quantum-box {
-            background: linear-gradient(135deg, rgba(155,89,182,0.08), transparent);
-            border: 1px solid rgba(155,89,182,0.2);
-            border-radius: 12px;
-            padding: 24px;
-            text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        .quantum-box::before {
-            content: ''; position: absolute; top: -24px; right: -24px;
-            width: 80px; height: 80px;
-            background: radial-gradient(circle, rgba(155,89,182,0.15) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-        .quantum-state { font-size: 0.85rem; color: var(--text-dim); margin-top: 8px; font-style: italic; }
+        :root { --accent: #9B59B6; --accent-dim: rgba(155, 89, 182, 0.1); --accent-glow: rgba(155, 89, 182, 0.4); --accent-rgb: 155, 89, 182; }
+        body::before { background: radial-gradient(ellipse 60% 40% at 22% 12%, rgba(155,89,182,0.12) 0%, transparent 50%), radial-gradient(ellipse 50% 35% at 75% 55%, rgba(155,89,182,0.06) 0%, transparent 50%); }
+        body::after { background-image: linear-gradient(rgba(155,89,182,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(155,89,182,0.025) 1px, transparent 1px); background-size: 45px 45px; }
+        .hero::after { background: radial-gradient(circle, rgba(155,89,182,0.16) 0%, transparent 55%); width: 460px; height: 460px; }
+        .hero .main-title { background: linear-gradient(135deg, #fff 0%, #9B59B6 35%, #C39BD3 65%, #fff 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .quantum-box { background: linear-gradient(135deg, rgba(155,89,182,0.08), transparent); border: 1px solid rgba(155,89,182,0.2); border-radius: 20px; padding: 28px; text-align: center; margin-bottom: 20px; position: relative; overflow: hidden; }
+        .quantum-box::before { content: ''; position: absolute; top: -30px; right: -30px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(155,89,182,0.15) 0%, transparent 70%); border-radius: 50%; animation: qPulse 4s ease-in-out infinite; }
+        @keyframes qPulse { 0%,100%{transform:scale(1);opacity:0.5;} 50%{transform:scale(1.5);opacity:0.2;} }
+        .quantum-state { font-size: 0.84rem; color: var(--text-dim); margin-top: 8px; font-style: italic; line-height: 1.6; }
         .song-list { list-style: none; }
-        .song-list li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
-        .song-list li .note-icon { font-size: 1.2rem; }
-        .song-list li .song-title { color: var(--accent); font-weight: 600; }
-        .song-list li .song-note { color: var(--text-dim); margin-left: auto; font-size: 0.78rem; }
+        .song-list li { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; gap: 12px; font-size: 0.88rem; transition: all 0.2s ease; }
+        .song-list li:hover { background: rgba(155,89,182,0.03); padding-left: 8px; border-radius: 6px; }
+        .song-list li .note-icon { font-size: 1.3rem; }
+        .song-list li .song-title { color: #9B59B6; font-weight: 600; }
+        .song-list li .song-note { color: var(--text-dim); margin-left: auto; font-size: 0.76rem; font-style: italic; }
     </style>
 </head>
 <body>
-
-<nav class="top-nav">
-    <a href="index.html" class="back-btn">返回登录</a>
-    <a href="ceo.html">公司主页</a>
-</nav>
-
+<nav class="top-nav"><a href="index.html" class="back-btn">返回登录</a><a href="ceo.html">公司主页</a></nav>
 <div class="page-container">
-
-    <div class="hero">
-        <span class="role-icon">🎤</span>
-        <h1 class="main-title">公司合伙人 · 高赓</h1>
-        <p class="subtitle">赓 · 生活部歌神 · 量子力学传承人 · 薛定谔的合伙人</p>
-        <div class="divider-line"></div>
-    </div>
-
-    <!-- 薛定谔的合伙人 -->
-    <div class="quantum-box anim-delay-1">
-        <div style="font-size:3rem;margin-bottom:8px;">📦</div>
-        <h2 style="color:var(--accent);font-size:1.2rem;">薛定谔的合伙人</h2>
-        <p class="quantum-state">在打开聊天框之前，他同时处于"在"和"不在"的叠加态。</p>
-        <p class="quantum-state">一旦观测，坍缩为"刚来，发生啥了？"</p>
-    </div>
-
-    <!-- 身份标签 -->
-    <div class="card anim-delay-2">
-        <h2><span class="section-icon">🏷️</span>多重身份</h2>
-        <div class="tag-list">
-            <span class="tag primary">公司合伙人</span>
-            <span class="tag">生活部歌神</span>
-            <span class="tag">量子力学传承人</span>
-            <span class="tag">Aron</span>
-            <span class="tag">麦霸</span>
-            <span class="tag">LPL二号支持者</span>
-            <span class="tag">二游尝鲜第一人（飞速退坑版）</span>
-            <span class="tag">薛定谔的合伙人</span>
-            <span class="tag">??</span>
-        </div>
-    </div>
-
-    <!-- 歌神经典曲目 -->
-    <div class="card anim-delay-3">
-        <h2><span class="section-icon">🎵</span>歌神经典曲目（推测）</h2>
-        <ul class="song-list">
-            <li><span class="note-icon">🎶</span><span class="song-title">量子纠缠</span><span class="song-note">又名：你找我时我不在</span></li>
-            <li><span class="note-icon">🎶</span><span class="song-title">麦霸进行曲</span><span class="song-note">KTV 自动循环播放</span></li>
-            <li><span class="note-icon">🎶</span><span class="song-title">LPL战歌</span><span class="song-note">二号位支援入场</span></li>
-            <li><span class="note-icon">🎶</span><span class="song-title">退坑练习曲</span><span class="song-note">二游尝鲜→飞速卸载</span></li>
-        </ul>
-    </div>
-
-    <!-- 战力 -->
-    <div class="card anim-delay-4">
-        <h2><span class="section-icon">📊</span>合伙人指数</h2>
-        <div class="stat-bar"><div class="label"><span>歌唱实力</span><span>98%</span></div><div class="bar"><div class="fill" style="width:98%"></div></div></div>
-        <div class="stat-bar"><div class="label"><span>量子存在概率</span><span>50%</span></div><div class="bar"><div class="fill" style="width:50%"></div></div></div>
-        <div class="stat-bar"><div class="label"><span>二游坚持天数</span><span>≈3天</span></div><div class="bar"><div class="fill" style="width:10%"></div></div></div>
-        <div class="stat-bar"><div class="label"><span>LPL观赛投入度</span><span>85%</span></div><div class="bar"><div class="fill" style="width:85%"></div></div></div>
-        <div class="stat-bar"><div class="label"><span>麦霸模式启动速度</span><span>瞬间</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div>
-    </div>
-
+    <div class="hero"><span class="role-icon">🎤</span><h1 class="main-title">公司合伙人 · 高赓</h1><p class="subtitle">赓 · 生活部歌神 · 量子力学传承人 · 薛定谔的合伙人</p><div class="divider-line"></div></div>
+    <div class="quantum-box anim-delay-1"><div style="font-size:3rem;margin-bottom:8px;">📦</div><h2 style="color:#9B59B6;font-size:1.2rem;font-weight:700;letter-spacing:2px;">薛定谔的合伙人</h2><p class="quantum-state">在打开聊天框之前，他同时处于"在"和"不在"的叠加态。</p><p class="quantum-state">一旦观测，坍缩为"刚来，发生啥了？"</p></div>
+    <div class="card anim-delay-2"><h2><span class="section-icon">🏷️</span>多重身份</h2><div class="tag-list"><span class="tag primary">公司合伙人</span><span class="tag">生活部歌神</span><span class="tag">量子力学传承人</span><span class="tag">Aron</span><span class="tag">麦霸</span><span class="tag">LPL二号支持者</span><span class="tag">二游尝鲜第一人（飞速退坑版）</span><span class="tag">薛定谔的合伙人</span><span class="tag">??</span></div></div>
+    <div class="card anim-delay-3"><h2><span class="section-icon">🎵</span>歌神经典曲目（推测）</h2><ul class="song-list"><li><span class="note-icon">🎶</span><span class="song-title">量子纠缠</span><span class="song-note">又名：你找我时我不在</span></li><li><span class="note-icon">🎶</span><span class="song-title">麦霸进行曲</span><span class="song-note">KTV 自动循环播放</span></li><li><span class="note-icon">🎶</span><span class="song-title">LPL战歌</span><span class="song-note">二号位支援入场</span></li><li><span class="note-icon">🎶</span><span class="song-title">退坑练习曲</span><span class="song-note">二游尝鲜→飞速卸载</span></li></ul></div>
+    <div class="card anim-delay-4"><h2><span class="section-icon">📊</span>合伙人指数</h2><div class="stat-bar"><div class="label"><span>歌唱实力</span><span>98%</span></div><div class="bar"><div class="fill" style="width:98%"></div></div></div><div class="stat-bar"><div class="label"><span>量子存在概率</span><span>50%</span></div><div class="bar"><div class="fill" style="width:50%"></div></div></div><div class="stat-bar"><div class="label"><span>二游坚持天数</span><span>≈3天</span></div><div class="bar"><div class="fill" style="width:10%"></div></div></div><div class="stat-bar"><div class="label"><span>LPL观赛投入度</span><span>85%</span></div><div class="bar"><div class="fill" style="width:85%"></div></div></div><div class="stat-bar"><div class="label"><span>麦霸模式启动速度</span><span>瞬间</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div></div>
 </div>
-
-<footer class="page-footer">
-    &copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.<br>
-    生活部已成立 <span id="establish-duration">--</span>
-</footer>
-
+<footer class="page-footer">&copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.<br>生活部已成立 <span id="establish-duration">--</span></footer>
 <script src="assets/js/birthday.js"></script>
 <script src="assets/js/comments.js"></script>
 </body>

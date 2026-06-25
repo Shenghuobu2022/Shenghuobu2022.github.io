@@ -5,110 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>玄海强 | 安保分队队长 · 生活部文化有限公司</title>
     <link rel="icon" href="assets/picture/专业团队.jpg" type="image/jpeg">
-    <link rel="stylesheet" href="assets/css/member.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/member.css?v=2">
     <style>
-        :root {
-            --accent: #00CC66;
-            --accent-dim: rgba(0, 204, 102, 0.15);
-            --accent-glow: rgba(0, 204, 102, 0.4);
-        }
-        .stadium-banner {
-            background: linear-gradient(135deg, rgba(0,204,102,0.08), transparent);
-            border: 1px solid rgba(0,204,102,0.2);
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 20px;
-            text-align: center;
-            animation: fadeInUp 0.6s ease-out both;
-        }
-        .stadium-banner .pitch-icon { font-size: 3.5rem; margin-bottom: 8px; animation: float 3s ease-in-out infinite; }
+        :root { --accent: #00CC66; --accent-dim: rgba(0, 204, 102, 0.1); --accent-glow: rgba(0, 204, 102, 0.4); --accent-rgb: 0, 204, 102; }
+        body::before { background: radial-gradient(ellipse 60% 40% at 25% 12%, rgba(0,204,102,0.13) 0%, transparent 50%), radial-gradient(ellipse 50% 30% at 70% 55%, rgba(0,204,102,0.06) 0%, transparent 50%); }
+        body::after { background-image: linear-gradient(rgba(0,204,102,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0,204,102,0.025) 1px, transparent 1px); background-size: 42px 42px; }
+        .hero::after { background: radial-gradient(circle, rgba(0,204,102,0.18) 0%, transparent 55%); width: 500px; height: 500px; }
+        .hero .main-title { background: linear-gradient(135deg, #fff 0%, #00CC66 35%, #66FFA0 65%, #fff 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .stadium-banner { background: linear-gradient(135deg, rgba(0,204,102,0.1), transparent); border: 1px solid rgba(0,204,102,0.2); border-radius: 20px; padding: 28px; margin-bottom: 20px; text-align: center; }
+        .stadium-banner .pitch-icon { font-size: 3.5rem; margin-bottom: 10px; animation: heroFloat 3s ease-in-out infinite; filter: drop-shadow(0 4px 12px rgba(0,204,102,0.3)); }
+        @keyframes heroFloat { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
         .goal-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 0; }
-        .goal-stat {
-            background: rgba(0,204,102,0.05); border: 1px solid rgba(0,204,102,0.1);
-            border-radius: 10px; padding: 14px 8px; text-align: center;
-        }
-        .goal-stat .num { font-size: 1.4rem; font-weight: 800; color: var(--accent); display: block; }
-        .goal-stat .lbl { font-size: 0.7rem; color: var(--text-dim); margin-top: 2px; }
-        .level-display {
-            text-align: center; padding: 20px;
-            background: linear-gradient(135deg, rgba(0,204,102,0.1), rgba(0,204,102,0.02));
-            border: 2px solid var(--accent-dim);
-            border-radius: 16px;
-            margin-bottom: 20px;
-            animation: fadeInUp 0.6s ease-out both;
-        }
-        .level-display .level-num { font-size: 4rem; font-weight: 900; color: var(--accent); display: block; text-shadow: 0 0 30px var(--accent-glow); }
-        .level-display .level-label { color: var(--text-dim); font-size: 0.85rem; letter-spacing: 2px; }
-        @media (max-width: 640px) { .goal-stats { grid-template-columns: repeat(2, 1fr); } }
+        .goal-stat { background: rgba(0,204,102,0.04); border: 1px solid rgba(0,204,102,0.1); border-radius: 12px; padding: 16px 8px; text-align: center; transition: all 0.2s ease; }
+        .goal-stat:hover { border-color: #00CC66; transform: translateY(-2px); }
+        .goal-stat .num { font-size: 1.5rem; font-weight: 900; color: #00CC66; display: block; font-family: 'JetBrains Mono', monospace; }
+        .goal-stat .lbl { font-size: 0.7rem; color: var(--text-dim); margin-top: 3px; letter-spacing: 1px; }
+        .level-display { text-align: center; padding: 24px; background: linear-gradient(135deg, rgba(0,204,102,0.12), rgba(0,204,102,0.02)); border: 2px solid rgba(0,204,102,0.2); border-radius: 20px; margin-bottom: 20px; position: relative; overflow: hidden; }
+        .level-display::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(0,204,102,0.1) 0%, transparent 60%); animation: lvlPulse 3s ease-in-out infinite; }
+        @keyframes lvlPulse { 0%,100%{opacity:0.4;} 50%{opacity:1;} }
+        .level-display .level-num { font-size: 5rem; font-weight: 900; color: #00CC66; display: block; text-shadow: 0 0 50px rgba(0,204,102,0.5); font-family: 'JetBrains Mono', monospace; position: relative; z-index: 1; }
+        .level-display .level-label { color: var(--text-dim); font-size: 0.84rem; letter-spacing: 3px; position: relative; z-index: 1; font-weight: 500; }
+        @media (max-width: 640px) { .goal-stats { grid-template-columns: repeat(2, 1fr); } .level-display .level-num { font-size: 3.5rem; } }
     </style>
 </head>
 <body>
-
-<nav class="top-nav">
-    <a href="index.html" class="back-btn">返回登录</a>
-    <a href="ceo.html">公司主页</a>
-</nav>
-
+<nav class="top-nav"><a href="index.html" class="back-btn">返回登录</a><a href="ceo.html">公司主页</a></nav>
 <div class="page-container">
-
-    <div class="hero">
-        <span class="role-icon">⚽</span>
-        <h1 class="main-title">安保分队队长 · 玄海强</h1>
-        <p class="subtitle">强 · 生活部梅西 · 史上第0位100级强者 · 生活部球王</p>
-        <div class="divider-line"></div>
-    </div>
-
-    <!-- 球王认证 -->
-    <div class="stadium-banner anim-delay-1">
-        <div class="pitch-icon">🏟️</div>
-        <h2 style="color:var(--accent);font-size:1.3rem;">生活部梅西 & 球王认证</h2>
-        <p style="color:var(--text-dim);font-size:0.85rem;margin-top:8px;">脚法细腻，走位灵活，生活部足球第一人</p>
-        <div class="goal-stats" style="margin-top:14px;">
-            <div class="goal-stat"><span class="num">10</span><span class="lbl">梅西指数</span></div>
-            <div class="goal-stat"><span class="num">⚽</span><span class="lbl">球王称号</span></div>
-            <div class="goal-stat"><span class="num">🇺🇸</span><span class="lbl">驻美使者</span></div>
-            <div class="goal-stat"><span class="num">🔒</span><span class="lbl">安保队长</span></div>
-        </div>
-    </div>
-
-    <!-- 满级大佬展示 -->
-    <div class="level-display anim-delay-2">
-        <span class="level-num">100</span>
-        <span class="level-label">Lv. 100 · 满级大佬 · 史上第0位</span>
-        <p style="color:var(--text-dim);font-size:0.8rem;margin-top:6px;">在所有人还在努力升级的时候，他已经在终点站买好了爆米花</p>
-    </div>
-
-    <!-- 身份标签 -->
-    <div class="card anim-delay-3">
-        <h2><span class="section-icon">🏷️</span>多重身份</h2>
-        <div class="tag-list">
-            <span class="tag primary">安保分队队长</span>
-            <span class="tag">生活部梅西</span>
-            <span class="tag">L1chaPup6</span>
-            <span class="tag">史上第0位100级强者</span>
-            <span class="tag">满级大佬</span>
-            <span class="tag">生活部球王</span>
-            <span class="tag">生活部驻美使者</span>
-        </div>
-    </div>
-
-    <!-- 战力面板 -->
-    <div class="card anim-delay-4">
-        <h2><span class="section-icon">📊</span>强者面板</h2>
-        <div class="stat-bar"><div class="label"><span>满级等级</span><span>100/100</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div>
-        <div class="stat-bar"><div class="label"><span>足球实力</span><span>98%</span></div><div class="bar"><div class="fill" style="width:98%"></div></div></div>
-        <div class="stat-bar"><div class="label"><span>安保能力</span><span>95%</span></div><div class="bar"><div class="fill" style="width:95%"></div></div></div>
-        <div class="stat-bar"><div class="label"><span>国际视野</span><span>90%</span></div><div class="bar"><div class="fill" style="width:90%"></div></div></div>
-        <div class="stat-bar"><div class="label"><span>大佬气质</span><span>MAX</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div>
-    </div>
-
+    <div class="hero"><span class="role-icon">⚽</span><h1 class="main-title">安保分队队长 · 玄海强</h1><p class="subtitle">强 · 生活部梅西 · 史上第0位100级强者 · 生活部球王</p><div class="divider-line"></div></div>
+    <div class="stadium-banner anim-delay-1"><div class="pitch-icon">🏟️</div><h2 style="color:#00CC66;font-size:1.3rem;font-weight:700;letter-spacing:2px;">生活部梅西 & 球王认证</h2><p style="color:var(--text-dim);font-size:0.85rem;margin-top:8px;">脚法细腻，走位灵活，生活部足球第一人</p><div class="goal-stats" style="margin-top:16px;"><div class="goal-stat"><span class="num">10</span><span class="lbl">梅西指数</span></div><div class="goal-stat"><span class="num">⚽</span><span class="lbl">球王称号</span></div><div class="goal-stat"><span class="num">🇺🇸</span><span class="lbl">驻美使者</span></div><div class="goal-stat"><span class="num">🔒</span><span class="lbl">安保队长</span></div></div></div>
+    <div class="level-display anim-delay-2"><span class="level-num">100</span><span class="level-label">Lv. 100 · 满级大佬 · 史上第0位</span><p style="color:var(--text-dim);font-size:0.78rem;margin-top:8px;position:relative;z-index:1;">在所有人还在努力升级的时候，他已经在终点站买好了爆米花</p></div>
+    <div class="card anim-delay-3"><h2><span class="section-icon">🏷️</span>多重身份</h2><div class="tag-list"><span class="tag primary">安保分队队长</span><span class="tag">生活部梅西</span><span class="tag">L1chaPup6</span><span class="tag">史上第0位100级强者</span><span class="tag">满级大佬</span><span class="tag">生活部球王</span><span class="tag">生活部驻美使者</span></div></div>
+    <div class="card anim-delay-4"><h2><span class="section-icon">📊</span>强者面板</h2><div class="stat-bar"><div class="label"><span>满级等级</span><span>100/100</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div><div class="stat-bar"><div class="label"><span>足球实力</span><span>98%</span></div><div class="bar"><div class="fill" style="width:98%"></div></div></div><div class="stat-bar"><div class="label"><span>安保能力</span><span>95%</span></div><div class="bar"><div class="fill" style="width:95%"></div></div></div><div class="stat-bar"><div class="label"><span>国际视野</span><span>90%</span></div><div class="bar"><div class="fill" style="width:90%"></div></div></div><div class="stat-bar"><div class="label"><span>大佬气质</span><span>MAX</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div></div>
 </div>
-
-<footer class="page-footer">
-    &copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.<br>
-    生活部已成立 <span id="establish-duration">--</span>
-</footer>
-
+<footer class="page-footer">&copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.<br>生活部已成立 <span id="establish-duration">--</span></footer>
 <script src="assets/js/birthday.js"></script>
 <script src="assets/js/comments.js"></script>
 </body>

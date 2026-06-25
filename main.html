@@ -5,126 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>公司回忆录 | 生活部文化有限公司</title>
     <link rel="icon" href="assets/picture/专业团队.jpg" type="image/jpeg">
-    <link rel="stylesheet" href="assets/css/member.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/member.css?v=2">
     <style>
         :root {
-            --accent: #F0C040;
-            --accent-dim: rgba(240, 192, 64, 0.15);
-            --accent-glow: rgba(240, 192, 64, 0.5);
+            --accent: #D4A843;
+            --accent-dim: rgba(212, 168, 67, 0.1);
+            --accent-glow: rgba(212, 168, 67, 0.4);
+            --accent-rgb: 212, 168, 67;
+        }
+        body::before {
+            background:
+                radial-gradient(ellipse 60% 40% at 20% 15%, rgba(212,168,67,0.12) 0%, transparent 50%),
+                radial-gradient(ellipse 50% 35% at 75% 60%, rgba(212,168,67,0.07) 0%, transparent 50%);
+        }
+        body::after {
+            background-image:
+                linear-gradient(rgba(212,168,67,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212,168,67,0.03) 1px, transparent 1px);
+            background-size: 45px 45px;
         }
         .welcome-banner {
             text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, rgba(240,192,64,0.06), transparent);
-            border: 1px solid rgba(240,192,64,0.12);
-            border-radius: 16px;
+            padding: 44px 28px;
+            background: linear-gradient(135deg, rgba(212,168,67,0.08), transparent);
+            border: 1px solid rgba(212,168,67,0.15);
+            border-radius: 20px;
             margin-bottom: 24px;
-            animation: fadeInUp 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
         }
-        .welcome-banner .welcome-icon { font-size: 3rem; margin-bottom: 10px; }
-        .welcome-banner .welcome-title { font-size: 1.6rem; color: var(--accent); font-weight: 800; letter-spacing: 2px; }
-        .welcome-banner .welcome-sub { color: var(--text-dim); font-size: 0.9rem; margin-top: 8px; line-height: 1.6; }
-        .memory-timeline { position: relative; padding-left: 30px; }
-        .memory-timeline::before {
-            content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
-            width: 2px; background: linear-gradient(180deg, var(--accent), rgba(240,192,64,0.2), transparent);
+        .welcome-banner::after {
+            content: '';
+            position: absolute;
+            top: -100px; left: 50%;
+            transform: translateX(-50%);
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(212,168,67,0.12) 0%, transparent 55%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            animation: orbPulse 5s ease-in-out infinite;
         }
-        .memory-item {
-            position: relative; padding-bottom: 28px;
-            animation: fadeInUp 0.6s ease-out both;
+        @keyframes orbPulse { 0%,100%{transform:translateX(-50%) scale(0.9);opacity:0.5;} 50%{transform:translateX(-50%) scale(1.15);opacity:1;} }
+        .welcome-banner .welcome-icon { font-size: 3rem; margin-bottom: 10px; display: block; }
+        .welcome-banner .welcome-title {
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, #F5E0A0, #D4A843, #B8922E, #D4A843, #F5E0A0);
+            background-size: 300% auto;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            font-weight: 800; letter-spacing: 3px;
+            font-family: 'Playfair Display', 'Inter', serif;
+            animation: goldShimmer 5s linear infinite;
         }
-        .memory-item::before {
-            content: ''; position: absolute; left: -26px; top: 6px;
-            width: 10px; height: 10px; border-radius: 50%;
-            background: var(--accent); box-shadow: 0 0 10px var(--accent-glow);
-        }
-        .memory-item .m-date { font-size: 0.8rem; color: var(--accent); font-weight: 700; letter-spacing: 1px; margin-bottom: 2px; }
-        .memory-item .m-event { font-size: 0.95rem; color: var(--text); line-height: 1.6; }
-        .memory-item .m-note { font-size: 0.8rem; color: var(--text-dim); margin-top: 2px; font-style: italic; }
+        @keyframes goldShimmer { to { background-position: 300% center; } }
+        .welcome-banner .welcome-sub { color: var(--text-dim); font-size: 0.88rem; margin-top: 10px; line-height: 1.7; }
+        .memory-timeline { position: relative; padding-left: 32px; }
+        .memory-timeline::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 1.5px; background: linear-gradient(180deg, #D4A843, rgba(212,168,67,0.3), transparent); }
+        .memory-item { position: relative; padding-bottom: 28px; transition: all 0.2s ease; }
+        .memory-item::before { content: ''; position: absolute; left: -29px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg-1); border: 2px solid #D4A843; box-shadow: 0 0 14px rgba(212,168,67,0.4); z-index: 1; transition: all 0.2s ease; }
+        .memory-item:hover::before { transform: scale(1.3); box-shadow: 0 0 22px rgba(212,168,67,0.6); }
+        .memory-item .m-date { font-size: 0.76rem; color: #D4A843; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 2px; font-family: 'JetBrains Mono', monospace; }
+        .memory-item .m-event { font-size: 0.9rem; color: var(--text); line-height: 1.7; }
+        .memory-item .m-note { font-size: 0.78rem; color: var(--text-dim); margin-top: 3px; font-style: italic; }
+        @media (max-width: 640px) { .welcome-banner { padding: 30px 16px; } .welcome-banner .welcome-title { font-size: 1.3rem; } }
     </style>
 </head>
 <body>
-
-<nav class="top-nav">
-    <a href="index.html" class="back-btn">返回登录</a>
-    <a href="ceo.html">公司主页</a>
-</nav>
-
+<nav class="top-nav"><a href="index.html" class="back-btn">返回登录</a><a href="ceo.html">公司主页</a></nav>
 <div class="page-container">
-
-    <div class="welcome-banner anim-delay-1">
-        <div class="welcome-icon">📖</div>
-        <h1 class="welcome-title">生活部文化有限公司 · 回忆录</h1>
-        <p class="welcome-sub">
-            欢迎来访！这里记录了山东大学信息学院2022级学生会生活部<br>
-            从创立到毕业这三年间共同走过的点点滴滴。
-        </p>
-    </div>
-
-    <div class="card anim-delay-2">
-        <h2><span class="section-icon">📅</span>时光之旅</h2>
-        <div class="memory-timeline">
-            <div class="memory-item anim-delay-1">
-                <div class="m-date">2022.06</div>
-                <div class="m-event">冰和姜选择留部，成立生活部</div>
-                <div class="m-note">一切故事的起点</div>
-            </div>
-            <div class="memory-item anim-delay-2">
-                <div class="m-date">2022.09.16</div>
-                <div class="m-event">线上面试</div>
-                <div class="m-note">第一次见到未来的小伙伴们</div>
-            </div>
-            <div class="memory-item anim-delay-3">
-                <div class="m-date">2022.09.18</div>
-                <div class="m-event">生活部群建立</div>
-                <div class="m-note">这个群一聊就是三年</div>
-            </div>
-            <div class="memory-item anim-delay-4">
-                <div class="m-date">2022 · 秋</div>
-                <div class="m-event">第一次外出团建（强策划）</div>
-                <div class="m-note">上午登山失败 → 下午密室逃脱 + 狼人杀 ———— <span style="color:var(--accent);">梦的开始</span></div>
-            </div>
-            <div class="memory-item anim-delay-5">
-                <div class="m-date">2022-2025</div>
-                <div class="m-event">图书馆研讨间 E208</div>
-                <div class="m-note">我们的秘密基地，见证了无数开会、讨论和扯淡</div>
-            </div>
-            <div class="memory-item anim-delay-1">
-                <div class="m-date">2022 · 冬</div>
-                <div class="m-event">群里一起看世界杯</div>
-                <div class="m-note">凌晨三点，群里消息依然99+</div>
-            </div>
-            <div class="memory-item anim-delay-2">
-                <div class="m-date">2023</div>
-                <div class="m-event">5个男生一起去游蓬莱</div>
-                <div class="m-note">说走就走，青春就该这样</div>
-            </div>
-            <div class="memory-item anim-delay-3">
-                <div class="m-date">2024</div>
-                <div class="m-event">剧本杀《暗黑者》（涂小猫）</div>
-                <div class="m-note">演技、推理、爆笑——全都有</div>
-            </div>
-            <div class="memory-item anim-delay-4">
-                <div class="m-date">2025 · 夏</div>
-                <div class="m-event">毕业快乐！</div>
-                <div class="m-note" style="color:var(--accent);">三年很长，但回忆更长。江湖再见！</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card anim-delay-5" style="text-align:center;">
-        <p style="font-size:1.1rem;color:var(--accent);font-weight:700;letter-spacing:2px;">生活部文化有限公司 2022-2026</p>
-        <p style="color:var(--text-dim);font-size:0.85rem;margin-top:8px;">吃瓜 · 团建 · 快乐 —— 我们的核心价值观</p>
-    </div>
-
+    <div class="welcome-banner anim-delay-1"><div class="welcome-icon">📖</div><h1 class="welcome-title">生活部文化有限公司 · 回忆录</h1><p class="welcome-sub">欢迎来访！这里记录了山东大学信息学院2022级学生会生活部<br>从创立到毕业这三年间共同走过的点点滴滴。</p></div>
+    <div class="card anim-delay-2"><h2><span class="section-icon">📅</span>时光之旅</h2>
+    <div class="memory-timeline">
+        <div class="memory-item anim-delay-1"><div class="m-date">2022.06</div><div class="m-event">冰和姜选择留部，成立生活部</div><div class="m-note">一切故事的起点</div></div>
+        <div class="memory-item anim-delay-2"><div class="m-date">2022.09.16</div><div class="m-event">线上面试</div><div class="m-note">第一次见到未来的小伙伴们</div></div>
+        <div class="memory-item anim-delay-3"><div class="m-date">2022.09.18</div><div class="m-event">生活部群建立</div><div class="m-note">这个群一聊就是三年</div></div>
+        <div class="memory-item anim-delay-4"><div class="m-date">2022 · 秋</div><div class="m-event">第一次外出团建（强策划）</div><div class="m-note">上午登山失败 → 下午密室逃脱 + 狼人杀 ———— <span style="color:#D4A843;font-weight:600;">梦的开始</span></div></div>
+        <div class="memory-item anim-delay-5"><div class="m-date">2022-2025</div><div class="m-event">图书馆研讨间 E208</div><div class="m-note">我们的秘密基地，见证了无数开会、讨论和扯淡</div></div>
+        <div class="memory-item anim-delay-1"><div class="m-date">2022 · 冬</div><div class="m-event">群里一起看世界杯</div><div class="m-note">凌晨三点，群里消息依然99+</div></div>
+        <div class="memory-item anim-delay-2"><div class="m-date">2023</div><div class="m-event">5个男生一起去游蓬莱</div><div class="m-note">说走就走，青春就该这样</div></div>
+        <div class="memory-item anim-delay-3"><div class="m-date">2024</div><div class="m-event">剧本杀《暗黑者》（涂小猫）</div><div class="m-note">演技、推理、爆笑——全都有</div></div>
+        <div class="memory-item anim-delay-4"><div class="m-date">2025 · 夏</div><div class="m-event">毕业快乐！</div><div class="m-note" style="color:#D4A843;font-weight:600;">三年很长，但回忆更长。江湖再见！</div></div>
+    </div></div>
+    <div class="card anim-delay-5" style="text-align:center;background:linear-gradient(135deg,rgba(212,168,67,0.06),rgba(212,168,67,0.01));"><p style="font-size:1.1rem;color:#D4A843;font-weight:700;letter-spacing:2px;">生活部文化有限公司 2022-2026</p><p style="color:var(--text-dim);font-size:0.85rem;margin-top:8px;">吃瓜 · 团建 · 快乐 —— 我们的核心价值观</p></div>
 </div>
-
-<footer class="page-footer">
-    &copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.<br>
-    生活部文化有限公司 · 山东大学信息学院2022级学生会生活部<br>
-    生活部已成立 <span id="establish-duration">--</span>
-</footer>
-
+<footer class="page-footer">&copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.<br>生活部文化有限公司 · 山东大学信息学院2022级学生会生活部<br>生活部已成立 <span id="establish-duration">--</span></footer>
 <script src="assets/js/birthday.js"></script>
 <script src="assets/js/comments.js"></script>
 </body>

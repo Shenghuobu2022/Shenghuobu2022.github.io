@@ -5,106 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>杨硕 | 秘书长 · 生活部文化有限公司</title>
     <link rel="icon" href="assets/picture/专业团队.jpg" type="image/jpeg">
-    <link rel="stylesheet" href="assets/css/member.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/member.css?v=2">
     <style>
-        :root {
-            --accent: #C0C0C0;
-            --accent-dim: rgba(192, 192, 192, 0.12);
-            --accent-glow: rgba(192, 192, 192, 0.4);
-        }
-        .knight-crest {
-            text-align: center;
-            padding: 20px;
-            background: linear-gradient(135deg, rgba(192,192,192,0.1), transparent);
-            border: 1px solid rgba(192,192,192,0.15);
-            border-radius: 12px;
-            margin-bottom: 20px;
-            animation: fadeInUp 0.6s ease-out both;
-        }
-        .knight-crest .crest-icon { font-size: 3.5rem; margin-bottom: 8px; }
-        .knight-crest .oath { font-family: serif; font-style: italic; font-size: 1rem; color: var(--accent); letter-spacing: 2px; }
-        .crest-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 0; }
-        .crest-detail .badge {
-            background: rgba(192,192,192,0.05);
-            border: 1px solid rgba(192,192,192,0.1);
-            border-radius: 8px; padding: 14px; text-align: center;
-        }
-        .crest-detail .badge .num { font-size: 1.6rem; font-weight: 800; color: var(--accent); display: block; }
-        .crest-detail .badge .lbl { font-size: 0.75rem; color: var(--text-dim); }
-        .dual-role { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 0; }
-        @media (max-width: 640px) { .crest-detail, .dual-role { grid-template-columns: 1fr; } }
+        :root { --accent: #B0B0B0; --accent-dim: rgba(176, 176, 176, 0.1); --accent-glow: rgba(176, 176, 176, 0.35); --accent-rgb: 176, 176, 176; }
+        body::before { background: radial-gradient(ellipse 60% 40% at 24% 14%, rgba(176,176,176,0.1) 0%, transparent 50%), radial-gradient(ellipse 45% 30% at 72% 55%, rgba(176,176,176,0.05) 0%, transparent 50%); }
+        body::after { background-image: linear-gradient(rgba(176,176,176,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(176,176,176,0.025) 1px, transparent 1px); background-size: 48px 48px; }
+        .hero::after { background: radial-gradient(circle, rgba(176,176,176,0.14) 0%, transparent 55%); width: 430px; height: 430px; }
+        .hero .main-title { background: linear-gradient(135deg, #fff 0%, #B0B0B0 35%, #D8D8D8 65%, #fff 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .knight-crest { text-align: center; padding: 28px; background: linear-gradient(135deg, rgba(176,176,176,0.08), transparent); border: 1px solid rgba(176,176,176,0.15); border-radius: 20px; margin-bottom: 20px; position: relative; overflow: hidden; }
+        .knight-crest::after { content: '⚔'; position: absolute; bottom: -10px; right: 10px; font-size: 4rem; opacity: 0.04; pointer-events: none; }
+        .knight-crest .crest-icon { font-size: 3.5rem; margin-bottom: 10px; animation: heroFloat 3s ease-in-out infinite; }
+        @keyframes heroFloat { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+        .knight-crest .oath { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem; color: #B0B0B0; letter-spacing: 3px; font-weight: 600; }
+        .dual-role { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .dual-role .role-box { background: rgba(176,176,176,0.03); border: 1px solid rgba(176,176,176,0.1); border-radius: 12px; padding: 20px; transition: all 0.35s ease; }
+        .dual-role .role-box:hover { border-color: rgba(176,176,176,0.2); background: rgba(176,176,176,0.05); }
+        .dual-role .role-box h3 { font-size: 0.95rem; color: #B0B0B0; margin-bottom: 8px; font-weight: 700; letter-spacing: 1px; }
+        .dual-role .role-box p { font-size: 0.84rem; color: var(--text-dim); line-height: 1.7; }
+        @media (max-width: 640px) { .dual-role { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-
-<nav class="top-nav">
-    <a href="index.html" class="back-btn">返回登录</a>
-    <a href="ceo.html">公司主页</a>
-</nav>
-
+<nav class="top-nav"><a href="index.html" class="back-btn">返回登录</a><a href="ceo.html">公司主页</a></nav>
 <div class="page-container">
-
-    <div class="hero">
-        <span class="role-icon">🛡️</span>
-        <h1 class="main-title">秘书长 · 杨硕</h1>
-        <p class="subtitle">硕宝 · 楠桶 · 此群坐镇骑士长 · 生活部守门员</p>
-        <div class="divider-line"></div>
-    </div>
-
-    <!-- 骑士勋章 -->
-    <div class="knight-crest anim-delay-1">
-        <div class="crest-icon">⚔️</div>
-        <p class="oath">"以骑士之名，守护此群"</p>
-        <p style="color:var(--text-dim);font-size:0.85rem;margin-top:8px;">骑士精神代言人（女生限定版）</p>
-    </div>
-
-    <!-- 身份标签 -->
-    <div class="card anim-delay-2">
-        <h2><span class="section-icon">🏷️</span>多重身份</h2>
-        <div class="tag-list">
-            <span class="tag primary">秘书长</span>
-            <span class="tag">此群坐镇骑士长</span>
-            <span class="tag">生活部守门员</span>
-            <span class="tag">楠桶 / 硕宝</span>
-            <span class="tag">骑士精神代言人（女生限定版）</span>
-            <span class="tag">楠木成精</span>
-            <span class="tag">LPL头号支持者</span>
-            <span class="tag">生活部分公司负头子</span>
-        </div>
-    </div>
-
-    <!-- 职责面板 -->
-    <div class="card anim-delay-3">
-        <h2><span class="section-icon">📋</span>骑士职责</h2>
-        <div class="dual-role">
-            <div class="card" style="margin:0;animation:none;">
-                <h2 style="font-size:1rem;">🛡️ 守门员</h2>
-                <p style="font-size:0.85rem;color:var(--text-dim);">生活部的最后一道防线，任何风吹草动都逃不过硕宝的眼睛。坐在骑士长的位置上，手持盾牌守护群聊安宁。</p>
-            </div>
-            <div class="card" style="margin:0;animation:none;">
-                <h2 style="font-size:1rem;">📝 秘书长</h2>
-                <p style="font-size:0.85rem;color:var(--text-dim);">组织协调、上传下达，一手掌管生活部大小事务的文书机密。楠木般沉稳，秘书必备素养。</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 战力面板 -->
-    <div class="card anim-delay-4">
-        <h2><span class="section-icon">📊</span>骑士战力</h2>
-        <div class="stat-bar"><div class="label"><span>守门能力</span><span>97%</span></div><div class="bar"><div class="fill" style="width:97%"></div></div></div>
-        <div class="stat-bar"><div class="label"><span>骑士精神</span><span>100%</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div>
-        <div class="stat-bar"><div class="label"><span>组织协调</span><span>90%</span></div><div class="bar"><div class="fill" style="width:90%"></div></div></div>
-        <div class="stat-bar"><div class="label"><span>LPL观赛狂热度</span><span>93%</span></div><div class="bar"><div class="fill" style="width:93%"></div></div></div>
-        <div class="stat-bar"><div class="label"><span>楠木沉稳度</span><span>96%</span></div><div class="bar"><div class="fill" style="width:96%"></div></div></div>
-    </div>
-
+    <div class="hero"><span class="role-icon">🛡️</span><h1 class="main-title">秘书长 · 杨硕</h1><p class="subtitle">硕宝 · 楠桶 · 此群坐镇骑士长 · 生活部守门员</p><div class="divider-line"></div></div>
+    <div class="knight-crest anim-delay-1"><div class="crest-icon">⚔️</div><p class="oath">"以骑士之名，守护此群"</p><p style="color:var(--text-dim);font-size:0.84rem;margin-top:10px;letter-spacing:1px;">骑士精神代言人（女生限定版）</p></div>
+    <div class="card anim-delay-2"><h2><span class="section-icon">🏷️</span>多重身份</h2><div class="tag-list"><span class="tag primary">秘书长</span><span class="tag">此群坐镇骑士长</span><span class="tag">生活部守门员</span><span class="tag">楠桶 / 硕宝</span><span class="tag">骑士精神代言人（女生限定版）</span><span class="tag">楠木成精</span><span class="tag">LPL头号支持者</span><span class="tag">生活部分公司负头子</span></div></div>
+    <div class="card anim-delay-3"><h2><span class="section-icon">📋</span>骑士职责</h2><div class="dual-role"><div class="role-box"><h3>🛡️ 守门员</h3><p>生活部的最后一道防线，任何风吹草动都逃不过硕宝的眼睛。坐在骑士长的位置上，手持盾牌守护群聊安宁。</p></div><div class="role-box"><h3>📝 秘书长</h3><p>组织协调、上传下达，一手掌管生活部大小事务的文书机密。楠木般沉稳，秘书必备素养。</p></div></div></div>
+    <div class="card anim-delay-4"><h2><span class="section-icon">📊</span>骑士战力</h2><div class="stat-bar"><div class="label"><span>守门能力</span><span>97%</span></div><div class="bar"><div class="fill" style="width:97%"></div></div></div><div class="stat-bar"><div class="label"><span>骑士精神</span><span>100%</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div><div class="stat-bar"><div class="label"><span>组织协调</span><span>90%</span></div><div class="bar"><div class="fill" style="width:90%"></div></div></div><div class="stat-bar"><div class="label"><span>LPL观赛狂热度</span><span>93%</span></div><div class="bar"><div class="fill" style="width:93%"></div></div></div><div class="stat-bar"><div class="label"><span>楠木沉稳度</span><span>96%</span></div><div class="bar"><div class="fill" style="width:96%"></div></div></div></div>
 </div>
-
-<footer class="page-footer">
-    &copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.<br>
-    生活部已成立 <span id="establish-duration">--</span>
-</footer>
-
+<footer class="page-footer">&copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.<br>生活部已成立 <span id="establish-duration">--</span></footer>
 <script src="assets/js/birthday.js"></script>
 <script src="assets/js/comments.js"></script>
 </body>

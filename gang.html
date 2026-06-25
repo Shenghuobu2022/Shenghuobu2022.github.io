@@ -5,118 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>邬小钢 | 一线工人 · 生活部文化有限公司</title>
     <link rel="icon" href="assets/picture/专业团队.jpg" type="image/jpeg">
-    <link rel="stylesheet" href="assets/css/member.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/member.css?v=2">
     <style>
-        :root {
-            --accent: #808080;
-            --accent-dim: rgba(128, 128, 128, 0.12);
-            --accent-glow: rgba(128, 128, 128, 0.35);
-        }
-        .worker-id {
-            background: linear-gradient(135deg, rgba(128,128,128,0.1), transparent);
-            border: 1px solid rgba(128,128,128,0.2);
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 20px;
-            animation: fadeInUp 0.6s ease-out both;
-        }
-        .worker-id .id-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-        .worker-id .id-tag { font-size: 0.7rem; letter-spacing: 2px; color: var(--accent); }
-        .worker-id .id-name { font-size: 1.4rem; font-weight: 700; color: var(--text); }
-        .worker-id .id-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .worker-id .id-stat { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.82rem; }
+        :root { --accent: #9E9E9E; --accent-dim: rgba(158, 158, 158, 0.1); --accent-glow: rgba(158, 158, 158, 0.35); --accent-rgb: 158, 158, 158; }
+        body::before { background: radial-gradient(ellipse 60% 40% at 25% 15%, rgba(158,158,158,0.1) 0%, transparent 50%), radial-gradient(ellipse 45% 35% at 70% 55%, rgba(158,158,158,0.05) 0%, transparent 50%); }
+        body::after { background-image: linear-gradient(rgba(158,158,158,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(158,158,158,0.025) 1px, transparent 1px); background-size: 40px 40px; }
+        .hero::after { background: radial-gradient(circle, rgba(158,158,158,0.13) 0%, transparent 55%); width: 420px; height: 420px; }
+        .hero .main-title { background: linear-gradient(135deg, #fff 0%, #9E9E9E 35%, #C8C8C8 65%, #fff 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .worker-id { background: linear-gradient(135deg, rgba(158,158,158,0.08), transparent); border: 1px solid rgba(158,158,158,0.18); border-radius: 20px; padding: 28px; margin-bottom: 20px; position: relative; overflow: hidden; }
+        .worker-id::before { content: 'SHB-ID'; position: absolute; top: 14px; right: 18px; font-size: 0.65rem; font-weight: 900; color: rgba(158,158,158,0.15); letter-spacing: 4px; font-family: 'JetBrains Mono', monospace; }
+        .worker-id .id-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .worker-id .id-tag { font-size: 0.68rem; letter-spacing: 3px; color: #9E9E9E; font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+        .worker-id .id-name { font-size: 1.5rem; font-weight: 800; color: #fff; letter-spacing: 2px; }
+        .worker-id .id-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .worker-id .id-stat { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.82rem; }
         .worker-id .id-stat .key { color: var(--text-dim); }
-        .worker-id .id-stat .val { color: var(--accent); font-weight: 600; }
+        .worker-id .id-stat .val { color: #9E9E9E; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
         .triple-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-        .triple-item {
-            background: rgba(128,128,128,0.04); border: 1px solid rgba(128,128,128,0.1);
-            border-radius: 10px; padding: 18px 12px; text-align: center; transition: all 0.3s;
-        }
-        .triple-item:hover { border-color: var(--accent); transform: translateY(-2px); }
-        .triple-item .icon { font-size: 1.8rem; display: block; margin-bottom: 6px; }
-        .triple-item .title { font-size: 0.85rem; color: var(--accent); font-weight: 600; }
-        .triple-item .desc { font-size: 0.72rem; color: var(--text-dim); margin-top: 4px; }
+        .triple-item { background: rgba(158,158,158,0.04); border: 1px solid rgba(158,158,158,0.12); border-radius: 12px; padding: 20px 12px; text-align: center; transition: all 0.35s ease; }
+        .triple-item:hover { border-color: #9E9E9E; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(158,158,158,0.08); }
+        .triple-item .icon { font-size: 1.8rem; display: block; margin-bottom: 8px; }
+        .triple-item .title { font-size: 0.84rem; color: #9E9E9E; font-weight: 600; }
+        .triple-item .desc { font-size: 0.7rem; color: var(--text-dim); margin-top: 4px; }
         @media (max-width: 640px) { .triple-grid { grid-template-columns: repeat(2, 1fr); } }
     </style>
 </head>
 <body>
-
-<nav class="top-nav">
-    <a href="index.html" class="back-btn">返回登录</a>
-    <a href="ceo.html">公司主页</a>
-</nav>
-
+<nav class="top-nav"><a href="index.html" class="back-btn">返回登录</a><a href="ceo.html">公司主页</a></nav>
 <div class="page-container">
-
-    <div class="hero">
-        <span class="role-icon">💪</span>
-        <h1 class="main-title">一线工人 · 邬小钢</h1>
-        <p class="subtitle">小钢 · 电竞达人 · 187体育生 · 百变小钢</p>
-        <div class="divider-line"></div>
-    </div>
-
-    <!-- 工人ID卡 -->
-    <div class="worker-id anim-delay-1">
-        <div class="id-header">
-            <span class="id-tag">SHENGHUOBU ID-007</span>
-            <span style="color:var(--accent);font-size:0.7rem;">一线工人</span>
-        </div>
-        <div class="id-name">邬小钢</div>
-        <div class="id-stats">
-            <div class="id-stat"><span class="key">身高</span><span class="val">187cm</span></div>
-            <div class="id-stat"><span class="key">分类</span><span class="val">体育生</span></div>
-            <div class="id-stat"><span class="key">段位</span><span class="val">王者领域大神</span></div>
-            <div class="id-stat"><span class="key">形态</span><span class="val">百变小钢</span></div>
-            <div class="id-stat"><span class="key">代号</span><span class="val">Nivana</span></div>
-            <div class="id-stat"><span class="key">特长</span><span class="val">最会玩 & 最会吃</span></div>
-        </div>
-    </div>
-
-    <!-- 身份标签 -->
-    <div class="card anim-delay-2">
-        <h2><span class="section-icon">🏷️</span>多重身份</h2>
-        <div class="tag-list">
-            <span class="tag primary">一线工人</span>
-            <span class="tag">王者领域大神</span>
-            <span class="tag">电竞达人</span>
-            <span class="tag">Nivana</span>
-            <span class="tag">187体育生</span>
-            <span class="tag">百变小钢</span>
-            <span class="tag">生活部最会玩之人</span>
-            <span class="tag">最会吃之人</span>
-        </div>
-    </div>
-
-    <!-- 百变小钢模式切换 -->
-    <div class="card anim-delay-3">
-        <h2><span class="section-icon">🔄</span>百变小钢 · 模式一览</h2>
-        <div class="triple-grid">
-            <div class="triple-item"><span class="icon">🎮</span><div class="title">电竞达人</div><div class="desc">王者大神，Carry全场</div></div>
-            <div class="triple-item"><span class="icon">🏃</span><div class="title">187体育生</div><div class="desc">身体素质天花板</div></div>
-            <div class="triple-item"><span class="icon">🍜</span><div class="title">最会吃</div><div class="desc">美食雷达精准制导</div></div>
-            <div class="triple-item"><span class="icon">🎉</span><div class="title">最会玩</div><div class="desc">娱乐活动百科全书</div></div>
-            <div class="triple-item"><span class="icon">⚙️</span><div class="title">一线工人</div><div class="desc">踏实肯干，核心战力</div></div>
-            <div class="triple-item"><span class="icon">🦋</span><div class="title">百变小钢</div><div class="desc">无所不能，随时切换</div></div>
-        </div>
-    </div>
-
-    <!-- 战力 -->
-    <div class="card anim-delay-4">
-        <h2><span class="section-icon">📊</span>工人战力面板</h2>
-        <div class="stat-bar"><div class="label"><span>王者实力</span><span>98%</span></div><div class="bar"><div class="fill" style="width:98%"></div></div></div>
-        <div class="stat-bar"><div class="label"><span>身体素质</span><span>187/200</span></div><div class="bar"><div class="fill" style="width:93%"></div></div></div>
-        <div class="stat-bar"><div class="label"><span>娱乐能量</span><span>99%</span></div><div class="bar"><div class="fill" style="width:99%"></div></div></div>
-        <div class="stat-bar"><div class="label"><span>美食鉴赏力</span><span>95%</span></div><div class="bar"><div class="fill" style="width:95%"></div></div></div>
-        <div class="stat-bar"><div class="label"><span>形态切换速度</span><span>MAX</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div>
-    </div>
-
+    <div class="hero"><span class="role-icon">💪</span><h1 class="main-title">一线工人 · 邬小钢</h1><p class="subtitle">小钢 · 电竞达人 · 187体育生 · 百变小钢</p><div class="divider-line"></div></div>
+    <div class="worker-id anim-delay-1"><div class="id-header"><span class="id-tag">SHENGHUOBU ID-007</span><span style="color:#9E9E9E;font-size:0.7rem;">一线工人</span></div><div class="id-name">邬小钢</div><div class="id-stats"><div class="id-stat"><span class="key">身高</span><span class="val">187cm</span></div><div class="id-stat"><span class="key">分类</span><span class="val">体育生</span></div><div class="id-stat"><span class="key">段位</span><span class="val">王者领域大神</span></div><div class="id-stat"><span class="key">形态</span><span class="val">百变小钢</span></div><div class="id-stat"><span class="key">代号</span><span class="val">Nivana</span></div><div class="id-stat"><span class="key">特长</span><span class="val">最会玩 & 最会吃</span></div></div></div>
+    <div class="card anim-delay-2"><h2><span class="section-icon">🏷️</span>多重身份</h2><div class="tag-list"><span class="tag primary">一线工人</span><span class="tag">王者领域大神</span><span class="tag">电竞达人</span><span class="tag">Nivana</span><span class="tag">187体育生</span><span class="tag">百变小钢</span><span class="tag">生活部最会玩之人</span><span class="tag">最会吃之人</span></div></div>
+    <div class="card anim-delay-3"><h2><span class="section-icon">🔄</span>百变小钢 · 模式一览</h2><div class="triple-grid"><div class="triple-item"><span class="icon">🎮</span><div class="title">电竞达人</div><div class="desc">王者大神，Carry全场</div></div><div class="triple-item"><span class="icon">🏃</span><div class="title">187体育生</div><div class="desc">身体素质天花板</div></div><div class="triple-item"><span class="icon">🍜</span><div class="title">最会吃</div><div class="desc">美食雷达精准制导</div></div><div class="triple-item"><span class="icon">🎉</span><div class="title">最会玩</div><div class="desc">娱乐活动百科全书</div></div><div class="triple-item"><span class="icon">⚙️</span><div class="title">一线工人</div><div class="desc">踏实肯干，核心战力</div></div><div class="triple-item"><span class="icon">🦋</span><div class="title">百变小钢</div><div class="desc">无所不能，随时切换</div></div></div></div>
+    <div class="card anim-delay-4"><h2><span class="section-icon">📊</span>工人战力面板</h2><div class="stat-bar"><div class="label"><span>王者实力</span><span>98%</span></div><div class="bar"><div class="fill" style="width:98%"></div></div></div><div class="stat-bar"><div class="label"><span>身体素质</span><span>187/200</span></div><div class="bar"><div class="fill" style="width:93%"></div></div></div><div class="stat-bar"><div class="label"><span>娱乐能量</span><span>99%</span></div><div class="bar"><div class="fill" style="width:99%"></div></div></div><div class="stat-bar"><div class="label"><span>美食鉴赏力</span><span>95%</span></div><div class="bar"><div class="fill" style="width:95%"></div></div></div><div class="stat-bar"><div class="label"><span>形态切换速度</span><span>MAX</span></div><div class="bar"><div class="fill" style="width:100%"></div></div></div></div>
 </div>
-
-<footer class="page-footer">
-    &copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.<br>
-    生活部已成立 <span id="establish-duration">--</span>
-</footer>
-
+<footer class="page-footer">&copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.<br>生活部已成立 <span id="establish-duration">--</span></footer>
 <script src="assets/js/birthday.js"></script>
 <script src="assets/js/comments.js"></script>
 </body>
