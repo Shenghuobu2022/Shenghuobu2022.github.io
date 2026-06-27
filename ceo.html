@@ -359,5 +359,52 @@
 
 <script src="assets/js/birthday.js"></script>
 <script src="assets/js/comments.js"></script>
+
+<script src="assets/js/common.js"></script>
+<script>
+/* 吉祥物彩蛋 — 点击信愿弹出随机语录 */
+(function(){
+    var mascot = document.querySelector('.mascot-emoji');
+    if (!mascot) return;
+    mascot.style.cursor = 'pointer';
+    var quotes = [
+        '今天吃瓜了吗？没吃的赶紧去找姜姜报到！🍉',
+        '听说有人在背后说我成精了？没错，我真成了 ✨',
+        '生活部的终极奥义：快乐！',
+        '本信虽是人偶，但也是有灵魂的！',
+        '该团建了吧？让我康康谁又在摸鱼 👀',
+        '冰和姜是我的左膀右臂——虽然我才是真正的老总 😎',
+        'E208 的灯还亮着吗？有点想那个地方了',
+        '不知不觉都四年了呀……感谢每一个你 ❤️',
+        '你好呀，欢迎来到生活部！👋',
+        '吃瓜、团建、快乐——这可是我定的核心价值观 📋',
+        '嘘……告诉你个秘密：其实我才是幕后大BOSS 🤫',
+        '瑶瑶的面包好吃吗？给我也尝一口 🍞'
+    ];
+    var last = -1;
+    mascot.addEventListener('click', function(e){
+        e.stopPropagation();
+        var idx;
+        do { idx = Math.floor(Math.random() * quotes.length); } while (idx === last && quotes.length > 1);
+        last = idx;
+        mascot.style.animation = 'none';
+        mascot.offsetHeight;
+        mascot.style.animation = 'heroFloat 0.6s ease-in-out';
+        setTimeout(function(){ mascot.style.animation = 'heroFloat 3.5s ease-in-out infinite'; }, 600);
+        var b = document.createElement('div');
+        b.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10001;' +
+            'background:rgba(20,20,24,0.96);border:1.5px solid rgba(212,168,67,0.4);border-radius:16px;' +
+            'padding:28px 32px;max-width:320px;text-align:center;color:#F5E0A0;font-size:1rem;' +
+            'line-height:1.7;letter-spacing:1px;box-shadow:0 16px 48px rgba(0,0,0,0.6),0 0 40px rgba(212,168,67,0.1);' +
+            'animation:lbFadeIn 0.35s ease;cursor:pointer;backdrop-filter:blur(20px);';
+        b.innerHTML = '🌟 <strong>小信说：</strong><br><br>' + quotes[idx] + '<br><br><span style="font-size:0.7rem;color:var(--text-dim);">（点此关闭）</span>';
+        document.body.appendChild(b);
+        b.addEventListener('click', function(){
+            b.style.opacity = '0'; b.style.transition = 'opacity 0.2s';
+            setTimeout(function(){ b.remove(); }, 200);
+        });
+    });
+})();
+</script>
 </body>
 </html>

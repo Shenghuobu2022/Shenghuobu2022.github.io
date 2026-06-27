@@ -287,5 +287,49 @@
 })();
 </script>
 <script src="assets/js/comments.js"></script>
+
+<script src="assets/js/common.js"></script>
+<script>
+/* 今天的回忆 — 检测今日是否有生日或特殊纪念日 */
+(function(){
+    var now = new Date();
+    var mm = ('0' + (now.getMonth() + 1)).slice(-2);
+    var dd = ('0' + now.getDate()).slice(-2);
+    var today = mm + '-' + dd;
+
+    // 时间线重要纪念日
+    var memories = {
+        '06-18': '2022年的今天，冰和姜选择留部——一切的起点 💫',
+        '09-15': '2022年的今天，新一届生活部面试启动 🎤',
+        '09-18': '2022年的今天，生活部文化有限公司群成立！公司注册日 🏢🎉',
+        '09-30': '2022年的今天，新生活部第一次电影放映 🎬',
+        '11-05': '小信生日！生活部吉祥物的诞辰 🎂🌟',
+        '02-19': '今天是孔祥冰的生日！生日快乐冰冰 🐺🎂',
+        '03-07': '今天是杨硕的生日！生日快乐硕宝 🛡️🎂',
+        '08-06': '今天是姜文雨的生日！生日快乐姜姜 🍉🎂',
+        '10-31': '今天是高赓的生日！生日快乐赓 🎤🎂',
+        '10-22': '今天是兰艳芝的生日！生日快乐姑姑 🔬🎂',
+        '06-28': '今天是王子瑶的生日！生日快乐瑶瑶公主 👑🎂',
+        '08-26': '今天是玄海强的生日！生日快乐强 ⚽🎂',
+        '10-03': '今天是玄洪远和丁俊熙的生日！双喜临门 🎓💼🎂',
+        '12-04': '今天是邬小钢的生日！生日快乐小钢 💪🎂'
+    };
+
+    var msg = memories[today];
+    if (!msg) return;
+
+    var banner = document.querySelector('.welcome-banner');
+    if (!banner) return;
+
+    var tip = document.createElement('div');
+    tip.style.cssText = 'margin-top:16px;padding:12px 20px;' +
+        'background:linear-gradient(135deg,rgba(212,168,67,0.15),rgba(212,168,67,0.04));' +
+        'border:1px solid rgba(212,168,67,0.25);border-radius:12px;' +
+        'color:#F5E0A0;font-size:0.92rem;font-weight:600;letter-spacing:1px;' +
+        'animation:fadeInUp 0.6s ease both;';
+    tip.innerHTML = '📅 <strong>历史上的今天</strong><br><span style="font-size:0.82rem;color:var(--text-dim);font-weight:400;">' + msg + '</span>';
+    banner.appendChild(tip);
+})();
+</script>
 </body>
 </html>

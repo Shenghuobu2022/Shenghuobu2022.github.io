@@ -715,3 +715,58 @@ nav.top-nav a:hover::after { width: 100%; }
   .company-logo { font-size: 2.2rem !important; }
   .mascot-card { padding: 16px 12px; }
 }
+
+/* ====== 滚动进度条 ====== */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2.5px;
+  background: linear-gradient(90deg, #D4A843, #F5E0A0, #D4A843);
+  background-size: 200% auto;
+  z-index: 1000;
+  width: 0%;
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 8px rgba(212,168,67,0.35);
+  pointer-events: none;
+  transition: width 0.15s linear;
+}
+
+/* ====== 回到顶部按钮 ====== */
+.back-to-top {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: rgba(18,18,24,0.9);
+  border: 1px solid rgba(212,168,67,0.25);
+  color: #D4A843;
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  user-select: none;
+  -webkit-user-select: none;
+}
+.back-to-top.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.back-to-top:hover {
+  border-color: #D4A843;
+  box-shadow: 0 0 20px rgba(212,168,67,0.3);
+  transform: translateY(-3px);
+}
+.back-to-top:active {
+  transform: scale(0.92);
+}
+@media (max-width: 480px) {
+  .back-to-top { bottom: 18px; right: 18px; width: 36px; height: 36px; font-size: 1rem; }
+}
