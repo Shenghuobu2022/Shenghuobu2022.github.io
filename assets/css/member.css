@@ -426,9 +426,36 @@ nav.top-nav a:hover::after { width: 100%; }
 @keyframes spinSlow { to { transform: rotate(360deg); } }
 
 .mascot-card .inner { position: relative; z-index: 1; }
+.mascot-card .mascot-emoji-wrap {
+  position: relative; display: inline-block; margin-bottom: 10px;
+}
 .mascot-card .mascot-emoji {
-  font-size: 4rem; display: block; margin-bottom: 10px;
-  animation: heroFloat 3s ease-in-out infinite;
+  width: 100px; height: 100px; border-radius: 50%;
+  object-fit: cover; display: block; margin: 0 auto;
+  border: 2.5px solid rgba(212,168,67,0.35);
+  box-shadow: 0 0 24px rgba(212,168,67,0.2);
+  cursor: pointer;
+  animation: heroFloat 3s ease-in-out infinite, mascotGlow 2.5s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+.mascot-card .mascot-emoji:hover {
+  border-color: #D4A843;
+  box-shadow: 0 0 32px rgba(212,168,67,0.45);
+  transform: scale(1.08);
+}
+@keyframes mascotGlow {
+  0%, 100% { box-shadow: 0 0 24px rgba(212,168,67,0.2); }
+  50% { box-shadow: 0 0 36px rgba(212,168,67,0.4), 0 0 60px rgba(212,168,67,0.1); }
+}
+.mascot-card .mascot-hint {
+  display: block; text-align: center;
+  font-size: 0.72rem; color: var(--text-dim);
+  margin-top: 6px; letter-spacing: 1px;
+  animation: hintBlink 2.5s ease-in-out infinite;
+}
+@keyframes hintBlink {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
 }
 .mascot-card h2 {
   font-size: 1.4rem; color: var(--accent); margin-bottom: 8px;

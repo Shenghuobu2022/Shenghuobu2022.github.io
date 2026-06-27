@@ -287,7 +287,10 @@
     <div class="mascot-section">
         <div class="mascot-card anim-delay-1">
             <div class="inner">
-                <span class="mascot-emoji">🌟</span>
+                <div class="mascot-emoji-wrap">
+                    <img class="mascot-emoji" src="assets/picture/小信.png" alt="小信" title="点我试试！">
+                    <span class="mascot-hint">👆 点我！我有话要说</span>
+                </div>
                 <h2>公司吉祥物 · 信愿</h2>
                 <p class="mascot-motto">"小信，真正的老总，生活部终极BOSS，吉祥物已然成精"</p>
                 <div class="mascot-tags">
@@ -366,7 +369,7 @@
 (function(){
     var mascot = document.querySelector('.mascot-emoji');
     if (!mascot) return;
-    mascot.style.cursor = 'pointer';
+    var hint = document.querySelector('.mascot-hint');
     var quotes = [
         '今天吃瓜了吗？没吃的赶紧去找姜姜报到！🍉',
         '听说有人在背后说我成精了？没错，我真成了 ✨',
@@ -387,10 +390,15 @@
         var idx;
         do { idx = Math.floor(Math.random() * quotes.length); } while (idx === last && quotes.length > 1);
         last = idx;
+        // 抖动效果
         mascot.style.animation = 'none';
         mascot.offsetHeight;
         mascot.style.animation = 'heroFloat 0.6s ease-in-out';
-        setTimeout(function(){ mascot.style.animation = 'heroFloat 3.5s ease-in-out infinite'; }, 600);
+        if (hint) hint.textContent = '嘻嘻，再点我一下！';
+        setTimeout(function(){
+            mascot.style.animation = 'heroFloat 3s ease-in-out infinite, mascotGlow 2.5s ease-in-out infinite';
+            if (hint) hint.textContent = '👆 点我！我有话要说';
+        }, 600);
         var b = document.createElement('div');
         b.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10001;' +
             'background:rgba(20,20,24,0.96);border:1.5px solid rgba(212,168,67,0.4);border-radius:16px;' +
