@@ -248,15 +248,13 @@
             50% { opacity: 1; transform: scale(1.25); }
         }
 
-        /* 历史性时刻 — 金色边框脉冲 */
+        /* 历史性时刻 — 金色内阴影脉冲 */
         .timeline-item.milestone-ring {
-            border-left: 3px solid transparent;
-            padding-left: 10px;
             animation: ringPulse 3s ease-in-out infinite;
         }
         @keyframes ringPulse {
-            0%, 100% { border-left-color: rgba(212,168,67,0.15); }
-            50% { border-left-color: rgba(212,168,67,0.55); box-shadow: -4px 0 12px rgba(212,168,67,0.08); }
+            0%, 100% { box-shadow: inset 3px 0 0 rgba(212,168,67,0.08); }
+            50% { box-shadow: inset 3px 0 0 rgba(212,168,67,0.4), -6px 0 14px rgba(212,168,67,0.06); }
         }
     </style>
 </head>
