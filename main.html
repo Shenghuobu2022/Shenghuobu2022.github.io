@@ -64,7 +64,7 @@
         .welcome-banner .welcome-sub { color: var(--text-dim); font-size: 0.88rem; margin-top: 10px; line-height: 1.7; }
         .memory-timeline { position: relative; padding-left: 32px; }
         .memory-timeline::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 1.5px; background: linear-gradient(180deg, #D4A843, rgba(212,168,67,0.3), transparent); }
-        .memory-item { position: relative; padding-bottom: 28px; transition: all 0.2s ease; }
+        .memory-item { position: relative; padding-bottom: 28px; transition: all 0.2s ease; content-visibility: auto; contain-intrinsic-size: auto 420px; }
         .memory-item::before { content: ''; position: absolute; left: -29px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg-1); border: 2px solid #D4A843; box-shadow: 0 0 14px rgba(212,168,67,0.4); z-index: 1; transition: all 0.2s ease; }
         .memory-item:hover::before { transform: scale(1.3); box-shadow: 0 0 22px rgba(212,168,67,0.6); }
         .memory-item .m-date { font-size: 0.76rem; color: #D4A843; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 2px; font-family: 'JetBrains Mono', monospace; }
@@ -121,6 +121,8 @@
             transition: all 0.35s ease;
             cursor: pointer;
             position: relative;
+            content-visibility: auto;
+            contain-intrinsic-size: auto 200px;
         }
         .photowall-item img {
             width: 100%;
@@ -173,85 +175,85 @@
     <div class="welcome-banner anim-delay-1"><div class="welcome-icon">📖</div><h1 class="welcome-title">生活部文化有限公司 · 回忆录</h1><p class="welcome-sub">欢迎来访！这里记录了山东大学信息学院2022级学生会生活部<br>从创立到毕业这三年间共同走过的点点滴滴。</p></div>
     <div class="card anim-delay-2"><h2><span class="section-icon">📅</span>时光之旅</h2>
     <div class="memory-timeline">
-        <div class="memory-item anim-delay-1"><div class="m-date">2022.06.18</div><div class="m-event">冰和姜选择留部</div><div class="m-note">命运的齿轮开始转动，两位创始人还不知自己即将开启一段怎样的传奇</div><div class="m-photo"><img src="assets/picture/timeline/冰姜留部图.png" alt="冰姜留部" loading="lazy"></div></div>
-        <div class="memory-item anim-delay-2"><div class="m-date">2022.09.15</div><div class="m-event">新一届生活部面试启动</div><div class="m-note">未来的同事们隔着屏幕初次亮相</div><div class="m-photo"><img src="assets/picture/timeline/生活部录取结果官方公示图.png" alt="录取公示" loading="lazy"></div></div>
+        <div class="memory-item anim-delay-1"><div class="m-date">2022.06.18</div><div class="m-event">冰和姜选择留部</div><div class="m-note">命运的齿轮开始转动，两位创始人还不知自己即将开启一段怎样的传奇</div><div class="m-photo"><img src="assets/picture/timeline/冰姜留部图.png" alt="冰姜留部" loading="lazy" decoding="async"></div></div>
+        <div class="memory-item anim-delay-2"><div class="m-date">2022.09.15</div><div class="m-event">新一届生活部面试启动</div><div class="m-note">未来的同事们隔着屏幕初次亮相</div><div class="m-photo"><img src="assets/picture/timeline/生活部录取结果官方公示图.png" alt="录取公示" loading="lazy" decoding="async"></div></div>
         <div class="memory-item anim-delay-3"><div class="m-date">2022.09.18</div><div class="m-event">「生活部文化有限公司」群正式成立</div><div class="m-note">公司虽未注册，精神已然上市——这个群一聊就是四年</div></div>
-        <div class="memory-item anim-delay-4"><div class="m-date">2022.09.30</div><div class="m-event">新生活部第一次电影放映</div><div class="m-note">文化事业正式起步，从此我们是正经文化公司了</div><div class="m-photo"><img src="assets/picture/timeline/第一次电影放映官方图.png" alt="第一次电影放映" loading="lazy"></div></div>
-        <div class="memory-item anim-delay-5"><div class="m-date">2022.10</div><div class="m-event">国庆第一次外出团建</div><div class="m-note">上午爬山，下午密室逃脱+狼人杀——<span style="color:#D4A843;font-weight:600;">梦开始的地方</span></div><div class="m-photo"><img src="assets/picture/timeline/第一次团建登山图.jpg" alt="第一次团建登山" loading="lazy"></div></div>
-        <div class="memory-item anim-delay-1"><div class="m-date">2022.11.05</div><div class="m-event">小信生日庆典</div><div class="m-note">时空信箱+秋日大作战——吉祥物也是有生日的，而且排面拉满</div><div class="m-photo"><img src="assets/picture/timeline/秋日大作战宣传图.png" alt="秋日大作战" loading="lazy"></div></div>
-        <div class="memory-item anim-delay-2"><div class="m-date">2022.11.10</div><div class="m-event">新生活部第一次查寝</div><div class="m-note">从此掌握了全院宿舍的第一手情报</div><div class="m-photo"><img src="assets/picture/timeline/第一次查寝图.png" alt="第一次查寝" loading="lazy"></div></div>
+        <div class="memory-item anim-delay-4"><div class="m-date">2022.09.30</div><div class="m-event">新生活部第一次电影放映</div><div class="m-note">文化事业正式起步，从此我们是正经文化公司了</div><div class="m-photo"><img src="assets/picture/timeline/第一次电影放映官方图.png" alt="第一次电影放映" loading="lazy" decoding="async"></div></div>
+        <div class="memory-item anim-delay-5"><div class="m-date">2022.10</div><div class="m-event">国庆第一次外出团建</div><div class="m-note">上午爬山，下午密室逃脱+狼人杀——<span style="color:#D4A843;font-weight:600;">梦开始的地方</span></div><div class="m-photo"><img src="assets/picture/timeline/第一次团建登山图.jpg" alt="第一次团建登山" loading="lazy" decoding="async"></div></div>
+        <div class="memory-item anim-delay-1"><div class="m-date">2022.11.05</div><div class="m-event">小信生日庆典</div><div class="m-note">时空信箱+秋日大作战——吉祥物也是有生日的，而且排面拉满</div><div class="m-photo"><img src="assets/picture/timeline/秋日大作战宣传图.png" alt="秋日大作战" loading="lazy" decoding="async"></div></div>
+        <div class="memory-item anim-delay-2"><div class="m-date">2022.11.10</div><div class="m-event">新生活部第一次查寝</div><div class="m-note">从此掌握了全院宿舍的第一手情报</div><div class="m-photo"><img src="assets/picture/timeline/第一次查寝图.png" alt="第一次查寝" loading="lazy" decoding="async"></div></div>
         <div class="memory-item anim-delay-3"><div class="m-date">2022.12–2023.02</div><div class="m-event">疫情+世界杯</div><div class="m-note">疫情让大家提前回家，但线上群聊从未停歇。一起见证阿根廷夺冠——梅西圆梦之夜，群里消息比央视还快</div></div>
-        <div class="memory-item anim-delay-4"><div class="m-date">2023.03</div><div class="m-event">游戏厅团建</div><div class="m-note">上午小游戏热身，下午《爱幼妇产医院》剧本杀——剧本杀初体验</div><div class="m-photo"><img src="assets/picture/timeline/游戏厅照片.jpg" alt="游戏厅" loading="lazy"></div></div>
-        <div class="memory-item anim-delay-5"><div class="m-date">2023.03</div><div class="m-event">活动密集月</div><div class="m-note">种猫草+红船模型+观影+星级宿舍评定……好忙碌的三月，生活部比学生会还忙</div><div class="m-photo-row"><div class="m-photo"><img src="assets/picture/timeline/猫草活动宣传图1.png" alt="猫草活动" loading="lazy"></div><div class="m-photo"><img src="assets/picture/timeline/猫草活动宣传图2.png" alt="猫草活动" loading="lazy"></div><div class="m-photo"><img src="assets/picture/timeline/红船活动宣传图.png" alt="红船活动" loading="lazy"></div></div></div>
-        <div class="memory-item anim-delay-1"><div class="m-date">2023.04</div><div class="m-event">宿舍文化节</div><div class="m-note">蛋蛋公爵的古堡——每个宿舍都藏着一段不为人知的传奇</div><div class="m-photo-row"><div class="m-photo"><img src="assets/picture/timeline/蛋蛋公爵宣传图.png" alt="蛋蛋公爵宣传" loading="lazy"></div><div class="m-photo"><img src="assets/picture/timeline/蛋蛋公爵合照图.png" alt="蛋蛋公爵合照" loading="lazy"></div></div></div>
-        <div class="memory-item anim-delay-2"><div class="m-date">2023.05</div><div class="m-event">奇妙物语+学生会大团建</div><div class="m-note">扭扭棒制作——手工达人与社牛的同台竞技</div><div class="m-photo-row"><div class="m-photo"><img src="assets/picture/timeline/扭扭棒活动宣传图.png" alt="扭扭棒" loading="lazy"></div><div class="m-photo"><img src="assets/picture/timeline/学生会大团建合照.jpg" alt="大团建" loading="lazy"></div></div></div>
+        <div class="memory-item anim-delay-4"><div class="m-date">2023.03</div><div class="m-event">游戏厅团建</div><div class="m-note">上午小游戏热身，下午《爱幼妇产医院》剧本杀——剧本杀初体验</div><div class="m-photo"><img src="assets/picture/timeline/游戏厅照片.jpg" alt="游戏厅" loading="lazy" decoding="async"></div></div>
+        <div class="memory-item anim-delay-5"><div class="m-date">2023.03</div><div class="m-event">活动密集月</div><div class="m-note">种猫草+红船模型+观影+星级宿舍评定……好忙碌的三月，生活部比学生会还忙</div><div class="m-photo-row"><div class="m-photo"><img src="assets/picture/timeline/猫草活动宣传图1.png" alt="猫草活动" loading="lazy" decoding="async"></div><div class="m-photo"><img src="assets/picture/timeline/猫草活动宣传图2.png" alt="猫草活动" loading="lazy" decoding="async"></div><div class="m-photo"><img src="assets/picture/timeline/红船活动宣传图.png" alt="红船活动" loading="lazy" decoding="async"></div></div></div>
+        <div class="memory-item anim-delay-1"><div class="m-date">2023.04</div><div class="m-event">宿舍文化节</div><div class="m-note">蛋蛋公爵的古堡——每个宿舍都藏着一段不为人知的传奇</div><div class="m-photo-row"><div class="m-photo"><img src="assets/picture/timeline/蛋蛋公爵宣传图.png" alt="蛋蛋公爵宣传" loading="lazy" decoding="async"></div><div class="m-photo"><img src="assets/picture/timeline/蛋蛋公爵合照图.png" alt="蛋蛋公爵合照" loading="lazy" decoding="async"></div></div></div>
+        <div class="memory-item anim-delay-2"><div class="m-date">2023.05</div><div class="m-event">奇妙物语+学生会大团建</div><div class="m-note">扭扭棒制作——手工达人与社牛的同台竞技</div><div class="m-photo-row"><div class="m-photo"><img src="assets/picture/timeline/扭扭棒活动宣传图.png" alt="扭扭棒" loading="lazy" decoding="async"></div><div class="m-photo"><img src="assets/picture/timeline/学生会大团建合照.jpg" alt="大团建" loading="lazy" decoding="async"></div></div></div>
         <div class="memory-item anim-delay-3"><div class="m-date">2023.06</div><div class="m-event">生活部换届</div><div class="m-note">姑和硕选择留部——<span style="color:#D4A843;font-weight:600;">薪火相传，故事继续</span></div></div>
-        <div class="memory-item anim-delay-4"><div class="m-date">2023.06</div><div class="m-event">期末月·E208大本营</div><div class="m-note">从振声苑走廊到图书馆研讨间，最终选定E208——白天复习，晚上开农，偶尔赶海，最美好的半个月</div><div class="m-photo-row"><div class="m-photo"><img src="assets/picture/timeline/E208合照.jpg" alt="E208合照" loading="lazy"></div><div class="m-photo"><img src="assets/picture/timeline/海边赶海合照.jpg" alt="海边赶海" loading="lazy"></div></div></div>
+        <div class="memory-item anim-delay-4"><div class="m-date">2023.06</div><div class="m-event">期末月·E208大本营</div><div class="m-note">从振声苑走廊到图书馆研讨间，最终选定E208——白天复习，晚上开农，偶尔赶海，最美好的半个月</div><div class="m-photo-row"><div class="m-photo"><img src="assets/picture/timeline/E208合照.jpg" alt="E208合照" loading="lazy" decoding="async"></div><div class="m-photo"><img src="assets/picture/timeline/海边赶海合照.jpg" alt="海边赶海" loading="lazy" decoding="async"></div></div></div>
         <div class="memory-item anim-delay-5"><div class="m-date">2023.06底</div><div class="m-event">通宵剧本杀</div><div class="m-note">期末结束，通宵庆祝！《暗黑者2》+涂小猫——永远的「白月光」之夜</div></div>
-        <div class="memory-item anim-delay-1"><div class="m-date">2023.07</div><div class="m-event">2022级军训</div><div class="m-note">烈日下站军姿，心里想的是狼人杀——补训也有补训的快乐</div><div class="m-photo-row"><div class="m-photo"><img src="assets/picture/timeline/军训合照1.jpg" alt="军训合照1" loading="lazy"></div><div class="m-photo"><img src="assets/picture/timeline/军训合照2.jpg" alt="军训合照2" loading="lazy"></div></div></div>
-        <div class="memory-item anim-delay-2"><div class="m-date">2023.08</div><div class="m-event">五个男生的蓬莱之旅</div><div class="m-note">说走就走的青春，海风吹不散的友谊</div><div class="m-photo"><img src="assets/picture/timeline/蓬莱游合照.jpg" alt="蓬莱游" loading="lazy"></div></div>
-        <div class="memory-item anim-delay-3"><div class="m-date">2023.09</div><div class="m-event">新一届生活部重新集结</div><div class="m-note">分公司建立，例会照开，狼人杀照杀，热情不减当年</div><div class="m-photo"><img src="assets/picture/timeline/两代生活部例会.jpg" alt="两代例会" loading="lazy"></div></div>
+        <div class="memory-item anim-delay-1"><div class="m-date">2023.07</div><div class="m-event">2022级军训</div><div class="m-note">烈日下站军姿，心里想的是狼人杀——补训也有补训的快乐</div><div class="m-photo-row"><div class="m-photo"><img src="assets/picture/timeline/军训合照1.jpg" alt="军训合照1" loading="lazy" decoding="async"></div><div class="m-photo"><img src="assets/picture/timeline/军训合照2.jpg" alt="军训合照2" loading="lazy" decoding="async"></div></div></div>
+        <div class="memory-item anim-delay-2"><div class="m-date">2023.08</div><div class="m-event">五个男生的蓬莱之旅</div><div class="m-note">说走就走的青春，海风吹不散的友谊</div><div class="m-photo"><img src="assets/picture/timeline/蓬莱游合照.jpg" alt="蓬莱游" loading="lazy" decoding="async"></div></div>
+        <div class="memory-item anim-delay-3"><div class="m-date">2023.09</div><div class="m-event">新一届生活部重新集结</div><div class="m-note">分公司建立，例会照开，狼人杀照杀，热情不减当年</div><div class="m-photo"><img src="assets/picture/timeline/两代生活部例会.jpg" alt="两代例会" loading="lazy" decoding="async"></div></div>
         <div class="memory-item anim-delay-4"><div class="m-date">……</div><div class="m-event" style="color:var(--text-dim);font-style:italic;">时光在忙碌与欢笑中悄然流过</div><div class="m-note"></div></div>
-        <div class="memory-item anim-delay-5"><div class="m-date">2024.01 元旦</div><div class="m-event">三代人别墅大团聚</div><div class="m-note">生活部三代同堂！第一次解锁麻将——从此打开新世界的大门</div><div class="m-photo"><img src="assets/picture/timeline/别墅团建合照.jpg" alt="别墅团建" loading="lazy"></div></div>
+        <div class="memory-item anim-delay-5"><div class="m-date">2024.01 元旦</div><div class="m-event">三代人别墅大团聚</div><div class="m-note">生活部三代同堂！第一次解锁麻将——从此打开新世界的大门</div><div class="m-photo"><img src="assets/picture/timeline/别墅团建合照.jpg" alt="别墅团建" loading="lazy" decoding="async"></div></div>
         <div class="memory-item anim-delay-1"><div class="m-date">……</div><div class="m-event" style="color:var(--text-dim);font-style:italic;">日子在例会、狼人杀和吃瓜中一天天过去</div><div class="m-note"></div></div>
         <div class="memory-item anim-delay-2"><div class="m-date">2025.05</div><div class="m-event">电竞酒店团建</div><div class="m-note">剧本杀+电竞+麻将，三位一体的终极快乐</div></div>
         <div class="memory-item anim-delay-3"><div class="m-date">2025.06</div><div class="m-event">冰和姜本科毕业</div><div class="m-note">创始人挥别校园——<span style="color:#D4A843;font-weight:600;">但公司永不退市</span></div></div>
         <div class="memory-item anim-delay-4"><div class="m-date">……</div><div class="m-event" style="color:var(--text-dim);font-style:italic;">各自奔赴，但群聊永远置顶</div><div class="m-note"></div></div>
         <div class="memory-item anim-delay-5"><div class="m-date">2026.03</div><div class="m-event">姜姜二战考回山大</div><div class="m-note">大家也各自有了远大前程——无论走多远，心从未离开</div></div>
-        <div class="memory-item anim-delay-1"><div class="m-date">2026.06</div><div class="m-event">全员毕业</div><div class="m-note" style="color:#D4A843;font-weight:600;">硕姑赓强远丁瑶钢——四年的故事讲完了，等待大家未来的美好篇章 ✨</div><div class="m-photo-row"><div class="m-photo"><img src="assets/picture/timeline/男生毕业合照.jpg" alt="毕业合照" loading="lazy"></div><div class="m-photo"><img src="assets/picture/timeline/男生毕业合照2.jpg" alt="毕业合照2" loading="lazy"></div></div></div>
+        <div class="memory-item anim-delay-1"><div class="m-date">2026.06</div><div class="m-event">全员毕业</div><div class="m-note" style="color:#D4A843;font-weight:600;">硕姑赓强远丁瑶钢——四年的故事讲完了，等待大家未来的美好篇章 ✨</div><div class="m-photo-row"><div class="m-photo"><img src="assets/picture/timeline/男生毕业合照.jpg" alt="毕业合照" loading="lazy" decoding="async"></div><div class="m-photo"><img src="assets/picture/timeline/男生毕业合照2.jpg" alt="毕业合照2" loading="lazy" decoding="async"></div></div></div>
     </div></div>
     <!-- 照片墙 -->
     <div class="card anim-delay-3">
         <h2><span class="section-icon">🖼️</span>生活剪影 · 照片墙</h2>
         <p style="color:var(--text-dim);font-size:0.82rem;margin-bottom:16px;letter-spacing:1px;">每一帧都是我们的独家记忆，点击可放大查看</p>
         <div class="photowall-grid">
-                    <div class="photowall-item"><img src="assets/picture/photowall/KTV游玩图.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/巴渝人家吃饭图.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/冰姜毕业合照.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/部门解散拍立得1.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/部门解散拍立得2.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/部门解散照.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/地铁出发合照.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/电竞酒店麻将图.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/赶海合照.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/赶海洗脚图.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/赶海游玩图1.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/赶海游玩图2.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/海边赶海伸脚图2.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/海边赶海什脚图.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/海底捞出发前合照图.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/海底捞合照.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/会客厅合照.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/剧本杀合照.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/剧本杀合照2.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/烤肉合照.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/两代生活部合照.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/两代生活部团建合照1.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/男生毕业合照.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/蓬莱游玩图.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/蓬莱游玩照.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/蓬莱游玩照2.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/沙滩我爱生活部.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/烧烤吃饭图.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/烧烤干杯照.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/烧烤后唱歌图.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/烧烤团建合照.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/沈誉生日合照.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/沈誉生日合照2.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/沈誉生日合照3.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/食堂吃饭图.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/团建等待图.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/团建电梯合照.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/团建干杯图.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/小信人偶.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/学生会大合照.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/学生会大团建部门合照.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/学生会大团建部门合照2.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/学生会大团建发电弹幕.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/瑶的凝视1.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/瑶的凝视2.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/瑶海底捞生日图.jpg" alt="" loading="lazy"></div>
-                    <div class="photowall-item"><img src="assets/picture/photowall/瑶生日合照图.jpg" alt="" loading="lazy"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/KTV游玩图.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/巴渝人家吃饭图.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/冰姜毕业合照.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/部门解散拍立得1.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/部门解散拍立得2.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/部门解散照.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/地铁出发合照.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/电竞酒店麻将图.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/赶海合照.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/赶海洗脚图.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/赶海游玩图1.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/赶海游玩图2.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/海边赶海伸脚图2.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/海边赶海什脚图.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/海底捞出发前合照图.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/海底捞合照.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/会客厅合照.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/剧本杀合照.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/剧本杀合照2.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/烤肉合照.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/两代生活部合照.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/两代生活部团建合照1.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/男生毕业合照.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/蓬莱游玩图.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/蓬莱游玩照.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/蓬莱游玩照2.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/沙滩我爱生活部.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/烧烤吃饭图.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/烧烤干杯照.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/烧烤后唱歌图.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/烧烤团建合照.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/沈誉生日合照.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/沈誉生日合照2.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/沈誉生日合照3.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/食堂吃饭图.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/团建等待图.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/团建电梯合照.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/团建干杯图.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/小信人偶.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/学生会大合照.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/学生会大团建部门合照.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/学生会大团建部门合照2.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/学生会大团建发电弹幕.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/瑶的凝视1.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/瑶的凝视2.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/瑶海底捞生日图.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="photowall-item"><img src="assets/picture/photowall/瑶生日合照图.jpg" alt="" loading="lazy" decoding="async"></div>
         </div>
     </div>
 
