@@ -31,7 +31,7 @@
   --transition-smooth: 0.35s ease;
 }
 
-html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; overflow-x: hidden; max-width: 100vw; }
 
 body {
   font-family: var(--font-sans);
@@ -41,6 +41,7 @@ body {
   line-height: 1.7;
   overflow-x: hidden;
   font-weight: 400;
+  max-width: 100vw;
 }
 
 /* ====== 动态渐变背景 ====== */
@@ -689,7 +690,10 @@ nav.top-nav a:hover::after { width: 100%; }
 }
 
 @media (max-width: 480px) {
-  .page-container { padding: 75px 10px 40px; max-width: 100%; }
+  .page-container { padding: 70px 8px 40px; max-width: 100%; }
+  nav.top-nav { padding: 10px 10px; }
+  nav.top-nav a { font-size: 0.7rem; letter-spacing: 0; }
+  .back-btn::before { margin-right: 2px; }
   .hero .main-title { font-size: 1.35rem; word-break: break-word; }
   .hero .subtitle { font-size: 0.78rem; word-break: break-word; }
   .hero .role-icon { font-size: 2.2rem; }
