@@ -280,7 +280,7 @@
 
     <div class="company-stats">
         <div class="stat-card anim-delay-2"><span class="stat-number">11</span><span class="stat-label">核心成员</span></div>
-        <div class="stat-card anim-delay-3"><span class="stat-number">3</span><span class="stat-label">年征程</span></div>
+        <div class="stat-card anim-delay-3"><span class="stat-number" id="years-count">3</span><span class="stat-label">年征程</span></div>
         <div class="stat-card anim-delay-4"><span class="stat-number">∞</span><span class="stat-label">欢乐回忆</span></div>
     </div>
 
@@ -364,6 +364,7 @@
 <script src="assets/js/comments.js"></script>
 
 <script src="assets/js/common.js"></script>
+<script>document.getElementById('years-count').textContent = new Date().getFullYear() - 2022;</script>
 <script>
 /* 吉祥物彩蛋 — 点击信愿弹出随机语录 */
 (function(){
