@@ -262,23 +262,27 @@
 <footer class="page-footer">&copy; 2022-2026 SHENGHUOBU CULTURE MEDIA. ALL RIGHTS RESERVED.<br>生活部文化有限公司 · 山东大学信息学院2022级学生会生活部<br>生活部已成立 <span id="establish-duration">--</span></footer>
 <script src="assets/js/birthday.js"></script>
 <script>
-/* 照片墙灯箱 */
+/* 全局图片灯箱 — 时间线配图 + 照片墙 */
 (function(){
-    var photowall = document.querySelector('.photowall-grid');
-    if (!photowall) return;
-    photowall.addEventListener('click', function(e){
-        var img = e.target.closest('.photowall-item img');
-        if (!img) return;
+    function openLightbox(src) {
         var overlay = document.createElement('div');
         overlay.className = 'lightbox-overlay';
         var big = document.createElement('img');
-        big.src = img.src;
+        big.src = src;
         overlay.appendChild(big);
         document.body.appendChild(overlay);
-        overlay.addEventListener('click', function(){ overlay.remove(); });
-        document.addEventListener('keydown', function esc(e){
-            if (e.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', esc); }
-        });
+        var close = function(){ overlay.remove(); document.removeEventListener('keydown', esc); };
+        overlay.addEventListener('click', close);
+        function esc(e){ if (e.key === 'Escape') close(); }
+        document.addEventListener('keydown', esc);
+    }
+    // 委托到 page-container，同时覆盖 .m-photo img 和 .photowall-item img
+    var container = document.querySelector('.page-container');
+    if (!container) return;
+    container.addEventListener('click', function(e){
+        var img = e.target.closest('.m-photo img, .photowall-item img');
+        if (!img) return;
+        openLightbox(img.src);
     });
 })();
 </script>
